@@ -1,0 +1,35 @@
+interface VideoPrototypeCardProps {
+  youtubeId: string
+  title: string
+  footerLabel?: string
+  className?: string
+}
+
+export function VideoPrototypeCard({
+  youtubeId,
+  title,
+  footerLabel = 'Video prototype',
+  className = '',
+}: VideoPrototypeCardProps) {
+  const embedSrc = `https://www.youtube.com/embed/${youtubeId}?rel=0&modestbranding=1`
+
+  return (
+    <article
+      className={`overflow-hidden rounded-3xl bg-[#141418] ring-1 ring-white/[0.08] ${className}`}
+    >
+      <div className="relative aspect-video w-full bg-black">
+        <iframe
+          src={embedSrc}
+          title={title}
+          className="absolute inset-0 h-full w-full border-0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowFullScreen
+          referrerPolicy="strict-origin-when-cross-origin"
+        />
+      </div>
+      <p className="border-t border-white/[0.06] px-5 py-4 text-sm text-slate md:px-8">
+        {footerLabel}
+      </p>
+    </article>
+  )
+}

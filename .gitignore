@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+.venv-logo/
+.venv/
+
+# Build
+dist/
+
+# Local env
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+
+# Editor / OS
+.DS_Store
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# TypeScript
+*.tsbuildinfo
+
+# Vite
+.vite/

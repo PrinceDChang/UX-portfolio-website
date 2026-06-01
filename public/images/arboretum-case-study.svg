@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" fill="none">
+  <rect width="800" height="500" fill="#0d1812"/>
+  <ellipse cx="400" cy="340" rx="280" ry="40" fill="#4ade80" opacity="0.12"/>
+  <path d="M400 300V160M340 240c20-60 100-60 120 0M460 240c20-60 100-60 120 0" stroke="#4ade80" stroke-width="3" stroke-linecap="round" opacity="0.75"/>
+  <text x="400" y="400" text-anchor="middle" fill="#4ade80" font-family="system-ui,sans-serif" font-size="22" font-weight="700" letter-spacing="0.08em">WASHINGTON PARK ARBORETUM</text>
+</svg>

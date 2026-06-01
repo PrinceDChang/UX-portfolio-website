@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" fill="none">
+  <rect width="800" height="500" fill="#141018"/>
+  <circle cx="400" cy="200" r="72" stroke="#e8a54b" stroke-width="3" opacity="0.85"/>
+  <path d="M400 128v24M400 248v24M328 200h24M448 200h24" stroke="#e8a54b" stroke-width="2" opacity="0.5"/>
+  <text x="400" y="360" text-anchor="middle" fill="#e8a54b" font-family="system-ui,sans-serif" font-size="34" font-weight="700" letter-spacing="0.1em">COMPETITION KING</text>
+</svg>

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" fill="none">
+  <rect width="800" height="500" fill="#0f1419"/>
+  <path d="M120 320h560" stroke="#9970FF" stroke-width="2" opacity="0.5"/>
+  <path d="M200 320V220M400 320V180M600 320V240" stroke="#9970FF" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+  <text x="400" y="380" text-anchor="middle" fill="#9970FF" font-family="system-ui,sans-serif" font-size="42" font-weight="700" letter-spacing="0.12em">CITBRIDGE</text>
+</svg>

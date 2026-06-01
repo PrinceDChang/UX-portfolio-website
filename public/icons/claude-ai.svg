@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Claude AI">
+  <rect width="120" height="120" rx="26" fill="#D97757"/>
+  <g fill="#FAF9F5" transform="translate(60 60)">
+    <rect x="-5" y="-32" width="10" height="64" rx="5"/>
+    <rect x="-5" y="-32" width="10" height="64" rx="5" transform="rotate(72)"/>
+    <rect x="-5" y="-32" width="10" height="64" rx="5" transform="rotate(144)"/>
+    <rect x="-5" y="-32" width="10" height="64" rx="5" transform="rotate(216)"/>
+    <rect x="-5" y="-32" width="10" height="64" rx="5" transform="rotate(288)"/>
+  </g>
+</svg>
