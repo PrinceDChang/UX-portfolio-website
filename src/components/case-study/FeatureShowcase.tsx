@@ -7,7 +7,23 @@ export interface FeatureShowcaseItem {
   description: string
   icon: string
   image?: string
+  imageSrc2x?: string
+  /** Intrinsic width of `image` — used for srcSet / layout */
+  imageWidth?: number
+  imageHeight?: number
+  /** Width descriptor for `imageSrc2x` when not exactly 2× (defaults to 2× imageWidth) */
+  imageRetinaWidth?: number
   imageAlt?: string
+  /** Tall screenshots scroll inside the visual frame instead of scaling down */
+  imageScrollable?: boolean
+  /** With imageScrollable — allow horizontal + vertical pan inside the frame */
+  imageScrollBoth?: boolean
+  /** Wide/short screenshots fill the frame width; height follows aspect ratio */
+  imageFill?: boolean
+  /** Override default fixed-frame sizing (min/max height) */
+  imageFrameClass?: string
+  /** Optional external link when the visual is clicked */
+  imageLink?: string
   recommendationHeadline?: string
   recommendation?: string
   recommendationImage?: string
@@ -21,6 +37,39 @@ interface FeatureShowcaseProps {
   sidebarTitle: string
   features: readonly FeatureShowcaseItem[]
   className?: string
+}
+
+function isGifSrc(src: string | undefined): boolean {
+  if (!src) return false
+  return /\.gif(?:\?|$)/i.test(src)
+}
+
+function LinkedFeatureImage({
+  href,
+  imageAlt,
+  className,
+  children,
+}: {
+  href?: string
+  imageAlt: string
+  className?: string
+  children: React.ReactNode
+}) {
+  if (!href) {
+    return <>{children}</>
+  }
+
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`block transition-opacity hover:opacity-95 ${className ?? ''}`}
+      aria-label={`${imageAlt} — open external link`}
+    >
+      {children}
+    </a>
+  )
 }
 
 function FeatureVisual({
@@ -38,34 +87,109 @@ function FeatureVisual({
     side === 'recommendation'
       ? feature.recommendationImageAlt ?? feature.imageAlt ?? feature.title
       : feature.imageAlt ?? feature.title
+  const isAnimatedGif = isGifSrc(image)
+  const imageSrcSet =
+    !isAnimatedGif && image && feature.imageSrc2x && feature.imageWidth
+      ? `${image} ${feature.imageWidth}w, ${feature.imageSrc2x} ${feature.imageRetinaWidth ?? feature.imageWidth * 2}w`
+      : undefined
+  const imageLoading = isAnimatedGif ? 'eager' : 'lazy'
+  const imageSizes = feature.imageScrollBoth
+    ? feature.imageWidth
+      ? `${feature.imageWidth}px`
+      : undefined
+    : feature.imageScrollable || feature.imageFill
+      ? '(min-width: 1024px) 672px, calc(100vw - 4rem)'
+      : undefined
   const quotes = side === 'finding' ? feature.quotes : undefined
   const observation = side === 'finding' ? feature.observation : undefined
   const stats = side === 'finding' ? feature.stats : undefined
   const showQuoteOverlay = Boolean(
     image &&
+      !feature.imageScrollable &&
+      !feature.imageFill &&
       ((quotes && quotes.length > 0) ||
         observation ||
         (stats && stats.length > 0)),
   )
 
+  const useFixedFrame = feature.imageScrollable || feature.imageFill
+
+  const defaultFixedFrameClass =
+    'flex min-h-[200px] flex-1 flex-col overflow-hidden bg-[#f4f4f6] md:min-h-[240px] md:max-h-[280px]'
+
+  const visualClass = useFixedFrame
+    ? feature.imageFrameClass ?? defaultFixedFrameClass
+    : image
+      ? 'h-[min(380px,52vw)] bg-[#f4f4f6] md:h-[min(400px,46vh)] lg:h-[min(460px,48vh)]'
+      : 'flex min-h-[200px] flex-1 items-center justify-center bg-gradient-to-br from-accent/20 via-[#1a1530] to-[#0d1118] md:min-h-[240px] md:max-h-[280px]'
+
   return (
     <div
-      className={`group/visual relative mb-6 shrink-0 overflow-hidden rounded-2xl ring-1 ring-white/[0.06] ${
-        image
-          ? 'h-[min(380px,52vw)] bg-[#f4f4f6] md:h-[min(400px,46vh)] lg:h-[min(460px,48vh)]'
-          : 'flex min-h-[200px] flex-1 items-center justify-center bg-gradient-to-br from-accent/20 via-[#1a1530] to-[#0d1118] md:min-h-[240px] md:max-h-[280px]'
-      } ${showQuoteOverlay ? 'cursor-default' : ''}`}
+      className={`group/visual relative mb-6 shrink-0 overflow-hidden rounded-2xl ring-1 ring-white/[0.06] ${visualClass} ${useFixedFrame ? 'min-w-0' : ''} ${showQuoteOverlay ? 'cursor-default' : ''}`}
       tabIndex={showQuoteOverlay ? 0 : undefined}
     >
       {image ? (
+        feature.imageFill ? (
+          <div className="relative min-h-0 flex-1 overflow-hidden">
+            <LinkedFeatureImage href={feature.imageLink} imageAlt={imageAlt}>
+              <img
+                src={image}
+                srcSet={imageSrcSet}
+                sizes={imageSizes}
+                width={feature.imageWidth}
+                height={feature.imageHeight}
+                alt={imageAlt}
+                className="block h-auto w-full"
+                loading={imageLoading}
+                decoding="async"
+              />
+            </LinkedFeatureImage>
+          </div>
+        ) : feature.imageScrollable ? (
+          <div
+            className={`min-h-0 min-w-0 flex-1 overscroll-contain ${
+              feature.imageScrollBoth
+                ? 'touch-pan-x touch-pan-y overflow-x-auto overflow-y-auto'
+                : 'overflow-y-auto overflow-x-hidden'
+            }`}
+          >
+            <LinkedFeatureImage href={feature.imageLink} imageAlt={imageAlt}>
+              <img
+                src={image}
+                srcSet={imageSrcSet}
+                sizes={imageSizes}
+                width={feature.imageWidth}
+                height={feature.imageHeight}
+                alt={imageAlt}
+                className={
+                  feature.imageScrollBoth
+                    ? 'block h-auto w-max max-w-none shrink-0'
+                    : 'block h-auto w-full'
+                }
+                loading={imageLoading}
+                decoding="async"
+              />
+            </LinkedFeatureImage>
+          </div>
+        ) : (
         <>
-          <img
-            src={image}
-            alt={imageAlt}
-            className="absolute inset-0 z-0 h-full w-full object-contain object-center p-2 md:p-3"
-            loading="lazy"
-            decoding="async"
-          />
+          <LinkedFeatureImage
+            href={feature.imageLink}
+            imageAlt={imageAlt}
+            className="absolute inset-0 z-0"
+          >
+            <img
+              src={image}
+              srcSet={imageSrcSet}
+              sizes={imageSizes}
+              width={feature.imageWidth}
+              height={feature.imageHeight}
+              alt={imageAlt}
+              className="h-full w-full object-contain object-center p-2 md:p-3"
+              loading={imageLoading}
+              decoding="async"
+            />
+          </LinkedFeatureImage>
           {showQuoteOverlay && (
             <>
             <div
@@ -97,6 +221,7 @@ function FeatureVisual({
             </>
           )}
         </>
+        )
       ) : (
         <>
           <div
@@ -136,7 +261,7 @@ function FeatureFace({
     !isRecommendation && !feature.image && !feature.recommendationImage
 
   return (
-    <div className="flex h-full flex-col">
+    <div className="flex h-full min-w-0 flex-col">
       <FeatureVisual feature={feature} side={side} />
       <div
         className={
@@ -282,10 +407,10 @@ export function FeatureShowcase({
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -10 }}
             transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
-            className="relative flex min-h-0 flex-1 flex-col [perspective:1400px]"
+            className="relative flex min-h-0 min-w-0 flex-1 flex-col [perspective:1400px]"
           >
             <motion.div
-              className="relative w-full"
+              className="relative w-full min-w-0"
               style={{ transformStyle: 'preserve-3d' }}
               animate={{ rotateY: showRecommendation ? 180 : 0 }}
               transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}

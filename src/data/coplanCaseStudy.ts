@@ -247,6 +247,13 @@ The goal was an all-in-one product students could trust before, during, and afte
       title: 'Homepage',
       headline: 'Start with clarity',
       icon: '🏠',
+      image: '/images/coplan-homepage.gif',
+      imageWidth: 992,
+      imageHeight: 786,
+      imageAlt: 'CoPlan homepage dashboard with term columns for registered and planned courses',
+      imageFill: true,
+      imageFrameClass:
+        'flex min-h-[240px] flex-1 flex-col overflow-hidden bg-[#f4f4f6] md:min-h-[360px] md:max-h-[min(532px,52vh)]',
       description:
         'A focused entry point orients new and returning students — surfacing schedule status, quick actions, and what needs attention next.',
     },
@@ -254,6 +261,13 @@ The goal was an all-in-one product students could trust before, during, and afte
       title: 'Schedule view',
       headline: 'See your term',
       icon: '📅',
+      image: '/images/coplan-schedule.gif',
+      imageWidth: 992,
+      imageHeight: 786,
+      imageAlt: 'CoPlan schedule view with registered and planned courses across academic terms',
+      imageFill: true,
+      imageFrameClass:
+        'flex min-h-[240px] flex-1 flex-col overflow-hidden bg-[#f4f4f6] md:min-h-[360px] md:max-h-[min(532px,52vh)]',
       description:
         'Calendar-style planning makes add/drop and term balance tangible, with less hunting through nested menus.',
     },
@@ -261,6 +275,14 @@ The goal was an all-in-one product students could trust before, during, and afte
       title: 'Map view',
       headline: 'Courses in context',
       icon: '🗺️',
+      image: '/images/coplan-map.png',
+      imageSrc2x: '/images/coplan-map@2x.png',
+      imageWidth: 992,
+      imageHeight: 786,
+      imageAlt: 'CoPlan map view with course planning and weekly schedule calendar',
+      imageFill: true,
+      imageFrameClass:
+        'flex min-h-[240px] flex-1 flex-col overflow-hidden bg-[#f4f4f6] md:min-h-[360px] md:max-h-[min(532px,52vh)]',
       description:
         'Spatial layout helps students understand campus and course relationships beyond a flat list.',
     },
@@ -268,6 +290,14 @@ The goal was an all-in-one product students could trust before, during, and afte
       title: 'Degree audit',
       headline: 'Track requirements',
       icon: '✅',
+      image: '/images/coplan-dars.png',
+      imageSrc2x: '/images/coplan-dars@2x.png',
+      imageWidth: 992,
+      imageHeight: 786,
+      imageAlt: 'CoPlan degree audit dashboard with registered and planned courses across academic terms',
+      imageFill: true,
+      imageFrameClass:
+        'flex min-h-[240px] flex-1 flex-col overflow-hidden bg-[#f4f4f6] md:min-h-[360px] md:max-h-[min(532px,52vh)]',
       description:
         'DARS-style auditing with clearer states for complete, in-progress, and remaining requirements — plus room to explore alternatives.',
     },
@@ -275,6 +305,14 @@ The goal was an all-in-one product students could trust before, during, and afte
       title: 'Onboarding',
       headline: 'Bring your progress',
       icon: '📥',
+      image: '/images/coplan-onboarding.png',
+      imageSrc2x: '/images/coplan-onboarding@2x.png',
+      imageWidth: 1024,
+      imageHeight: 693,
+      imageAlt: 'CoPlan sign-in screen with UW NetID, Google, and email login options',
+      imageFill: true,
+      imageFrameClass:
+        'flex min-h-[220px] flex-1 flex-col overflow-hidden bg-[#f4f4f6] md:min-h-[320px] md:max-h-[min(460px,48vh)]',
       description:
         'Students coming from another platform or mid-degree can import existing coursework so planning starts from reality, not a blank slate.',
     },
@@ -282,6 +320,14 @@ The goal was an all-in-one product students could trust before, during, and afte
       title: 'Tooltips & guidance',
       headline: 'Explain the system',
       icon: '💬',
+      image: '/images/coplan-tooltips.gif',
+      imageWidth: 986,
+      imageHeight: 784,
+      imageAlt:
+        'CoPlan dashboard with contextual tooltips explaining course cards, icons, and planning sections',
+      imageFill: true,
+      imageFrameClass:
+        'flex min-h-[240px] flex-1 flex-col overflow-hidden bg-[#f4f4f6] md:min-h-[360px] md:max-h-[min(532px,52vh)]',
       description:
         'After testing showed confusion with icons and headings, we added contextual tooltips to reinforce the all-in-one model.',
     },
@@ -316,33 +362,3 @@ The goal was an all-in-one product students could trust before, during, and afte
     },
   },
 } as const
-
-export const coplanMoreProjects = [
-  {
-    title: 'Cue',
-    role: 'UX Designer',
-    href: '/projects/cue',
-    description: 'Social coaching companion for FigBuild 2026.',
-    image: '/images/cue-hero.png',
-    imageAlt:
-      'Cue AR social coaching interface with engagement insights and companion app profile',
-  },
-  {
-    title: 'SushiTalk',
-    role: 'UX Designer',
-    href: '/projects/sushitalk',
-    description: 'Tutor marketplace for learning Japanese.',
-    image: '/images/sushitalk-hero.png',
-    imageAlt: 'SushiTalk kawaii salmon nigiri mascot logo',
-    imageBackground: '#f5f0e8',
-  },
-  {
-    title: 'Washington 211',
-    role: 'Research',
-    href: '/projects/wa211',
-    description: 'Usability research on WA 211 search accessibility.',
-    image: '/images/wa211-case-study.png',
-    imageAlt:
-      'Washington 211 community hands with blue 2-1-1 speech bubble logo',
-  },
-] as const

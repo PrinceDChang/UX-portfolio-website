@@ -73,12 +73,12 @@ Our team partnered with WA 211 stakeholders to study how users search for resour
     steps: [
       {
         number: '01',
-        title: 'User study',
+        title: 'User Study',
         body: `A preliminary survey captured participant background and how they currently use the 211 website — establishing context before task-based testing.`,
       },
       {
         number: '02',
-        title: 'Usability testing',
+        title: 'Usability Testing',
         body: `Moderated sessions focused on finding resources by topic and location, using filters and map views, and comparing the WA site to familiar search patterns and MI 211.`,
       },
     ],
@@ -336,33 +336,3 @@ Our team partnered with WA 211 stakeholders to study how users search for resour
     },
   },
 } as const
-
-export const wa211MoreProjects = [
-  {
-    title: 'Co-plan',
-    role: 'UX Designer',
-    href: '/projects/coplan',
-    description:
-      'All-in-one course planning and degree progress for university students.',
-    image: '/images/coplan-case-study.png',
-    imageAlt: 'Co-plan laptop mockup with schedule and degree planning UI',
-  },
-  {
-    title: 'SushiTalk',
-    role: 'UX Designer',
-    href: '/projects/sushitalk',
-    description: 'Tutor marketplace for learning Japanese.',
-    image: '/images/sushitalk-case-study.png',
-    imageAlt: 'SushiTalk kawaii salmon nigiri mascot logo',
-    imageBackground: '#f5f0e8',
-  },
-  {
-    title: 'Cue',
-    role: 'UX Designer',
-    href: '/projects/cue',
-    description: 'Social coaching companion for FigBuild 2026.',
-    image: '/images/cue-hero.png',
-    imageAlt:
-      'Cue AR social coaching interface with engagement insights and companion app profile',
-  },
-] as const

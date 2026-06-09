@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
+import { CaseStudyMoreProjects } from '../components/case-study/CaseStudyMoreProjects'
 import { CaseStudyConclusion } from '../components/case-study/CaseStudyConclusion'
 import { CaseStudyShell } from '../components/case-study/CaseStudyShell'
 import { DesignProcessSteps } from '../components/case-study/DesignProcessSteps'
@@ -8,11 +8,7 @@ import { FeatureShowcase } from '../components/case-study/FeatureShowcase'
 import { FigmaPrototypeEmbed } from '../components/case-study/FigmaPrototypeEmbed'
 import { InformationArchitectureScroll } from '../components/case-study/InformationArchitectureScroll'
 import { SectionBlock } from '../components/case-study/SectionBlock'
-import {
-  citibridgeCaseStudyMeta,
-  citibridgeMoreProjects,
-  citibridgeSections,
-} from '../data/citibridgeCaseStudy'
+import { citibridgeCaseStudyMeta, citibridgeSections } from '../data/citibridgeCaseStudy'
 import { roleBadgeClassName } from '../lib/projectRole'
 
 export function CitibridgeCaseStudyPage() {
@@ -51,7 +47,7 @@ export function CitibridgeCaseStudyPage() {
               {citibridgeCaseStudyMeta.details.map((item) => (
                 <div
                   key={item.label}
-                  className="rounded-2xl bg-elevated/80 px-5 py-4 ring-1 ring-white/8 backdrop-blur-sm"
+                  className="rounded-2xl bg-elevated/80 px-5 py-4 ring-1 ring-accent/30 backdrop-blur-sm"
                 >
                   <dt className="text-xs font-semibold uppercase tracking-[0.2em] text-slate">
                     {item.label}
@@ -253,58 +249,7 @@ export function CitibridgeCaseStudyPage() {
         </SectionBlock>
 
         <SectionBlock label="Explore more" title="More projects">
-          <div className="grid gap-4 md:grid-cols-3">
-            {citibridgeMoreProjects.map((project) => {
-              const hasImage = 'image' in project && project.image
-              const imageBackground =
-                'imageBackground' in project ? project.imageBackground : '#111118'
-              const fillsFrame = 'fillsFrame' in project && project.fillsFrame
-
-              return (
-                <Link
-                  key={project.title}
-                  to={project.href}
-                  className={`overflow-hidden rounded-3xl bg-surface ring-1 ring-white/8 transition hover:ring-accent/40 ${
-                    hasImage ? 'flex flex-col' : 'p-6'
-                  }`}
-                >
-                  {hasImage && (
-                    <div
-                      className="relative aspect-[16/10] overflow-hidden"
-                      style={{ backgroundColor: imageBackground }}
-                    >
-                      <img
-                        src={project.image}
-                        alt={
-                          ('imageAlt' in project ? project.imageAlt : undefined) ??
-                          project.title
-                        }
-                        className={`h-full w-full object-center ${
-                          fillsFrame ? 'object-cover' : 'object-contain p-4'
-                        }`}
-                        loading="lazy"
-                        decoding="async"
-                      />
-                      <span
-                        className={roleBadgeClassName(
-                          project.role,
-                          'absolute left-3 top-3 z-10 text-[10px]',
-                        )}
-                      >
-                        {project.role}
-                      </span>
-                    </div>
-                  )}
-                  <div className="p-6">
-                    <h3 className="font-condensed text-3xl uppercase tracking-wide text-ink">
-                      {project.title}
-                    </h3>
-                    <p className="mt-2 text-sm text-slate">{project.description}</p>
-                  </div>
-                </Link>
-              )
-            })}
-          </div>
+          <CaseStudyMoreProjects excludeProjectId="citbridge" />
         </SectionBlock>
       </div>
     </CaseStudyShell>

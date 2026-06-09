@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
+import { CaseStudyMoreProjects } from '../components/case-study/CaseStudyMoreProjects'
 import { CaseStudyConclusion } from '../components/case-study/CaseStudyConclusion'
 import { CaseStudyShell } from '../components/case-study/CaseStudyShell'
 import { AlternatingDesignTimeline } from '../components/case-study/AlternatingDesignTimeline'
@@ -12,7 +12,6 @@ import { SectionBlock } from '../components/case-study/SectionBlock'
 import { SplitHeroCards } from '../components/case-study/SplitHeroCards'
 import {
   sushitalkCaseStudyMeta,
-  sushitalkMoreProjects,
   sushitalkSections,
 } from '../data/sushitalkCaseStudy'
 import { roleBadgeClassName } from '../lib/projectRole'
@@ -59,7 +58,7 @@ export function SushiTalkCaseStudyPage() {
               {sushitalkCaseStudyMeta.details.map((item) => (
                 <div
                   key={item.label}
-                  className="rounded-2xl bg-elevated/80 px-5 py-4 ring-1 ring-white/8 backdrop-blur-sm"
+                  className="rounded-2xl bg-elevated/80 px-5 py-4 ring-1 ring-accent/30 backdrop-blur-sm"
                 >
                   <dt className="text-xs font-semibold uppercase tracking-[0.2em] text-slate">
                     {item.label}
@@ -188,9 +187,13 @@ export function SushiTalkCaseStudyPage() {
               {sushitalkSections.process.intro}
             </p>
           </div>
-          <figure className="mx-auto mb-10 w-[70%] max-w-full overflow-hidden rounded-3xl bg-[#eef3f8] ring-1 ring-white/10 md:mb-12">
+          <figure className="mb-10 w-full overflow-hidden rounded-3xl bg-[#eef3f8] ring-1 ring-white/10 md:mb-12">
             <img
               src={sushitalkSections.process.roadmap.src}
+              srcSet={`${sushitalkSections.process.roadmap.src} 1024w, ${sushitalkSections.process.roadmap.src2x} 2048w`}
+              sizes="(min-width: 1152px) 1104px, calc(100vw - 3rem)"
+              width={1024}
+              height={616}
               alt={sushitalkSections.process.roadmap.alt}
               className="block h-auto w-full object-contain object-center"
               loading="lazy"
@@ -219,6 +222,18 @@ export function SushiTalkCaseStudyPage() {
             features={sushitalkSections.features}
           />
 
+          <blockquote className="case-study-quote mt-20 rounded-3xl border border-accent/25 bg-elevated/60 px-8 py-8 md:mt-28 md:px-10 md:py-10">
+            <p className="font-display text-xl leading-relaxed text-ink md:text-2xl">
+              &ldquo;{sushitalkSections.testimonial.quote}&rdquo;
+            </p>
+            <footer className="mt-6 text-sm text-slate md:text-base">
+              <cite className="not-italic font-semibold text-ink">
+                {sushitalkSections.testimonial.name}
+              </cite>
+              <span className="mt-1 block">{sushitalkSections.testimonial.title}</span>
+            </footer>
+          </blockquote>
+
           <div className="mb-8 mt-20 border-t border-white/[0.06] pt-20 md:mb-10 md:mt-28 md:pt-28">
             <h2 className="section-title mb-0">{sushitalkSections.phaseTwo.title}</h2>
             <p className="mt-4 font-display text-xl uppercase tracking-wide text-ink md:text-2xl">
@@ -235,18 +250,7 @@ export function SushiTalkCaseStudyPage() {
         </SectionBlock>
 
         <SectionBlock>
-          <blockquote className="case-study-quote rounded-3xl border border-accent/25 bg-elevated/60 px-8 py-8 md:px-10 md:py-10">
-            <p className="font-display text-xl leading-relaxed text-ink md:text-2xl">
-              &ldquo;{sushitalkSections.testimonial.quote}&rdquo;
-            </p>
-            <footer className="mt-6 text-sm text-slate md:text-base">
-              <cite className="not-italic font-semibold text-ink">
-                {sushitalkSections.testimonial.name}
-              </cite>
-              <span className="mt-1 block">{sushitalkSections.testimonial.title}</span>
-            </footer>
-          </blockquote>
-          <p className="mt-8 rounded-2xl border border-accent/20 bg-accent/10 px-5 py-4 text-sm font-medium text-ink md:text-base">
+          <p className="rounded-2xl border border-accent/20 bg-accent/10 px-5 py-4 text-sm font-medium text-ink md:text-base">
             {sushitalkSections.finalDesign.ongoingNote}
           </p>
         </SectionBlock>
@@ -262,7 +266,7 @@ export function SushiTalkCaseStudyPage() {
               {sushitalkSections.lessonsLearned.map((item) => (
                 <article
                   key={item.title}
-                  className="rounded-3xl bg-elevated p-8 ring-1 ring-white/8"
+                  className="rounded-3xl bg-elevated p-8 ring-1 ring-accent/30"
                 >
                   <h4 className="text-lg font-semibold text-ink">{item.title}</h4>
                   <p className="mt-4 text-sm leading-relaxed text-slate">{item.body}</p>
@@ -273,66 +277,7 @@ export function SushiTalkCaseStudyPage() {
         </SectionBlock>
 
         <SectionBlock label="Explore more" title="More projects">
-          <div className="grid gap-4 md:grid-cols-3">
-            {sushitalkMoreProjects.map((project) => {
-              const hasImage = 'image' in project && project.image
-              const imageBackground =
-                'imageBackground' in project &&
-                typeof project.imageBackground === 'string'
-                  ? project.imageBackground
-                  : '#111118'
-              const imageFit =
-                'imageBackground' in project ? 'object-contain' : 'object-cover'
-
-              return (
-                <Link
-                  key={project.title}
-                  to={project.href}
-                  className={`overflow-hidden rounded-3xl bg-surface ring-1 ring-white/8 transition hover:ring-accent/40 ${
-                    hasImage ? 'flex flex-col' : 'p-6'
-                  }`}
-                >
-                  {hasImage && (
-                    <div
-                      className="relative aspect-[16/10] overflow-hidden"
-                      style={{ backgroundColor: imageBackground }}
-                    >
-                      <img
-                        src={project.image}
-                        alt={
-                          ('imageAlt' in project ? project.imageAlt : undefined) ??
-                          project.title
-                        }
-                        className={`h-full w-full ${imageFit} object-center ${
-                          'imageBackground' in project ? 'p-4' : ''
-                        }`}
-                        loading="lazy"
-                        decoding="async"
-                      />
-                      <span
-                        className={roleBadgeClassName(
-                          project.role,
-                          'absolute left-3 top-3 z-10 text-[10px]',
-                        )}
-                      >
-                        {project.role}
-                      </span>
-                    </div>
-                  )}
-                  <div className={hasImage ? 'p-6' : 'p-6'}>
-                    <h3
-                      className={`font-condensed text-3xl uppercase tracking-wide text-ink ${
-                        hasImage ? '' : 'mt-4'
-                      }`}
-                    >
-                      {project.title}
-                    </h3>
-                    <p className="mt-2 text-sm text-slate">{project.description}</p>
-                  </div>
-                </Link>
-              )
-            })}
-          </div>
+          <CaseStudyMoreProjects excludeProjectId="sushitalk" />
         </SectionBlock>
       </div>
     </CaseStudyShell>

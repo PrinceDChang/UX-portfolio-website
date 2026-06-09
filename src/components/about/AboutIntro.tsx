@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { aboutIntro, aboutIntroPortrait, aboutStats } from '../../data/aboutPage'
+import { CountUpStat } from '../CountUpStat'
 import { SocialLinks } from './SocialLinks'
 
 export function AboutIntro() {
@@ -28,10 +29,14 @@ export function AboutIntro() {
                 key={stat.label}
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.15 + i * 0.06 }}
+                transition={{ duration: 0.5, delay: 0.35 + i * 0.08 }}
                 className="rounded-2xl bg-elevated/80 px-4 py-4 ring-1 ring-white/8"
               >
-                <p className="font-display text-3xl text-accent md:text-4xl">{stat.value}</p>
+                <CountUpStat
+                  value={stat.value}
+                  delay={0.4 + i * 0.1}
+                  className="font-display text-3xl text-accent md:text-4xl"
+                />
                 <p className="mt-1 text-xs text-slate">{stat.label}</p>
               </motion.div>
             ))}
@@ -58,7 +63,7 @@ export function AboutIntro() {
           <div className="about-intro__frame">
             <img
               src={aboutIntroPortrait}
-              alt="Oey Chang at Chureito Pagoda with Mount Fuji and Fujiyoshida in the background"
+              alt="Oey Chang holding a giant Pikachu plush over their head in a warehouse store"
               className="h-full w-full object-cover object-center"
             />
           </div>

@@ -6,6 +6,7 @@ export interface DesignProcessStep {
   number: string
   title: string
   body: string
+  listItems?: readonly string[]
   image?: string
   imageAlt?: string
   imageCaption?: string
@@ -362,6 +363,15 @@ export function DesignProcessSteps({
                       <p className="mt-4 max-w-xl whitespace-pre-line text-sm leading-relaxed text-slate md:mt-5 md:text-[15px] md:leading-relaxed">
                         {step.body}
                       </p>
+                      {step.listItems && step.listItems.length > 0 && (
+                        <ol className="mt-4 max-w-xl list-decimal space-y-2 pl-5 text-sm leading-relaxed text-slate marker:text-accent md:mt-5 md:text-[15px] md:leading-relaxed">
+                          {step.listItems.map((item) => (
+                            <li key={item} className="pl-1">
+                              {item}
+                            </li>
+                          ))}
+                        </ol>
+                      )}
                       {step.image && !artifactsBelowTrack && (
                         <div className="mt-5 flex h-[242px] w-full items-center justify-center overflow-hidden rounded-lg border border-white/[0.08] bg-white/[0.04] shadow-lg ring-1 ring-white/[0.06]">
                           <img

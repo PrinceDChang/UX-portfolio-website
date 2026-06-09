@@ -1,5 +1,6 @@
 interface VideoPrototypeCardProps {
-  youtubeId: string
+  youtubeId?: string
+  embedSrc?: string
   title: string
   footerLabel?: string
   className?: string
@@ -7,11 +8,18 @@ interface VideoPrototypeCardProps {
 
 export function VideoPrototypeCard({
   youtubeId,
+  embedSrc,
   title,
   footerLabel = 'Video prototype',
   className = '',
 }: VideoPrototypeCardProps) {
-  const embedSrc = `https://www.youtube.com/embed/${youtubeId}?rel=0&modestbranding=1`
+  const resolvedSrc =
+    embedSrc ??
+    (youtubeId
+      ? `https://www.youtube.com/embed/${youtubeId}?rel=0&modestbranding=1`
+      : undefined)
+
+  if (!resolvedSrc) return null
 
   return (
     <article
@@ -19,7 +27,7 @@ export function VideoPrototypeCard({
     >
       <div className="relative aspect-video w-full bg-black">
         <iframe
-          src={embedSrc}
+          src={resolvedSrc}
           title={title}
           className="absolute inset-0 h-full w-full border-0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

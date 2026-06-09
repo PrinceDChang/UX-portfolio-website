@@ -85,12 +85,12 @@ After every interaction, Cue helps users reflect on what happened, what worked, 
     steps: [
       {
         number: '01',
-        title: 'Research & empathy',
+        title: 'Research & Empathy',
         body: `We audited social coaching tools, AR wearables, and accessibility patterns to understand where real-time emotional legibility breaks down — and where post-session reflection already helps users grow.`,
       },
       {
         number: '02',
-        title: 'Ideation & user flows',
+        title: 'Ideation & User Flows',
         body: `We mapped moments that needed AR support versus companion-app reflection, keeping the experience calm and opt-in rather than omnipresent.`,
       },
       {
@@ -100,20 +100,20 @@ After every interaction, Cue helps users reflect on what happened, what worked, 
       },
       {
         number: '04',
-        title: 'Prototyping & testing',
+        title: 'Prototyping & Testing',
         body: `Rapid low-fidelity exploration of profile structure, energy signals, interest tags, and filters — paired with ethical edge-case mapping before high-fidelity build.`,
       },
     ],
     artifacts: [
       {
-        title: 'Use case storyboard',
+        title: 'Use Case Storyboard',
         body: `Mapping the journey helped us identify which moments needed AR support, which needed the companion app, and which were best left alone. Not every moment benefits from an interface.`,
         image: '/images/cue-use-case-storyboard.png',
         imageAlt:
           'Eight-panel storyboard from bar exterior through AR aura filtering, target lock on Alex, AI conversation starters, to connection initiated',
       },
       {
-        title: 'Early sketches & information architecture',
+        title: 'Early Sketches & Information Architecture',
         body: `We explored profile structure — introvert/extrovert scale, toggleable energy bar, interest tags — alongside filters for the kinds of connections someone is open to in a given moment. Information architecture kept the system coherent under time pressure.`,
         cards: [
           {
@@ -223,27 +223,3 @@ After every interaction, Cue helps users reflect on what happened, what worked, 
     },
   ],
 } as const
-
-export const cueMoreProjects = [
-  {
-    title: 'Co-plan',
-    role: 'UX Designer',
-    href: '/projects/coplan',
-    description: 'Degree planning for university students.',
-  },
-  {
-    title: 'Washington 211',
-    role: 'Research',
-    href: '/projects/wa211',
-    description: 'Usability research on WA 211 search accessibility.',
-    image: '/images/wa211-case-study.png',
-    imageAlt:
-      'Washington 211 community hands with blue 2-1-1 speech bubble logo',
-  },
-  {
-    title: 'SushiTalk',
-    role: 'UX Designer',
-    href: '/projects/sushitalk',
-    description: 'Tutor marketplace for learning Japanese.',
-  },
-] as const

@@ -61,7 +61,7 @@ export function HeroIntro({
             <div className="relative w-full min-w-[305px]">
               <div className="absolute right-0 bottom-full w-full space-y-1 pb-3 text-right">
                 <p className="w-full text-sm leading-snug text-slate md:text-base">
-                  Currently pursuing a Master Degree in
+                  Master Degree graduate in
                   <br />
                   Human-Centered Design & Engineering @UW
                 </p>
@@ -107,7 +107,7 @@ export function HeroIntro({
           >
             <div className="ml-auto max-w-md space-y-1 text-right">
               <p className="text-sm leading-snug text-slate md:text-base">
-                Currently pursuing a Master Degree in
+                Master Degree graduate in
                 <br />
                 Human-Centered Design & Engineering @UW
               </p>

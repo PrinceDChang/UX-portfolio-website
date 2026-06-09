@@ -44,7 +44,7 @@ function ChevronIcon({ open }: { open: boolean }) {
 }
 
 export function Services() {
-  const [activeIndex, setActiveIndex] = useState<number | null>(0)
+  const [activeIndex, setActiveIndex] = useState<number | null>(null)
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
 
   const cursorX = useMotionValue(-9999)

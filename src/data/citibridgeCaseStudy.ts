@@ -208,37 +208,3 @@ export const citibridgeSections = {
     },
   },
 } as const
-
-export const citibridgeMoreProjects = [
-  {
-    title: 'Co-plan',
-    role: 'UX Designer',
-    description:
-      'All-in-one web planning tool for university students to plan courses and track degree progress.',
-    href: '/projects/coplan',
-    image: '/images/coplan-case-study.png',
-    imageAlt: 'Co-plan case study',
-    imageBackground: '#ffffff',
-  },
-  {
-    title: 'Washington 211',
-    role: 'Research',
-    description:
-      'A corporate usability research project with Washington 211 stakeholders on improving search accessibility.',
-    href: '/projects/wa211',
-    image: '/images/wa211-case-study.png',
-    imageAlt: 'Washington 211 case study',
-    imageBackground: '#2a2a2a',
-    fillsFrame: true,
-  },
-  {
-    title: 'SushiTalk',
-    role: 'UX Designer',
-    description:
-      'A platform for native Japanese tutors and learners to connect on the journey to learn Japanese.',
-    href: '/projects/sushitalk',
-    image: '/images/sushitalk-case-study.png',
-    imageAlt: 'SushiTalk case study',
-    imageBackground: '#f5f0e8',
-  },
-] as const

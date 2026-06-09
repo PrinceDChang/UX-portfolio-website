@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
+import { CaseStudyMoreProjects } from '../components/case-study/CaseStudyMoreProjects'
 import { CaseStudyShell } from '../components/case-study/CaseStudyShell'
 import { SectionBlock } from '../components/case-study/SectionBlock'
 import { DesignProcessSteps } from '../components/case-study/DesignProcessSteps'
@@ -12,7 +12,6 @@ import { ZoomableImage } from '../components/case-study/ZoomableImage'
 import { FigmaPrototypeEmbed } from '../components/case-study/FigmaPrototypeEmbed'
 import {
   cueCaseStudyMeta,
-  cueMoreProjects,
   cueSections,
 } from '../data/cueCaseStudy'
 import { roleBadgeClassName } from '../lib/projectRole'
@@ -55,7 +54,7 @@ export function CueCaseStudyPage() {
               {cueCaseStudyMeta.details.map((item) => (
                 <div
                   key={item.label}
-                  className="rounded-2xl bg-elevated/80 px-5 py-4 ring-1 ring-white/8 backdrop-blur-sm"
+                  className="rounded-2xl bg-elevated/80 px-5 py-4 ring-1 ring-accent/30 backdrop-blur-sm"
                 >
                   <dt className="text-xs font-semibold uppercase tracking-[0.2em] text-slate">
                     {item.label}
@@ -114,7 +113,7 @@ export function CueCaseStudyPage() {
 
         <SectionBlock label={cueSections.finalDesign.label} title="Final design">
           <p className="section-copy mb-10">{cueSections.finalDesign.body}</p>
-          <div className="grid gap-6 md:grid-cols-2 md:items-start">
+          <div className="grid gap-6 md:grid-cols-2 md:items-center">
             {cueSections.finalDesign.deliverables.map((item) => (
               <figure
                 key={item.title}
@@ -203,14 +202,6 @@ export function CueCaseStudyPage() {
               )
             })}
           </div>
-
-          <SplitHeroCards
-            className="mt-10"
-            label={cueSections.ethics.label}
-            headline={cueSections.ethics.headline}
-            body={cueSections.ethics.body}
-            pillars={cueSections.solution.pillars}
-          />
         </SectionBlock>
 
         <SectionBlock label="Key features" title="What we built">
@@ -267,23 +258,7 @@ export function CueCaseStudyPage() {
         </SectionBlock>
 
         <SectionBlock label="Explore more" title="More projects">
-          <div className="grid gap-4 md:grid-cols-3">
-            {cueMoreProjects.map((project) => (
-              <Link
-                key={project.title}
-                to={project.href}
-                className="rounded-3xl bg-surface p-6 ring-1 ring-white/8 transition hover:ring-accent/40"
-              >
-                <span className={roleBadgeClassName(project.role, 'text-[10px]')}>
-                  {project.role}
-                </span>
-                <h3 className="mt-4 font-condensed text-3xl uppercase tracking-wide text-ink">
-                  {project.title}
-                </h3>
-                <p className="mt-2 text-sm text-slate">{project.description}</p>
-              </Link>
-            ))}
-          </div>
+          <CaseStudyMoreProjects excludeProjectId="cue" />
         </SectionBlock>
       </div>
     </CaseStudyShell>

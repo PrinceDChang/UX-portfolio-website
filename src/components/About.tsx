@@ -22,18 +22,19 @@ export function AboutContent() {
         consulting, a passion for globalization, localization and fitness.
       </p>
       <p className="mt-4 section-copy">
-        Hi, I&apos;m Oey — a UX Designer currently pursuing a Master Degree in Human-Centered Design
-        & Engineering @UW
+        I graduated from the University of Washington Seattle with a Master Degree in Human-Centered
+        Design & Engineering in June 2026.
       </p>
 
       <div className="mt-10 grid max-w-md grid-cols-2 gap-6">
-        {stats.map((stat) => (
+        {stats.map((stat, index) => (
           <div
             key={stat.label}
             className="rounded-3xl bg-elevated p-6 shadow-card ring-1 ring-white/8"
           >
             <CountUpStat
               value={stat.value}
+              delay={index * 0.12}
               className="font-display text-5xl text-accent"
             />
             <p className="mt-2 text-sm text-slate">{stat.label}</p>

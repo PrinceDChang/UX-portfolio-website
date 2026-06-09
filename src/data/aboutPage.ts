@@ -16,6 +16,8 @@ export interface AboutFocus {
     href?: string
     external?: boolean
     comingSoon?: boolean
+    wushuTransition?: boolean
+    photographyTransition?: boolean
   }
 }
 
@@ -25,7 +27,7 @@ export const aboutIntro = {
   label: 'About Oey',
   headline: 'Three disciplines,\none point of view.',
   lead: "I'm Oey Chang — a UX designer and researcher shaped by international consulting, a love of globalization and localization, and a life built around craft, movement, and the camera.",
-  sub: 'Currently pursuing a Master Degree in Human-Centered Design & Engineering at the University of Washington, I bring the same curiosity to pixels, prints, and the training floor.',
+  sub: 'Graduated with a Master Degree in Human-Centered Design & Engineering at the University of Washington Seattle June 2026. I bring the same curiosity to pixels, prints, and the training grounds.',
 }
 
 export const aboutStats = [
@@ -62,8 +64,8 @@ export const aboutFocuses: AboutFocus[] = [
     index: '02',
     title: 'Photography',
     tagline: 'Chasing light, framing silence.',
-    accent: '#e8a54b',
-    accentMuted: 'rgba(232, 165, 75, 0.16)',
+    accent: '#9970FF',
+    accentMuted: 'rgba(153, 112, 255, 0.18)',
     image: '/images/about-photography.png',
     imageAlt:
       'Oey Chang photographing a golden-hour sunset over water with a DSLR camera, mountains on the horizon',
@@ -77,15 +79,15 @@ export const aboutFocuses: AboutFocus[] = [
       'Color & composition',
       'Visual storytelling',
     ],
-    cta: { label: 'Coming soon', comingSoon: true },
+    cta: { label: 'Open the gallery', photographyTransition: true },
   },
   {
     id: 'wushu',
     index: '03',
     title: 'Wushu',
     tagline: 'Discipline in motion.',
-    accent: '#4ade80',
-    accentMuted: 'rgba(74, 222, 128, 0.14)',
+    accent: '#9970FF',
+    accentMuted: 'rgba(153, 112, 255, 0.18)',
     image: '/images/oey-portrait-back.png',
     imageAlt: 'Oey Chang performing martial arts in wushu training',
     paragraphs: [
@@ -98,6 +100,6 @@ export const aboutFocuses: AboutFocus[] = [
       'Focus & breathwork',
       'Community & coaching',
     ],
-    cta: { label: 'Coming soon', comingSoon: true },
+    cta: { label: 'Enter the hall', href: '/wushu', wushuTransition: true },
   },
 ]

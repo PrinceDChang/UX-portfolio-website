@@ -1,9 +1,11 @@
 import { useCallback, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
+import { ZoomableImage } from './ZoomableImage'
 
 export interface ImageCarouselSlide {
   src: string
   alt: string
+  caption?: string
 }
 
 interface ImageCarouselProps {
@@ -11,6 +13,8 @@ interface ImageCarouselProps {
   className?: string
   frameClassName?: string
   imageClassName?: string
+  /** Enable pan/zoom controls per slide (resets when changing slides) */
+  zoomable?: boolean
 }
 
 export function ImageCarousel({
@@ -18,6 +22,7 @@ export function ImageCarousel({
   className = '',
   frameClassName = 'min-h-[200px] md:min-h-[240px]',
   imageClassName = 'h-auto w-full object-contain p-3 md:p-4',
+  zoomable = false,
 }: ImageCarouselProps) {
   const [index, setIndex] = useState(0)
   const total = slides.length
@@ -40,19 +45,31 @@ export function ImageCarousel({
       >
         <div className={`relative ${frameClassName}`}>
           <AnimatePresence mode="wait">
-            <motion.img
-              key={current.src}
-              src={current.src}
-              alt={current.alt}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className={imageClassName}
-              loading="lazy"
-              decoding="async"
-              draggable={false}
-            />
+            {zoomable ? (
+              <motion.div
+                key={current.src}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <ZoomableImage src={current.src} alt={current.alt} className="mt-0" />
+              </motion.div>
+            ) : (
+              <motion.img
+                key={current.src}
+                src={current.src}
+                alt={current.alt}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                className={imageClassName}
+                loading="lazy"
+                decoding="async"
+                draggable={false}
+              />
+            )}
           </AnimatePresence>
         </div>
 
@@ -102,7 +119,7 @@ export function ImageCarousel({
               type="button"
               role="tab"
               aria-selected={i === index}
-              aria-label={slide.alt}
+              aria-label={slide.caption ?? slide.alt}
               onClick={() => setIndex(i)}
               className={`h-2 rounded-full transition-all ${
                 i === index
@@ -112,6 +129,10 @@ export function ImageCarousel({
             />
           ))}
         </div>
+      )}
+
+      {current.caption && (
+        <p className="mt-3 text-center text-sm font-medium text-slate">{current.caption}</p>
       )}
     </div>
   )

@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Canvas, useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
-import { featuredProjects } from '../../data/content'
+import { globeFeaturedProjects } from '../../data/content'
 import { fibonacciSpherePoints, filterLandPoints } from '../../lib/geo'
 import { CaseStudyCard } from './CaseStudyCard'
 import { ProjectPin, useGlobeDrag } from './ProjectPin'
@@ -82,7 +82,7 @@ function GlobeScene({
         <meshBasicMaterial transparent opacity={0} />
       </mesh>
 
-      {featuredProjects.map((project) => (
+      {globeFeaturedProjects.map((project) => (
         <ProjectPin
           key={project.id}
           project={project}
@@ -104,7 +104,7 @@ export function DottedGlobe() {
   const pendingHoverId = useRef<string | null>(null)
 
   const previewId = hoveredId ?? activeId
-  const previewProject = featuredProjects.find((p) => p.id === previewId) ?? null
+  const previewProject = globeFeaturedProjects.find((p) => p.id === previewId) ?? null
 
   const clearHoverTimers = () => {
     if (hoverClearTimer.current) {

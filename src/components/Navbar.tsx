@@ -65,7 +65,9 @@ export function Navbar() {
         </div>
 
         <a
-          href="#"
+          href="https://docs.google.com/document/d/1PRhWQULdrhxiATykFpkIKLJeIBRO6PLr0GSEFbgDMg4/edit?usp=sharing"
+          target="_blank"
+          rel="noopener noreferrer"
           className="nav-resume-cta shrink-0 rounded-full px-4 py-2 text-sm font-medium md:px-5 md:py-2.5"
           onPointerEnter={setResumeHoverOrigin}
         >

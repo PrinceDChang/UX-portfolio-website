@@ -6,11 +6,11 @@ export const globePinCoordinates: Record<
   string,
   { lat: number; lng: number }
 > = {
-  cue: { lat: 28, lng: -98 },
-  coplan: { lat: -18, lng: -52 },
-  sushitalk: { lat: 10, lng: 98 },
-  wa211: { lat: 48, lng: 12 },
-  'uw-oris': { lat: 58, lng: -108 },
+  cue: { lat: 51.51, lng: -0.13 },
+  coplan: { lat: 35.86, lng: 104.19 },
+  sushitalk: { lat: 35.68, lng: 139.69 },
+  wa211: { lat: 40.71, lng: -74.01 },
+  'uw-oris': { lat: 47.61, lng: -122.33 },
   citbridge: { lat: 52, lng: -2 },
   'competition-king': { lat: 34, lng: 132 },
   arboretum: { lat: 40, lng: -68 },

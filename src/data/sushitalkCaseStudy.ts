@@ -6,14 +6,14 @@ export const sushitalkCaseStudyMeta = {
   logoHeight: 132,
   logoAlt: 'SushiTalk wordmark',
   tagline:
-    'A passion project with a Software Engineer from Google in Tokyo — a platform for native Japanese tutors to host their business and learners to find the right match on their journey to learn Japanese.',
+    'A passion project with a Software Engineer at Google Japan for a platform to help non-native Japanese learners connect with native Japanese tutors that match on their journey to not only learn Japanese, but give specialized help with moving into or staying in Japan.',
   heroImage: '/images/sushitalk-case-study.png',
-  heroImageAlt: 'SushiTalk brand and product screens for the tutor marketplace',
-  projectLabel: 'Passion project · Tokyo',
+  heroImageAlt: 'SushiTalk brand and product screens for the tutor matching platform',
+  projectLabel: 'Passion project · Google Japan',
   details: [
     { label: 'Role', value: 'UX Designer · Usability Researcher' },
     { label: 'Industry', value: 'EdTech · Marketplace' },
-    { label: 'Team', value: '4 HCDE students' },
+    { label: 'Team', value: 'HCDE design team · Google Japan engineer' },
     {
       label: 'Duration',
       value: 'Phase 1: 8 weeks\nPhase 2: 2 months',
@@ -23,51 +23,52 @@ export const sushitalkCaseStudyMeta = {
 
 export const sushitalkSections = {
   hook: {
-    label: 'Learning Japanese deserves a better match',
-    body: `Finding a tutor online often means hitting paywalls before you understand the product, scrolling endless listings without strong filters, or juggling tools that were never designed for how learners actually compare teaching styles.
+    label: 'Language is only part of living in Japan',
+    body: `For non-native Japanese learners, finding the right tutor is rarely just about grammar drills. Some are preparing for JLPT exams. Others are planning a move, navigating visas and housing, or figuring out how daily life works once they arrive. Most platforms treat every learner the same — and bury the tutors who could actually help behind paywalls and weak search.
 
-SushiTalk started as a collaboration with a Google engineer in Tokyo who wanted a marketplace that respects both tutors building a business and learners trying to find the right fit — without locking discovery behind a subscription.`,
+SushiTalk began as a passion project with a software engineer at Google Japan: a platform where native tutors can host their practice and learners can find someone who matches their language goals and their life-in-Japan journey — not just their lesson budget.`,
   },
   challenge: {
     label: 'The challenge',
-    body: `We had eight weeks and a distributed student team to define stage-one of a two-sided marketplace. Competing products showed what not to do: critical features behind paywalls, weak browse experiences, and search that made it hard to compare tutors fairly.`,
-    problemStatement: `How might we help Japanese learners discover and connect with native tutors through an intuitive marketplace — with free browsing, transparent profiles, and powerful search that does not gate core value behind a paywall?`,
+    body: `We had eight weeks and a distributed student team to define stage one of a two-sided marketplace — with a longer-term vision of supporting learners beyond language alone. Competing products showed what not to do: discovery locked behind paywalls, profiles that hide whether a tutor understands relocation or local life, and search that makes it hard to compare who can truly help on your journey.`,
+    problemStatement: `How might we help non-native Japanese learners discover and connect with native tutors who match their language goals and their broader journey — whether learning Japanese, moving to Japan, or building a life there — through free browsing, transparent profiles, and search that does not gate core value behind a paywall?`,
   },
   goals: [
+    'Help learners find tutors matched to language level, teaching style, and life-in-Japan needs.',
     'Avoid blocking important features behind a paywall.',
     'Allow free browsing of tutor profiles before commitment.',
     'Ship an intuitive, powerful advanced filter for tutor search.',
     'Deliver three of five priority screens in a testable hi-fi prototype.',
   ],
   researchQuestions: [
-    'What do learners expect when comparing Japanese tutors online?',
-    'Where do existing tutor platforms create friction — paywalls, search, or profile depth?',
-    'Which filters and profile details most influence whether a learner reaches out to a tutor?',
+    'What do learners need from a tutor when language study is tied to moving to or staying in Japan?',
+    'Where do existing tutor platforms create friction — paywalls, weak matching, or profiles that ignore life-in-Japan context?',
+    'Which filters and profile details most influence whether a learner trusts a tutor for their specific journey?',
   ],
   solution: {
     label: 'Solution',
-    subtitle: 'Browse first. Commit when it feels right.',
-    body: `SushiTalk centers discovery: learners can explore tutors, compare teaching focus and availability, and use advanced filters before signing up for premium flows. Tutors get a place to present their business clearly — not buried behind opaque navigation.
+    subtitle: 'Match on language. Support the full journey.',
+    body: `SushiTalk centers on meaningful matching: learners explore tutors, compare teaching focus, availability, and specialties — including support for relocation, daily life, and staying in Japan — before committing to premium flows. Tutors get a clear place to present what they offer beyond textbook lessons.
 
-We scoped stage one around the highest-priority flows the founder needed to validate with users and investors.
+We scoped stage one around the discovery and profile flows the founder needed to validate with users and investors — the foundation for a platform that grows from language into specialized life-in-Japan guidance.
 
-Stage two then leading to expansion of adding additional functionality toward giving users assistance with topics outside of language (i.e. help with moving into Japan, healthcare, etc.).`,
+Stage two expands that foundation with resources and flows for documentation, healthcare, housing, and other topics learners need once language tutoring alone is not enough.`,
     pillars: [
+      {
+        title: 'Journey-based matching',
+        icon: '🎯',
+        body: `Profiles and filters surface language level, teaching style, and life-in-Japan specialties so learners connect with tutors who fit where they are — and where they are headed.`,
+      },
       {
         title: 'Open discovery',
         icon: '🔍',
-        body: `Free browsing of tutor listings and profiles so learners can understand the marketplace before creating an account or hitting a paywall.`,
-      },
-      {
-        title: 'Advanced search',
-        icon: '⚡',
-        body: `Filter by teaching style, availability, price band, and specialty — designed to feel powerful without overwhelming first-time visitors.`,
+        body: `Free browsing of tutor listings and profiles so learners can evaluate the marketplace — and find the right match — before creating an account or hitting a paywall.`,
       },
     ],
   },
   finalDesign: {
     label: 'Final design',
-    body: `After eight weeks, the team completed a working prototype of the web platform for stage one of SushiTalk’s design goals — covering the core tutor-discovery and profile flows the founder prioritized for validation.`,
+    body: `After eight weeks, the team completed a working prototype of the web platform for stage one — covering tutor discovery, search, and profile flows that let learners evaluate fit on language goals and teaching approach, setting up the life-in-Japan support vision for phase two.`,
     ongoingNote: 'Design is still ongoing — launching soon.',
     prototype: {
       title: 'SushiTalk interactive prototype',
@@ -83,16 +84,22 @@ Stage two then leading to expansion of adding additional functionality toward gi
   process: {
     title: 'The process',
     introLabel: 'Leading the team',
-    intro: `I led the team by setting a timeline, communicating design goals, and creating an agile roadmap so we could manage workload, prioritize tasks, and keep momentum through an eight-week sprint.`,
+    intro: `I led the team by setting a timeline, communicating the product vision — tutor matching for language and life-in-Japan goals — and creating an agile roadmap so we could manage workload, prioritize stage-one flows, and keep momentum through an eight-week sprint.`,
     roadmap: {
       src: '/images/sushitalk-agile-roadmap.png',
+      src2x: '/images/sushitalk-agile-roadmap@2x.png',
       alt: 'Agile roadmap chart titled Timeline via Features, showing phased work from research through home page, sign-up, profiles, search, and scheduling with team assignments',
     },
     steps: [
       {
         number: '01',
         title: 'Competitive audit',
-        body: `As a team, we audited the tutor marketplace landscape. For SushiTalk to stand out we needed to: 1) avoid blocking important features behind a paywall, 2) allow free browsing of tutors, and 3) design an intuitive, powerful advanced filter for tutor search.`,
+        body: `As a team, we audited the tutor marketplace landscape. For SushiTalk to stand out we needed to:`,
+        listItems: [
+          'Help learners match on language and life-in-Japan goals, not just price',
+          'Avoid blocking discovery behind a paywall',
+          'Design search and profiles that surface whether a tutor can support a learner’s full journey',
+        ],
         image: '/images/sushitalk-competitive-audit.png',
         imageAlt:
           'Competitive audit table comparing iTalki, HelloTalk, Duolingo, ADPList, Care.com, and Taskrabbit across services, pros, cons, and opportunities',
@@ -102,7 +109,7 @@ Stage two then leading to expansion of adding additional functionality toward gi
       {
         number: '02',
         title: 'Personas',
-        body: `We developed personas for native Japanese tutors hosting on the platform and non-Japanese learners at different stages of their language journey — grounding priorities in real motivations, not feature wishlists.`,
+        body: `We developed personas for native Japanese tutors hosting on the platform and non-native learners at different stages — from JLPT prep and conversation practice to planning a move or settling into life in Japan — grounding priorities in real motivations, not feature wishlists.`,
         image: '/images/sushitalk-personas.png',
         imageAlt:
           'Learner personas Tom and Misty and mentor personas Reina and Takashi with goals, behaviors, and frustrations',
@@ -112,7 +119,7 @@ Stage two then leading to expansion of adding additional functionality toward gi
       {
         number: '03',
         title: 'User flow',
-        body: `User flows mapped discovery, profile comparison, and outreach so the team agreed on the minimum path learners need before committing to a tutor.`,
+        body: `User flows mapped discovery, profile comparison, and outreach — including how learners evaluate tutors for both language fit and life-in-Japan support — so the team agreed on the minimum path before committing.`,
         image: '/images/sushitalk-user-flow.png',
         imageAlt:
           'User flow diagram from landing page through browse, search, scheduling, sign-up, and profile setup for mentors and learners',
@@ -243,8 +250,8 @@ Stage two then leading to expansion of adding additional functionality toward gi
   },
   phaseTwo: {
     title: 'Phase Two',
-    introLabel: 'Expanding beyond Language tutoring',
-    intro: `After months of brainstorming, the stakeholder and I found a large market not only in helping people learn Japanese, but also in supporting non-Japanese learners with moving to and staying in Japan — keeping track of documentation and providing assistance where they need it.`,
+    introLabel: 'Beyond language tutoring',
+    intro: `The product vision always extended past conversation practice. Working with the Google Japan engineer, we identified a strong need among non-native learners for specialized help with moving to and staying in Japan — visas, documentation, healthcare, and the everyday questions that language apps never answer. Phase two expands SushiTalk from tutor matching into that broader support layer.`,
     flowCaption:
       'After creating a list of topics and extra features, fed everything to Claude to generate a prototype to present to stakeholder',
     flowCta: {
@@ -252,37 +259,62 @@ Stage two then leading to expansion of adding additional functionality toward gi
       href: 'https://sushitalk.netlify.app',
     },
   },
-  featuresSidebarTitle: 'Stage-one priorities for the marketplace.',
+  featuresSidebarTitle: 'Stage-one priorities for matching learners and tutors.',
   featuresIntro:
-    'We focused on discovery and trust first — the flows learners and tutors need before payments or messaging expand in later releases.',
+    'We focused on discovery and trust first — the flows learners need to find a tutor who fits their language goals and Japan journey before payments, messaging, or life-in-Japan resources expand in later releases.',
   features: [
+    {
+      title: 'Priority screens',
+      headline: 'Ship what validates',
+      icon: '✅',
+      image: '/images/sushitalk-landing.png',
+      imageSrc2x: '/images/sushitalk-landing@4x.png',
+      imageWidth: 270,
+      imageHeight: 1024,
+      imageRetinaWidth: 1080,
+      imageAlt: 'SushiTalk learner landing page with hero, how it works, mentor browse, testimonials, and FAQ',
+      imageScrollable: true,
+      description:
+        'We were able to create three of the five priority screens (Home page, Mentor Profile/Search, Sign up), which helped accelerate the path to phase two before launch.',
+    },
     {
       title: 'Tutor browse',
       headline: 'Explore without friction',
       icon: '🍣',
+      image: '/images/sushitalk-search.png',
+      imageSrc2x: '/images/sushitalk-search@2x.png',
+      imageWidth: 432,
+      imageHeight: 1024,
+      imageAlt: 'SushiTalk search results with filters and mentor profile cards',
+      imageScrollable: true,
       description:
-        'List and grid views let learners scan tutors freely — no account required to understand who is on the platform.',
+        'List and grid views let learners scan tutors freely — no account required to see who can support their language path and life-in-Japan goals.',
     },
     {
       title: 'Advanced filters',
-      headline: 'Find the right fit',
+      headline: 'Match on what matters',
       icon: '🎛️',
+      image: '/images/sushitalk-filters.png',
+      imageSrc2x: '/images/sushitalk-filters@2x.png',
+      imageWidth: 1024,
+      imageHeight: 212,
+      imageAlt: 'SushiTalk advanced filter panel with availability, level, gender, reviews, time, and rate controls',
+      imageFill: true,
       description:
-        'Search by specialty, availability, price, and teaching style so comparison feels intentional, not endless scrolling.',
+        'Search by specialty, availability, price, teaching style, and life-in-Japan focus so learners find tutors aligned with their full journey — not just their next lesson.',
     },
     {
       title: 'Tutor profiles',
       headline: 'Trust before contact',
       icon: '👤',
+      image: '/images/sushitalk-profile.png',
+      imageSrc2x: '/images/sushitalk-profile@2x.png',
+      imageWidth: 913,
+      imageHeight: 1024,
+      imageAlt: 'SushiTalk tutor profile for Sakura Sato with bio, lesson pricing, stats, and availability calendar',
+      imageScrollable: true,
       description:
-        'Profiles highlight experience, approach, and logistics so learners can shortlist tutors with confidence.',
-    },
-    {
-      title: 'Priority screens',
-      headline: 'Ship what validates',
-      icon: '✅',
-      description:
-        'We delivered three of five priority screens in hi-fi — enough for founder testing and startup timeline acceleration.',
+        'Profiles highlight experience, approach, and what each tutor offers beyond textbook lessons — from JLPT prep to relocation and daily-life guidance.',
     },
   ],
   lessonsLearned: [
@@ -300,52 +332,22 @@ Stage two then leading to expansion of adding additional functionality toward gi
     },
     {
       title: 'What I learned',
-      body: `The importance of time management, clear team goals, and defining success metrics early with founders and engineers.`,
+      body: `The importance of tying design decisions to a clear product vision early — matching learners to tutors on their full Japan journey, not just language level — and defining success metrics with founders and engineers from the start.`,
     },
   ],
   conclusion: {
-    lead: 'SushiTalk reinforced how much a small, focused team can ship when research, agile planning, and founder partnership stay aligned — even on a passion-project timeline.',
+    lead: 'SushiTalk reinforced how much a small, focused team can ship when research, agile planning, and founder partnership stay aligned — building toward a platform that supports learners on language and life-in-Japan goals, not just the next lesson.',
     insights: [
-      'Competitive audit insights directly shaped our no-paywall discovery strategy and filter priorities.',
-      'Short-cycle usability testing before hi-fi saved rework on search and profile layouts.',
+      'Competitive audit insights shaped a no-paywall discovery strategy and matching criteria that go beyond language level alone.',
+      'Short-cycle usability testing before hi-fi saved rework on search and profile layouts — the flows learners rely on to judge tutor fit.',
     ],
     nextSteps: {
       label: 'What’s next:',
       items: [
         'Continue hi-fi iteration toward launch with the SushiTalk founder team.',
         'Expand from three priority screens to the full five-screen stage-one roadmap.',
-        'Deepen usability testing as engineering handoff begins.',
+        'Grow phase-two flows for life-in-Japan support — documentation, healthcare, and relocation guidance.',
       ],
     },
   },
 } as const
-
-export const sushitalkMoreProjects = [
-  {
-    title: 'Co-plan',
-    role: 'UX Designer',
-    href: '/projects/coplan',
-    description:
-      'All-in-one course planning and degree progress for university students.',
-    image: '/images/coplan-case-study.png',
-    imageAlt: 'Co-plan laptop mockup with schedule and degree planning UI',
-  },
-  {
-    title: 'Cue',
-    role: 'UX Designer',
-    href: '/projects/cue',
-    description: 'Social coaching companion for FigBuild 2026.',
-    image: '/images/cue-hero.png',
-    imageAlt:
-      'Cue AR social coaching interface with engagement insights and companion app profile',
-  },
-  {
-    title: 'Washington 211',
-    role: 'Research',
-    href: '/projects/wa211',
-    description: 'Usability research on WA 211 search accessibility.',
-    image: '/images/wa211-case-study.png',
-    imageAlt:
-      'Washington 211 community hands with blue 2-1-1 speech bubble logo',
-  },
-] as const

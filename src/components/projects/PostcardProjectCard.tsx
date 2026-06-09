@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import type { Project } from '../../data/content'
+import { getPostcardVisibleTags, type Project } from '../../data/content'
 import { scrollPageToTop } from '../../lib/scrollToTop'
 
 const postcardTilt: Record<string, number> = {
@@ -30,6 +30,7 @@ function PostcardPin() {
 
 function PostcardInner({ project }: { project: Project }) {
   const imageBg = project.heroImageBackground ?? '#f4f0ea'
+  const visibleTags = getPostcardVisibleTags(project.tags)
 
   return (
     <article className="postcard-card">
@@ -48,11 +49,13 @@ function PostcardInner({ project }: { project: Project }) {
         <h3 className="postcard-card__title">{project.title}</h3>
         <p className="postcard-card__copy">{project.description}</p>
 
-        <ul className="postcard-card__tags" aria-label="Project tags">
-          {project.tags.map((tag) => (
-            <li key={tag}>{tag}</li>
-          ))}
-        </ul>
+        {visibleTags.length > 0 && (
+          <ul className="postcard-card__tags" aria-label="Project tags">
+            {visibleTags.map((tag) => (
+              <li key={tag}>{tag}</li>
+            ))}
+          </ul>
+        )}
 
         {project.comingSoon ? (
           <span className="postcard-card__cta postcard-card__cta--muted">Coming soon</span>

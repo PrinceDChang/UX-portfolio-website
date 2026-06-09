@@ -281,37 +281,3 @@ export const arboretumSections = {
     },
   },
 } as const
-
-export const arboretumMoreProjects = [
-  {
-    title: 'Co-plan',
-    role: 'UX Designer',
-    description:
-      'All-in-one web planning tool for university students to plan courses and track degree progress.',
-    href: '/projects/coplan',
-    image: '/images/coplan-case-study.png',
-    imageAlt: 'Co-plan case study',
-    imageBackground: '#ffffff',
-  },
-  {
-    title: 'Citibridge',
-    role: 'UX Designer',
-    description:
-      'A communication app bridging city municipalities and residents on reporting civic issues.',
-    href: '/projects/citibridge',
-    image: '/images/citbridge-case-study.png',
-    imageAlt: 'Citibridge case study',
-    imageBackground: '#eef1f0',
-  },
-  {
-    title: 'Washington 211',
-    role: 'Research',
-    description:
-      'Corporate usability research with Washington 211 stakeholders on improving search accessibility.',
-    href: '/projects/wa211',
-    image: '/images/wa211-case-study.png',
-    imageAlt: 'Washington 211 case study',
-    imageBackground: '#2a2a2a',
-    fillsFrame: true,
-  },
-] as const

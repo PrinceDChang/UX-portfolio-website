@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
+import { CaseStudyMoreProjects } from '../components/case-study/CaseStudyMoreProjects'
 import { CaseStudyConclusion } from '../components/case-study/CaseStudyConclusion'
 import { CaseStudyShell } from '../components/case-study/CaseStudyShell'
 import { DesignProcessSteps } from '../components/case-study/DesignProcessSteps'
@@ -9,7 +9,6 @@ import { SectionBlock } from '../components/case-study/SectionBlock'
 import { SplitHeroCards } from '../components/case-study/SplitHeroCards'
 import {
   wa211CaseStudyMeta,
-  wa211MoreProjects,
   wa211Sections,
 } from '../data/wa211CaseStudy'
 import { roleBadgeClassName } from '../lib/projectRole'
@@ -48,7 +47,7 @@ export function Washington211CaseStudyPage() {
               {wa211CaseStudyMeta.details.map((item) => (
                 <div
                   key={item.label}
-                  className="rounded-2xl bg-elevated/80 px-5 py-4 ring-1 ring-white/8 backdrop-blur-sm"
+                  className="rounded-2xl bg-elevated/80 px-5 py-4 ring-1 ring-accent/30 backdrop-blur-sm"
                 >
                   <dt className="text-xs font-semibold uppercase tracking-[0.2em] text-slate">
                     {item.label}
@@ -108,7 +107,7 @@ export function Washington211CaseStudyPage() {
               ))}
             </ul>
           </div>
-          <div className="mt-8 rounded-3xl bg-elevated/60 px-7 py-8 ring-1 ring-white/8 md:px-10 md:py-10">
+          <div className="mt-8 rounded-3xl bg-elevated/60 px-7 py-8 ring-1 ring-accent/30 md:px-10 md:py-10">
             <h3 className="font-display text-lg uppercase tracking-wide text-ink md:text-xl">
               {wa211Sections.purpose.label}
             </h3>
@@ -183,7 +182,7 @@ export function Washington211CaseStudyPage() {
               {wa211Sections.lessonsLearned.map((item) => (
                 <article
                   key={item.title}
-                  className="rounded-3xl bg-elevated p-8 ring-1 ring-white/8"
+                  className="rounded-3xl bg-elevated p-8 ring-1 ring-accent/30"
                 >
                   <h4 className="text-lg font-semibold text-ink">{item.title}</h4>
                   <p className="mt-4 text-sm leading-relaxed text-slate">{item.body}</p>
@@ -194,66 +193,7 @@ export function Washington211CaseStudyPage() {
         </SectionBlock>
 
         <SectionBlock label="Explore more" title="More projects">
-          <div className="grid gap-4 md:grid-cols-3">
-            {wa211MoreProjects.map((project) => {
-              const hasImage = 'image' in project && project.image
-              const imageBackground =
-                'imageBackground' in project &&
-                typeof project.imageBackground === 'string'
-                  ? project.imageBackground
-                  : '#111118'
-              const imageFit =
-                'imageBackground' in project ? 'object-contain' : 'object-cover'
-
-              return (
-                <Link
-                  key={project.title}
-                  to={project.href}
-                  className={`overflow-hidden rounded-3xl bg-surface ring-1 ring-white/8 transition hover:ring-accent/40 ${
-                    hasImage ? 'flex flex-col' : 'p-6'
-                  }`}
-                >
-                  {hasImage && (
-                    <div
-                      className="relative aspect-[16/10] overflow-hidden"
-                      style={{ backgroundColor: imageBackground }}
-                    >
-                      <img
-                        src={project.image}
-                        alt={
-                          ('imageAlt' in project ? project.imageAlt : undefined) ??
-                          project.title
-                        }
-                        className={`h-full w-full ${imageFit} object-center ${
-                          'imageBackground' in project ? 'p-4' : ''
-                        }`}
-                        loading="lazy"
-                        decoding="async"
-                      />
-                      <span
-                        className={roleBadgeClassName(
-                          project.role,
-                          'absolute left-3 top-3 z-10 text-[10px]',
-                        )}
-                      >
-                        {project.role}
-                      </span>
-                    </div>
-                  )}
-                  <div className={hasImage ? 'p-6' : 'p-6'}>
-                    <h3
-                      className={`font-condensed text-3xl uppercase tracking-wide text-ink ${
-                        hasImage ? '' : 'mt-4'
-                      }`}
-                    >
-                      {project.title}
-                    </h3>
-                    <p className="mt-2 text-sm text-slate">{project.description}</p>
-                  </div>
-                </Link>
-              )
-            })}
-          </div>
+          <CaseStudyMoreProjects excludeProjectId="wa211" />
         </SectionBlock>
       </div>
     </CaseStudyShell>

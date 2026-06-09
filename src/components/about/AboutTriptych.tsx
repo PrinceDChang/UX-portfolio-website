@@ -6,20 +6,22 @@ import {
   type AboutFocus,
   type AboutFocusId,
 } from '../../data/aboutPage'
+import { useWushuTransition } from '../../context/WushuTransitionContext'
+import { usePhotographyTransition } from '../../context/PhotographyTransitionContext'
 
 function FocusCta({ focus }: { focus: AboutFocus }) {
+  const { startWushuTransition } = useWushuTransition()
+  const { startPhotographyTransition } = usePhotographyTransition()
+
   if (!focus.cta) return null
 
-  const ctaBackground = focus.id === 'wushu' ? '#9970FF' : focus.accent
-
   const className =
-    'about-focus-panel__cta mt-8 inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold text-white transition hover:opacity-90'
+    'about-focus-panel__cta mt-8 inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-white transition hover:opacity-90 hover:shadow-glow'
 
   if (focus.cta.comingSoon) {
     return (
       <span
-        className={`${className} cursor-default opacity-80 hover:opacity-80`}
-        style={{ backgroundColor: ctaBackground }}
+        className={`${className} cursor-default opacity-80 hover:opacity-80 hover:shadow-none`}
         aria-disabled="true"
       >
         {focus.cta.label}
@@ -34,6 +36,30 @@ function FocusCta({ focus }: { focus: AboutFocus }) {
     </>
   )
 
+  if (focus.cta.wushuTransition) {
+    return (
+      <button
+        type="button"
+        onClick={startWushuTransition}
+        className={className}
+      >
+        {content}
+      </button>
+    )
+  }
+
+  if (focus.cta.photographyTransition) {
+    return (
+      <button
+        type="button"
+        onClick={startPhotographyTransition}
+        className={className}
+      >
+        {content}
+      </button>
+    )
+  }
+
   if (!focus.cta.href) return null
 
   if (focus.cta.external || !focus.cta.href.startsWith('/')) {
@@ -41,7 +67,6 @@ function FocusCta({ focus }: { focus: AboutFocus }) {
       <a
         href={focus.cta.href}
         className={className}
-        style={{ backgroundColor: ctaBackground }}
         target={focus.cta.external ? '_blank' : undefined}
         rel={focus.cta.external ? 'noopener noreferrer' : undefined}
       >
@@ -51,7 +76,7 @@ function FocusCta({ focus }: { focus: AboutFocus }) {
   }
 
   return (
-    <Link to={focus.cta.href} className={className} style={{ backgroundColor: ctaBackground }}>
+    <Link to={focus.cta.href} className={className}>
       {content}
     </Link>
   )
@@ -61,16 +86,7 @@ function FocusPanel({ focus }: { focus: AboutFocus }) {
   const isPhoto = focus.id === 'photography'
 
   return (
-    <section
-      id={`focus-${focus.id}`}
-      className="about-focus-panel scroll-mt-32"
-      style={
-        {
-          '--focus-accent': focus.accent,
-          '--focus-accent-muted': focus.accentMuted,
-        } as React.CSSProperties
-      }
-    >
+    <section id={`focus-${focus.id}`} className="about-focus-panel scroll-mt-32">
       <div className="about-focus-panel__inner">
         <div className="about-focus-panel__visual">
           <div className="about-focus-panel__lens" aria-hidden="true">
@@ -174,7 +190,6 @@ export function AboutTriptych() {
                     <motion.span
                       layoutId="about-nav-active"
                       className="about-triptych__nav-indicator"
-                      style={{ backgroundColor: focus.accent }}
                       transition={{ type: 'spring', stiffness: 380, damping: 32 }}
                     />
                   ) : null}
@@ -183,11 +198,6 @@ export function AboutTriptych() {
                     onClick={() => scrollToFocus(focus.id)}
                     aria-current={isActive ? 'true' : undefined}
                     className={`about-triptych__nav-btn ${isActive ? 'about-triptych__nav-btn--active' : ''}`}
-                    style={
-                      isActive
-                        ? ({ '--nav-accent': focus.accent } as React.CSSProperties)
-                        : undefined
-                    }
                   >
                     <span className="about-triptych__nav-index">{focus.index}</span>
                     <span className="about-triptych__nav-title">{focus.title}</span>
@@ -208,11 +218,6 @@ export function AboutTriptych() {
                 aria-selected={activeId === focus.id}
                 onClick={() => scrollToFocus(focus.id)}
                 className={`about-triptych__tab ${activeId === focus.id ? 'about-triptych__tab--active' : ''}`}
-                style={
-                  activeId === focus.id
-                    ? ({ '--tab-accent': focus.accent } as React.CSSProperties)
-                    : undefined
-                }
               >
                 {focus.title}
               </button>
