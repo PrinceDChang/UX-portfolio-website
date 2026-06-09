@@ -48,7 +48,7 @@ This was a coordination problem dressed up as a tooling problem — and every pr
         body: 'Grant Managers (GMs) use Smart Budgeting to build and reconcile multi-year budget(s) across Excel and SAGE without losing rationale, versions, or numbers along the way.',
       },
       {
-        label: 'Secondary — PIs & OSP/GCA reviewers',
+        label: 'Secondary — PIs & OSPs',
         body: 'Principal investigators (researchers) and Office of Sponsor Programs or OSP (reviewers) benefit downstream, but neither drives the design.',
       },
       {
