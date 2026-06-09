@@ -154,6 +154,7 @@ export const featuredProjects: Project[] = [
       'Secondary research',
       'Information architecture',
     ],
+    heroBackgroundCard: true,
     heroImageBackground: '#f4f4f6',
   },
   {
