@@ -9,7 +9,7 @@ export const uwOrisCaseStudyMeta = {
     'SAGE Smart Budgeting — an AI-assisted redesign of the research-award budgeting workflow at UW Office of Research Information Services (ORIS), built so grant managers build their budget efficiently without worrying about the tedious tasks.',
   heroImage: '/images/uw-oris-case-study.png',
   heroImageAlt:
-    'University of Washington logo above the SAGE Smart Budgeting capstone project',
+    'University of Washington logo beside a laptop showing the SAGE Smart Budgeting worksheet interface',
   projectLabel: 'Research administration · HCDE capstone 2026',
   details: [
     { label: 'Role', value: 'UX Designer · Research' },

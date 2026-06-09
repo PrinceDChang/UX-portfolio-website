@@ -143,8 +143,9 @@ export const featuredProjects: Project[] = [
       'Master capstone project streamlining research award budgeting for grant managers at the University of Washington.',
     href: '/projects/uw-oris',
     image: '/images/uw-oris-case-study.png',
-    imageAlt: 'SAGE Smart Budgeting capstone for UW Office of Research Information Services',
-    tags: ['Design', 'Research', 'Web', 'AI'],
+    imageAlt:
+      'University of Washington logo beside a laptop showing the SAGE Smart Budgeting worksheet interface',
+    tags: ['Design', 'Web', 'AI'],
     keywords: [
       'Interviews & surveys',
       'User flows',
