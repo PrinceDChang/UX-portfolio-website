@@ -8,7 +8,8 @@ import { CaseStudyCard } from './CaseStudyCard'
 import { ProjectPin, useGlobeDrag } from './ProjectPin'
 
 const EARTH_TEXTURE = '/images/earth-day.jpg'
-const LAND_SAMPLE_COUNT = 18000
+const EARTH_LAND_MASK = '/images/earth-land-mask.png'
+const LAND_SAMPLE_COUNT = 42000
 const GLOBE_RADIUS = 1
 const HOVER_ENTER_DELAY_MS = 280
 const HOVER_CLEAR_DELAY_MS = 320
@@ -30,7 +31,7 @@ function GlobeScene({
     let cancelled = false
     const samplePoints = fibonacciSpherePoints(LAND_SAMPLE_COUNT, GLOBE_RADIUS)
 
-    filterLandPoints(samplePoints, EARTH_TEXTURE)
+    filterLandPoints(samplePoints, EARTH_TEXTURE, EARTH_LAND_MASK)
       .then((positions) => {
         if (!cancelled) setLandPositions(positions)
       })
@@ -64,10 +65,10 @@ function GlobeScene({
         <points geometry={landGeometry}>
           <pointsMaterial
             color="#c4b5fd"
-            size={0.014}
+            size={0.015}
             sizeAttenuation
             transparent
-            opacity={0.95}
+            opacity={0.92}
           />
         </points>
       )}

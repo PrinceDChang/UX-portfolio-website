@@ -47,46 +47,126 @@ function latLngToEquirectangularUV(lat: number, lng: number): { u: number; v: nu
   }
 }
 
-function isLandPixel(r: number, g: number, b: number): boolean {
+function isLandPixel(r: number, g: number, b: number, lat: number): boolean {
   const lum = 0.299 * r + 0.587 * g + 0.114 * b
-  const isDeepOcean = b > r + 18 && b > g + 8 && lum < 50
-  const isShallowWater = b > r + 8 && lum < 65 && g > r
-  if (isDeepOcean || isShallowWater) return false
-  return lum > 32
+  const rg = r + g
+
+  if (b > r + 32 && b > g + 20 && lum < 120) return false
+  if (b > r + 22 && lum < 62) return false
+
+  if (lum > 185 && Math.abs(r - g) < 32 && b > 155) return true
+
+  if (Math.abs(lat) > 50) {
+    if (b > r + 24 && lum < 52) return false
+    return lum > 8 || rg > b * 1.05
+  }
+
+  if (lum < 55) {
+    if (b > r + 12 && b > g + 6) return false
+    return rg > 28 || lum > 10
+  }
+
+  if (lum < 85 && rg > b * 1.15) return true
+  if (lum > 18 && rg >= b * 0.75) return true
+
+  return lum > 34
+}
+
+function isLandFromSample(
+  data: Uint8ClampedArray,
+  width: number,
+  height: number,
+  u: number,
+  v: number,
+  lat: number,
+  useMask: boolean,
+): boolean {
+  const cx = Math.min(width - 1, Math.max(0, Math.floor(u * width)))
+  const cy = Math.min(height - 1, Math.max(0, Math.floor(v * height)))
+  let landVotes = 0
+  let total = 0
+
+  for (let dy = -2; dy <= 2; dy += 1) {
+    for (let dx = -2; dx <= 2; dx += 1) {
+      const x = Math.min(width - 1, Math.max(0, cx + dx))
+      const y = Math.min(height - 1, Math.max(0, cy + dy))
+      const index = (y * width + x) * 4
+
+      const isLand = useMask
+        ? data[index] > 96
+        : isLandPixel(data[index], data[index + 1], data[index + 2], lat)
+
+      if (isLand) landVotes += 1
+      total += 1
+    }
+  }
+
+  return landVotes / total >= 0.22
+}
+
+async function loadImageData(
+  imageUrl: string,
+  sampleWidth: number,
+  sampleHeight: number,
+): Promise<{ data: Uint8ClampedArray; width: number; height: number; channels: number } | null> {
+  const image = await loadImage(imageUrl)
+  const canvas = document.createElement('canvas')
+  canvas.width = sampleWidth
+  canvas.height = sampleHeight
+  const context = canvas.getContext('2d')
+
+  if (!context) return null
+
+  context.drawImage(image, 0, 0, sampleWidth, sampleHeight)
+  const imageData = context.getImageData(0, 0, sampleWidth, sampleHeight)
+  return {
+    data: imageData.data,
+    width: sampleWidth,
+    height: sampleHeight,
+    channels: 4,
+  }
 }
 
 export async function filterLandPoints(
   points: THREE.Vector3[],
   imageUrl: string,
+  maskUrl?: string,
 ): Promise<Float32Array> {
-  const image = await loadImage(imageUrl)
-  const canvas = document.createElement('canvas')
-  const sampleWidth = 2048
-  const sampleHeight = 1024
-  canvas.width = sampleWidth
-  canvas.height = sampleHeight
-  const context = canvas.getContext('2d')
+  const sampleWidth = 4096
+  const sampleHeight = 2048
 
-  if (!context) {
-    return new Float32Array(0)
+  let textureData: Uint8ClampedArray | null = null
+  let useMask = false
+
+  if (maskUrl) {
+    try {
+      const mask = await loadImageData(maskUrl, sampleWidth, sampleHeight)
+      if (mask) {
+        textureData = mask.data
+        useMask = true
+      }
+    } catch {
+      textureData = null
+    }
   }
 
-  context.drawImage(image, 0, 0, sampleWidth, sampleHeight)
-  const { data, width, height } = context.getImageData(0, 0, sampleWidth, sampleHeight)
+  if (!textureData) {
+    const texture = await loadImageData(imageUrl, sampleWidth, sampleHeight)
+    textureData = texture?.data ?? null
+    useMask = false
+  }
+
+  if (!textureData) {
+    return new Float32Array(0)
+  }
 
   const landPoints: number[] = []
 
   for (const point of points) {
     const { lat, lng } = vector3ToLatLng(point)
     const { u, v } = latLngToEquirectangularUV(lat, lng)
-    const x = Math.min(width - 1, Math.max(0, Math.floor(u * width)))
-    const y = Math.min(height - 1, Math.max(0, Math.floor(v * height)))
-    const index = (y * width + x) * 4
-    const r = data[index]
-    const g = data[index + 1]
-    const b = data[index + 2]
 
-    if (isLandPixel(r, g, b)) {
+    if (isLandFromSample(textureData, sampleWidth, sampleHeight, u, v, lat, useMask)) {
       const surface = point.clone().normalize().multiplyScalar(point.length())
       landPoints.push(surface.x, surface.y, surface.z)
     }
