@@ -86,9 +86,58 @@ Stage two expands that foundation with resources and flows for documentation, he
     introLabel: 'Leading the team',
     intro: `I led the team by setting a timeline, communicating the product vision — tutor matching for language and life-in-Japan goals — and creating an agile roadmap so we could manage workload, prioritize stage-one flows, and keep momentum through an eight-week sprint.`,
     roadmap: {
-      src: '/images/sushitalk-agile-roadmap.png',
-      src2x: '/images/sushitalk-agile-roadmap@2x.png',
-      alt: 'Agile roadmap chart titled Timeline via Features, showing phased work from research through home page, sign-up, profiles, search, and scheduling with team assignments',
+      title: 'Timeline via Features',
+      rows: [
+        {
+          label: 'Task: Research (Surveys)',
+          barColor: 'rgba(251, 191, 36, 0.22)',
+          textColor: '#fde68a',
+          fullWidth: true,
+          tall: true,
+        },
+        {
+          label: 'Phase 1: Home Page',
+          barColor: 'rgba(245, 166, 35, 0.85)',
+          colStart: 1,
+          colSpan: 2,
+        },
+        {
+          label: 'Phase 2: Sign-Up/Login (Tutors)',
+          barColor: 'rgba(153, 112, 255, 0.75)',
+          colStart: 3,
+          colSpan: 2,
+        },
+        {
+          label: 'Phase 2: (Learners)',
+          barColor: 'rgba(153, 112, 255, 0.55)',
+          colStart: 4,
+          colSpan: 2,
+        },
+        {
+          label: 'Phase 3: Profile (Tutors)',
+          barColor: 'rgba(255, 138, 101, 0.8)',
+          colStart: 5,
+          colSpan: 2,
+        },
+        {
+          label: 'Phase 3: Profile (Learners)',
+          barColor: 'rgba(255, 138, 101, 0.55)',
+          colStart: 6,
+          colSpan: 2,
+        },
+        {
+          label: 'Phase 4: Search/ Lesson Pages',
+          barColor: 'rgba(129, 199, 132, 0.8)',
+          colStart: 7,
+          colSpan: 2,
+        },
+        {
+          label: 'Phase 5: Scheduling/Billing Pages',
+          barColor: 'rgba(240, 98, 146, 0.8)',
+          colStart: 7,
+          colSpan: 2,
+        },
+      ],
     },
     steps: [
       {

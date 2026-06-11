@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { CaseStudyMoreProjects } from '../components/case-study/CaseStudyMoreProjects'
 import { CaseStudyConclusion } from '../components/case-study/CaseStudyConclusion'
 import { CaseStudyShell } from '../components/case-study/CaseStudyShell'
+import { AgileRoadmapReveal } from '../components/case-study/AgileRoadmapReveal'
 import { AlternatingDesignTimeline } from '../components/case-study/AlternatingDesignTimeline'
 import { DesignProcessSteps } from '../components/case-study/DesignProcessSteps'
 import { FeatureShowcase } from '../components/case-study/FeatureShowcase'
@@ -187,22 +188,7 @@ export function SushiTalkCaseStudyPage() {
               {sushitalkSections.process.intro}
             </p>
           </div>
-          <figure className="mb-10 w-full overflow-hidden rounded-3xl bg-[#eef3f8] ring-1 ring-white/10 md:mb-12">
-            <img
-              src={sushitalkSections.process.roadmap.src}
-              srcSet={`${sushitalkSections.process.roadmap.src} 1024w, ${sushitalkSections.process.roadmap.src2x} 2048w`}
-              sizes="(min-width: 1152px) 1104px, calc(100vw - 3rem)"
-              width={1024}
-              height={616}
-              alt={sushitalkSections.process.roadmap.alt}
-              className="block h-auto w-full object-contain object-center"
-              loading="lazy"
-              decoding="async"
-            />
-            <figcaption className="border-t border-black/[0.06] px-6 py-4 text-sm text-slate">
-              Timeline via Features (Version 1.0) — agile roadmap for the eight-week sprint
-            </figcaption>
-          </figure>
+          <AgileRoadmapReveal data={sushitalkSections.process.roadmap} />
           <DesignProcessSteps
             steps={sushitalkSections.process.steps}
             artifactsBelowTrack

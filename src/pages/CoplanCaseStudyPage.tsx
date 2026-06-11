@@ -5,6 +5,9 @@ import { CaseStudyMoreProjects } from '../components/case-study/CaseStudyMorePro
 import { CaseStudyLogo } from '../components/case-study/CaseStudyLogo'
 import { CaseStudyShell } from '../components/case-study/CaseStudyShell'
 import { AlternatingDesignTimeline } from '../components/case-study/AlternatingDesignTimeline'
+import { CoplanJourneyMapReveal } from '../components/case-study/CoplanJourneyMapReveal'
+import { CoplanTasksDataReveal } from '../components/case-study/CoplanTasksDataReveal'
+import { CoplanUserFlowReveal } from '../components/case-study/CoplanUserFlowReveal'
 import { PrototypingIntro } from '../components/case-study/PrototypingIntro'
 import { DesignProcessSteps } from '../components/case-study/DesignProcessSteps'
 import { ZoomableImage } from '../components/case-study/ZoomableImage'
@@ -15,6 +18,9 @@ import { FigmaPrototypeEmbed } from '../components/case-study/FigmaPrototypeEmbe
 import {
   coplanCaseStudyMeta,
   coplanSections,
+  coplanTestingTasks,
+  coplanUserFlow,
+  coplanUserJourney,
 } from '../data/coplanCaseStudy'
 import { roleBadgeClassName } from '../lib/projectRole'
 
@@ -172,13 +178,22 @@ export function CoplanCaseStudyPage() {
 
           <div className="mt-10 grid gap-6">
             {coplanSections.process.artifacts.map((artifact) => {
-              const hasImage = 'image' in artifact && artifact.image
+              const hasUserFlow = 'userFlow' in artifact && artifact.userFlow
+              const hasUserJourney = 'userJourney' in artifact && artifact.userJourney
+              const imageSrc =
+                'image' in artifact && typeof artifact.image === 'string'
+                  ? artifact.image
+                  : null
+              const imageAlt =
+                'imageAlt' in artifact && typeof artifact.imageAlt === 'string'
+                  ? artifact.imageAlt
+                  : artifact.title
 
               return (
                 <article
                   key={artifact.title}
                   className={
-                    hasImage
+                    imageSrc || hasUserFlow || hasUserJourney
                       ? 'py-2 md:py-3'
                       : 'rounded-3xl border border-white/8 bg-surface/80 p-8 md:p-10'
                   }
@@ -187,15 +202,9 @@ export function CoplanCaseStudyPage() {
                   <p className="mt-4 w-full max-w-none whitespace-pre-line text-base leading-relaxed text-slate md:text-lg">
                     {artifact.body}
                   </p>
-                  {hasImage && (
-                    <ZoomableImage
-                      src={artifact.image}
-                      alt={
-                        ('imageAlt' in artifact ? artifact.imageAlt : undefined) ??
-                        artifact.title
-                      }
-                    />
-                  )}
+                  {hasUserFlow && <CoplanUserFlowReveal data={coplanUserFlow} />}
+                  {hasUserJourney && <CoplanJourneyMapReveal data={coplanUserJourney} />}
+                  {imageSrc && <ZoomableImage src={imageSrc} alt={imageAlt} />}
                 </article>
               )
             })}
@@ -218,15 +227,7 @@ export function CoplanCaseStudyPage() {
           <p className="mb-8 w-full max-w-none text-base leading-relaxed text-slate md:text-lg">
             {coplanSections.findingsIntro}
           </p>
-          <figure className="mb-10 overflow-hidden rounded-2xl ring-1 ring-white/[0.08]">
-            <img
-              src={coplanSections.findingsTasksImage}
-              alt={coplanSections.findingsTasksImageAlt}
-              className="h-auto w-full"
-              loading="lazy"
-              decoding="async"
-            />
-          </figure>
+          <CoplanTasksDataReveal data={coplanTestingTasks} />
           <div className="grid gap-4 sm:grid-cols-3">
             {coplanSections.findings.map((stat) => (
               <article

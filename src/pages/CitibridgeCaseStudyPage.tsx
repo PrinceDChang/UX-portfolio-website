@@ -161,7 +161,7 @@ export function CitibridgeCaseStudyPage() {
               {process.painPoints.map((point, index) => (
                 <article
                   key={point.title}
-                  className="rounded-3xl bg-elevated/80 p-8 ring-1 ring-white/8"
+                  className="rounded-3xl bg-elevated/80 p-8 ring-1 ring-accent/35"
                 >
                   <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
                     {index + 1}
@@ -190,7 +190,7 @@ export function CitibridgeCaseStudyPage() {
               {process.finalFeatureSet.items.map((item, index) => (
                 <li
                   key={item.slice(0, 48)}
-                  className="flex h-full flex-col gap-4 rounded-3xl border border-white/8 bg-surface/80 p-6 md:p-8"
+                  className="flex h-full flex-col gap-4 rounded-3xl bg-elevated/80 p-6 ring-1 ring-accent/40 md:p-8"
                 >
                   <span className="font-display text-3xl text-accent/80 md:text-4xl">
                     {index + 1}

@@ -69,9 +69,6 @@ The goal was an all-in-one product students could trust before, during, and afte
   },
   findingsIntro:
     'After conducting 1 round of usability testing with 4 participants. Participants had to go through 6 different tasks and I gathered data on their success for each task.',
-  findingsTasksImage: '/images/coplan-tasks-data-collected.png',
-  findingsTasksImageAlt:
-    'Usability testing task list and data collected — notes, recordings, task success, quotes, and debrief',
   findings: [
     { value: '100%', label: 'Frustrated with MyPlan' },
     { value: '75%', label: 'Confused by headings, icons & navigation' },
@@ -123,18 +120,14 @@ The goal was an all-in-one product students could trust before, during, and afte
       {
         title: 'User flow',
         body: `Creating a user flow identified missing steps: onboarding students' existing schedule information into the planner — since many users come from a different platform or may have already started college courses — and a more accessible way to update courses in their schedule.`,
-        image: '/images/coplan-user-flow.png',
-        imageAlt:
-          'Co-plan user flow diagram covering onboarding, degree audit, scheduling, and course updates',
+        userFlow: true,
       },
       {
         title: 'User Journey Map',
         body: `📍 Identify accessibility pain points in each stage of the process, with overly complicated steps to complete a single task.
 📍 Difficult to confirm or find alternatives when actions are completed or incomplete.
 📍 Labelled opportunities to improve the user's experience for each phase — adding and streamlining different features for better separation and user focus.`,
-        image: '/images/coplan-user-journey-map.png',
-        imageAlt:
-          'Co-plan user journey map across onboarding, home, degree audit, course finding, and schedule',
+        userJourney: true,
       },
     ],
     designTimelineIntro: {
@@ -361,4 +354,310 @@ The goal was an all-in-one product students could trust before, during, and afte
       ],
     },
   },
+} as const
+
+export const coplanTestingTasks = {
+  title: 'Tasks & Data collected',
+  taskColumnLabel: 'Task list',
+  dataColumnLabel: 'Data',
+  pairs: [
+    {
+      task: 'Add/Drop Class on homepage',
+      data: 'Notes (Thoughts, Feelings, Behaviours...)',
+    },
+    {
+      task: 'Accessing Class information from homepage',
+      data: 'Audio Recording (Zoom)',
+    },
+    {
+      task: 'Replace existing Class section with a different section',
+      data: 'Task success (Yes or No)',
+    },
+    {
+      task: 'Navigating to Schedule view',
+      data: 'Participant quotes',
+    },
+    {
+      task: 'Finding graduation information on DARs',
+      data: 'Debriefing Questions',
+      wide: true,
+    },
+  ],
+} as const
+
+export const coplanUserFlow = {
+  sections: [],
+  nodes: [
+    { id: 'start', kind: 'state', label: 'Starting University', x: 108, y: 58, r: 51 },
+    { id: 'welcome', kind: 'action', label: 'Co-Plan Welcome Screen', x: 108, y: 148, w: 156 },
+    { id: 'signup1', kind: 'action', label: 'Sign Up Form', x: 108, y: 218, w: 132 },
+    {
+      id: 'signup2',
+      kind: 'action',
+      label: 'Sign Up form 2\n(Student Information)',
+      x: 108,
+      y: 292,
+      w: 136,
+      h: 36,
+    },
+    {
+      id: 'transfer-q',
+      kind: 'decision',
+      label: 'Student have transfer credit?',
+      x: 108,
+      y: 400,
+    },
+    { id: 'transfer-credit', kind: 'action', label: 'Transfer Credit page', x: 108, y: 506, w: 148 },
+    {
+      id: 'add-classes',
+      kind: 'action',
+      label: 'Sign up form\n(Add classes)',
+      x: 280,
+      y: 400,
+      w: 120,
+      h: 36,
+    },
+    {
+      id: 'connect-advisor',
+      kind: 'action',
+      label: 'Sign Up Form\n(Connect with Advisor)',
+      x: 280,
+      y: 248,
+      w: 136,
+      h: 36,
+    },
+    { id: 'homepage', kind: 'state', label: 'Homepage', x: 448, y: 248 },
+    {
+      id: 'degree-q',
+      kind: 'decision',
+      label: 'Want to learn about Degree Requirements?',
+      x: 592,
+      y: 96,
+    },
+    { id: 'dars', kind: 'action', label: 'DARs Page', x: 792, y: 96, w: 120 },
+    {
+      id: 'schedule-q',
+      kind: 'decision',
+      label: "Don't know what your schedule look...",
+      x: 592,
+      y: 248,
+    },
+    { id: 'schedule-page', kind: 'action', label: 'Schedule Page', x: 792, y: 248, w: 132 },
+    {
+      id: 'changes-q',
+      kind: 'decision',
+      label: 'Want to make changes to class?',
+      x: 592,
+      y: 392,
+    },
+    { id: 'registration', kind: 'action', label: 'Registration Page', x: 792, y: 392, w: 140 },
+    { id: 'find-course', kind: 'action', label: 'Find Course', x: 868, y: 312, w: 112 },
+    { id: 'search', kind: 'action', label: 'Search Page', x: 1016, y: 312, w: 112 },
+    {
+      id: 'course-info',
+      kind: 'action',
+      label: 'Course\nInformation',
+      x: 1016,
+      y: 384,
+      w: 112,
+      h: 36,
+    },
+    { id: 'drop-class', kind: 'action', label: 'Drop Class', x: 792, y: 496, w: 112 },
+    { id: 'updated-home', kind: 'state', label: 'Updated Homepage', x: 1016, y: 496, r: 52 },
+  ],
+  edges: [
+    { from: 'start', to: 'welcome', routing: 'straight' },
+    { from: 'welcome', to: 'signup1', routing: 'straight' },
+    { from: 'signup1', to: 'signup2', routing: 'straight' },
+    { from: 'signup2', to: 'transfer-q', routing: 'straight' },
+    { from: 'transfer-q', to: 'transfer-credit', routing: 'straight', label: 'Yes' },
+    { from: 'transfer-q', to: 'add-classes', routing: 'h-first', label: 'No' },
+    {
+      from: 'transfer-credit',
+      to: 'add-classes',
+      via: [
+        { x: 280, y: 506 },
+        { x: 280, y: 430 },
+      ],
+    },
+    { from: 'add-classes', to: 'connect-advisor', routing: 'straight' },
+    { from: 'connect-advisor', to: 'homepage', routing: 'h-first' },
+    {
+      from: 'homepage',
+      to: 'degree-q',
+      via: [
+        { x: 500, y: 248 },
+        { x: 500, y: 96 },
+      ],
+    },
+    { from: 'degree-q', to: 'dars', routing: 'h-first' },
+    { from: 'homepage', to: 'schedule-q', routing: 'h-first' },
+    { from: 'schedule-q', to: 'schedule-page', routing: 'h-first' },
+    {
+      from: 'homepage',
+      to: 'changes-q',
+      via: [
+        { x: 500, y: 248 },
+        { x: 500, y: 392 },
+      ],
+    },
+    { from: 'changes-q', to: 'registration', routing: 'h-first' },
+    {
+      from: 'registration',
+      to: 'find-course',
+      via: [{ x: 792, y: 312 }],
+      label: 'Add',
+    },
+    { from: 'find-course', to: 'search', routing: 'h-first' },
+    { from: 'search', to: 'course-info', routing: 'straight' },
+    { from: 'course-info', to: 'updated-home', routing: 'straight' },
+    {
+      from: 'registration',
+      to: 'drop-class',
+      routing: 'straight',
+      label: 'Drop',
+    },
+    { from: 'drop-class', to: 'updated-home', routing: 'h-first' },
+  ],
+  revealOrder: [
+    'start',
+    'welcome',
+    'signup1',
+    'signup2',
+    'transfer-q',
+    'transfer-credit',
+    'add-classes',
+    'connect-advisor',
+    'homepage',
+    'degree-q',
+    'dars',
+    'schedule-q',
+    'schedule-page',
+    'changes-q',
+    'registration',
+    'find-course',
+    'search',
+    'course-info',
+    'drop-class',
+    'updated-home',
+  ],
+} as const
+
+export const coplanUserJourney = {
+  phases: [
+    {
+      id: 'onboarding',
+      title: 'Onboarding',
+      tone: 'orange',
+      actions: [
+        'Update/connect to their college profile',
+        'Sign up into profile',
+        'Input existing information about classes or degree',
+      ],
+      goals: [
+        'Goal: Create an account to add and search for courses.',
+        'Move existing info to have accurate progression on graduation/degree requirements.',
+      ],
+      feelings: ['neutral'],
+      painPoints: [
+        'Long and hard to understand process.',
+        'Tedious information input.',
+        'Had to add-in existing courses and credits into graduation tracker.',
+        "Can't figure out which degree to audit or apply.",
+      ],
+      opportunity:
+        'Revamp the onboarding process with easy-to-understand sections and having a better way to transfer existing information.',
+    },
+    {
+      id: 'home',
+      title: 'Home Screen',
+      tone: 'pink',
+      actions: [
+        'See courses already signed up for',
+        'Look at future quarters',
+        'See any saved courses users are interested in',
+      ],
+      goals: [
+        'Goal: Get a general view of what course they signed up for.',
+        'Access to tools to help them with registration and degree view.',
+      ],
+      feelings: ['unhappy'],
+      painPoints: [
+        'Hard to understand icons.',
+        "Can't figure out where are all the features.",
+        'Hard to quickly access very important tools (schedule, courses, degree audit, etc.).',
+      ],
+      opportunity:
+        'Improve home screen layout to have all the important features and tools to be easy to access and see what are better ways to indicate each features (i.e icons, text, etc.).',
+    },
+    {
+      id: 'dars',
+      title: 'Degree Audit (DARS)',
+      tone: 'purple',
+      actions: [
+        "See degree you audit or change it depending on user's status",
+        'Find courses that would help work towards your degree',
+        'See what courses/users are missing or requirements you have completed',
+      ],
+      goals: [
+        'Goal: See what are the requirements for the degree.',
+        'Understand what is left or already accomplished for degree.',
+        'Find courses that fulfill degree requirement.',
+      ],
+      feelings: ['happy', 'unhappy'],
+      painPoints: [
+        'Hard to understand degree requirement.',
+        "Don't know application process.",
+        "Aren't sure which course fulfills what requirement.",
+        "Don't know about pre-requisites.",
+      ],
+      opportunity:
+        'More simplistic and not to text heavy layout for the Degree audit to better visualize what is already completed or needs to be done for specific major and graduation requirements.',
+    },
+    {
+      id: 'course-finding',
+      title: 'Course Finding',
+      tone: 'blue',
+      actions: [
+        'Users searching and filtering out courses they would want to take',
+        'Users adding courses to respective quarters',
+        'Users bookmarking courses for later/current or future reference',
+      ],
+      goals: [
+        'Goal: Searching/filtering for courses.',
+        'Add or saving courses for current or later quarters.',
+        'Browse of course that might fit into degree requirements.',
+      ],
+      feelings: ['happy', 'unhappy'],
+      painPoints: [
+        'Too many courses during general search.',
+        'Hard to see which course correspond to which degree/graduation requirement.',
+        "Can't filter enough courses.",
+      ],
+      opportunity:
+        'Streamline the search experience and adding emphasize on filters and quick add features.',
+    },
+    {
+      id: 'schedule',
+      title: 'Schedule',
+      tone: 'green',
+      actions: [
+        'Users seeing current schedule layout for current quarter',
+        'Users can change/update courses',
+        'Users can see what future schedules might look like',
+      ],
+      goals: [
+        'Goal: Visual of what current or later quarters might look like.',
+        'Ability to make quick changes to courses to fit into schedule.',
+      ],
+      feelings: ['happy', 'neutral'],
+      painPoints: [
+        'Hard to access.',
+        'No real way to make quick changes.',
+        'Some information about the courses are missing when viewing schedule (exact time, location, professor, etc.).',
+      ],
+      opportunity:
+        'Design a full interactive page where the schedule can be placed and manipulated rather than a static photo.',
+    },
+  ],
 } as const

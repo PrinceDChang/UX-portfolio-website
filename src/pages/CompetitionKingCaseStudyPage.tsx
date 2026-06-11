@@ -7,7 +7,7 @@ import { CaseStudyShell } from '../components/case-study/CaseStudyShell'
 import { DesignProcessSteps } from '../components/case-study/DesignProcessSteps'
 import { FeatureShowcase } from '../components/case-study/FeatureShowcase'
 import { FieldPhotoGallery } from '../components/case-study/FieldPhotoGallery'
-import { ImageCarousel } from '../components/case-study/ImageCarousel'
+import { CompetitionKingUserFlowReveal } from '../components/case-study/CompetitionKingUserFlowReveal'
 import { SectionBlock } from '../components/case-study/SectionBlock'
 import { SplitHeroCards } from '../components/case-study/SplitHeroCards'
 import {
@@ -139,7 +139,7 @@ export function CompetitionKingCaseStudyPage() {
             <p className="mt-4 w-full max-w-none whitespace-pre-line text-base leading-relaxed text-slate md:text-lg">
               {process.userFlow.body}
             </p>
-            <ImageCarousel slides={process.userFlow.images} className="mt-8" />
+            <CompetitionKingUserFlowReveal className="mt-8" />
           </article>
 
           <h3 className="mt-12 text-xl font-semibold text-ink md:mt-16 md:text-2xl">Design</h3>
@@ -245,7 +245,7 @@ export function CompetitionKingCaseStudyPage() {
               {competitionKingSections.lessonsLearned.map((item) => (
                 <article
                   key={item.title}
-                  className="rounded-3xl bg-elevated p-8 ring-1 ring-white/8"
+                  className="rounded-3xl bg-elevated/80 p-8 ring-1 ring-accent/35"
                 >
                   <h4 className="text-lg font-semibold text-ink">{item.title}</h4>
                   <p className="mt-4 text-sm leading-relaxed text-slate">{item.body}</p>
