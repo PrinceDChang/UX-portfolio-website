@@ -16,7 +16,7 @@ export function HtmlPrototypeEmbed({
       <iframe
         src={src}
         title={title}
-        className="block h-[min(88vh,920px)] w-full min-h-[560px] border-0 md:min-h-[640px]"
+        className="block h-[min(72vh,920px)] w-full min-h-[320px] border-0 sm:min-h-[420px] md:min-h-[640px]"
         allow="fullscreen"
         loading="lazy"
         referrerPolicy="no-referrer-when-downgrade"

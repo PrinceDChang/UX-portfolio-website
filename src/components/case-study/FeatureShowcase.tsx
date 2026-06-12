@@ -451,7 +451,7 @@ export function FeatureShowcase({
           <button
             type="button"
             onClick={() => setShowRecommendation((value) => !value)}
-            className="absolute bottom-6 right-6 z-10 rounded-full border border-accent/35 bg-accent/15 px-5 py-2.5 text-sm font-semibold text-ink ring-1 ring-accent/25 transition hover:bg-accent/25 md:bottom-8 md:right-8"
+            className="absolute bottom-4 right-4 z-10 rounded-full border border-accent/35 bg-accent/15 px-4 py-2 text-xs font-semibold text-ink ring-1 ring-accent/25 transition hover:bg-accent/25 sm:px-5 sm:py-2.5 sm:text-sm md:bottom-8 md:right-8"
             aria-pressed={showRecommendation}
             aria-label={
               showRecommendation ? 'Show finding' : 'Show recommendation'

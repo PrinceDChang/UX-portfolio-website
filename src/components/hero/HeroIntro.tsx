@@ -31,7 +31,7 @@ export function HeroIntro({
             className="relative z-30 col-start-1 justify-self-end self-center text-right"
           >
             <div className="relative">
-              <p className="absolute right-0 bottom-full mb-1 whitespace-nowrap text-[11px] font-medium uppercase tracking-[0.28em] text-ink/80">
+              <p className="absolute right-0 bottom-full mb-1 text-[10px] font-medium uppercase tracking-[0.2em] text-ink/80 sm:text-[11px] sm:tracking-[0.28em]">
                 Oey Chang
               </p>
               <h1 className="font-condensed text-[clamp(4.75rem,9vw,9.5rem)] leading-[0.85] tracking-[0.02em] text-ink">
@@ -82,7 +82,7 @@ export function HeroIntro({
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           >
-            <p className="mb-1 whitespace-nowrap text-[11px] font-medium uppercase tracking-[0.28em] text-ink/80">
+            <p className="mb-1 text-[10px] font-medium uppercase tracking-[0.2em] text-ink/80 sm:text-[11px] sm:tracking-[0.28em]">
               Oey Chang
             </p>
             <h1 className="font-condensed text-[clamp(4.5rem,18vw,6rem)] leading-[0.85] tracking-[0.02em] text-ink">

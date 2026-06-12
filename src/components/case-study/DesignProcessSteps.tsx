@@ -272,9 +272,12 @@ export function DesignProcessSteps({
   const hasDualConnectors = (index: number) => index >= 1 && index <= 2
 
   return (
-    <div className="design-process-track overflow-x-auto rounded-2xl bg-[#0c0c10] ring-1 ring-white/[0.08]">
+    <div className="design-process-track overflow-x-auto rounded-2xl bg-[#0c0c10] ring-1 ring-white/[0.08] scroll-smooth [scrollbar-width:thin]">
+      <p className="px-4 pt-3 text-[10px] text-slate/60 md:hidden">
+        Swipe to explore each step
+      </p>
       <div
-        className="flex min-w-[min(100%,720px)] md:min-w-full"
+        className="flex min-w-full snap-x snap-mandatory md:min-w-full"
         role="tablist"
         aria-label="Design process steps"
       >
@@ -293,10 +296,10 @@ export function DesignProcessSteps({
                 layout: { duration: LAYOUT_TRANSITION_S, ease: [0.22, 1, 0.36, 1] },
               }}
               onClick={() => selectStep(index)}
-              className={`relative flex min-w-[5.5rem] flex-col border-r border-white/[0.08] text-left last:border-r-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-accent ${
+              className={`relative flex snap-start flex-col border-r border-white/[0.08] text-left last:border-r-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-accent ${
                 isActive
-                  ? 'min-w-[min(52%,28rem)] flex-[2.4] cursor-default px-5 py-7 md:px-7 md:py-9'
-                  : 'flex-1 cursor-pointer px-3 py-7 transition-colors hover:bg-white/[0.03] md:px-4 md:py-9'
+                  ? 'min-w-[min(88vw,28rem)] flex-[0_0_min(88vw,28rem)] cursor-default px-4 py-6 md:min-w-[min(52%,28rem)] md:flex-[2.4] md:px-7 md:py-9'
+                  : 'min-w-[4.75rem] flex-[0_0_4.75rem] cursor-pointer px-2 py-6 transition-colors hover:bg-white/[0.03] md:min-w-[5.5rem] md:flex-1 md:px-4 md:py-9'
               }`}
               id={`process-tab-${index}`}
               aria-controls={`process-panel-${index}`}
@@ -373,7 +376,7 @@ export function DesignProcessSteps({
                         </ol>
                       )}
                       {step.image && !artifactsBelowTrack && (
-                        <div className="mt-5 flex h-[242px] w-full items-center justify-center overflow-hidden rounded-lg border border-white/[0.08] bg-white/[0.04] shadow-lg ring-1 ring-white/[0.06]">
+                        <div className="mt-5 flex h-[min(42vw,180px)] w-full items-center justify-center overflow-hidden rounded-lg border border-white/[0.08] bg-white/[0.04] shadow-lg ring-1 ring-white/[0.06] md:h-[242px]">
                           <img
                             src={step.image}
                             alt={step.imageAlt ?? ''}

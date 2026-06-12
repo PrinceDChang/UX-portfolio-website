@@ -8,11 +8,13 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
+  overflow-x: clip;
   background-color: #09090f;
   background-image:
     radial-gradient(ellipse 90% 55% at 15% -5%, rgba(153, 112, 255, 0.14), transparent 55%),
@@ -88,6 +90,16 @@ body {
   -webkit-filter: url(#case-study-logo-outline)
     drop-shadow(0 0 0.5px rgba(255, 255, 255, 0.95))
     drop-shadow(0 0 1px rgba(255, 255, 255, 0.7));
+}
+
+.ia-scroll-track {
+  height: min(180vh, 960px);
+}
+
+@media (min-width: 768px) {
+  .ia-scroll-track {
+    height: min(260vh, 1500px);
+  }
 }
 
 .design-process-track {
@@ -1019,6 +1031,13 @@ body {
   overflow: hidden;
 }
 
+@media (max-width: 767px) {
+  .postcard-card__tags {
+    flex-wrap: wrap;
+    overflow: visible;
+  }
+}
+
 .postcard-card__tags li {
   flex-shrink: 0;
   border-radius: 9999px;
@@ -1691,6 +1710,16 @@ body {
   transform: translateX(-50%);
 }
 
+@media (max-width: 767px) {
+  .about-intro__orbit-caption {
+    width: auto;
+    max-width: min(100%, 16rem);
+    white-space: normal;
+    text-align: center;
+    line-height: 1.35;
+  }
+}
+
 @keyframes about-orbit-spin {
   to {
     transform: rotate(360deg);
@@ -2278,8 +2307,27 @@ body {
   width: 100%;
   max-width: 34rem;
   margin-inline: auto;
-  overflow: visible;
+  overflow-x: clip;
+  overflow-y: visible;
   filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.35));
+}
+
+@media (max-width: 767px) {
+  .wushu-scroll__rod-icon--left {
+    left: calc(clamp(38px, 5.8vw, 50px) * -0.45);
+  }
+
+  .wushu-scroll__rod-icon--right {
+    right: calc(clamp(38px, 5.8vw, 50px) * -0.45);
+  }
+
+  .wushu-scroll__finial--left {
+    left: calc(clamp(10px, 1.6vw, 14px) * -0.5);
+  }
+
+  .wushu-scroll__finial--right {
+    right: calc(clamp(10px, 1.6vw, 14px) * -0.5);
+  }
 }
 
 @media (min-width: 1024px) {

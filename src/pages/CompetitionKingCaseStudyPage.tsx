@@ -139,7 +139,7 @@ export function CompetitionKingCaseStudyPage() {
             <p className="mt-4 w-full max-w-none whitespace-pre-line text-base leading-relaxed text-slate md:text-lg">
               {process.userFlow.body}
             </p>
-            <CompetitionKingUserFlowReveal className="mt-8" />
+            <CompetitionKingUserFlowReveal className="relative mt-8" />
           </article>
 
           <h3 className="mt-12 text-xl font-semibold text-ink md:mt-16 md:text-2xl">Design</h3>

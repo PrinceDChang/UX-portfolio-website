@@ -69,23 +69,24 @@ export function AgileRoadmapReveal({ data, className = '' }: AgileRoadmapRevealP
         </p>
       </motion.div>
 
-      <div className="relative p-4 sm:p-6 md:p-8">
-        <div
-          className="pointer-events-none absolute inset-4 grid sm:inset-6 md:inset-8"
-          style={{ gridTemplateColumns: `repeat(${GRID_COLS}, minmax(0, 1fr))` }}
-          aria-hidden
-        >
-          {Array.from({ length: GRID_COLS }, (_, index) => (
-            <div
-              key={index}
-              className={index % 2 === 0 ? 'bg-white/[0.02]' : 'bg-accent/[0.04]'}
-            />
-          ))}
-        </div>
+      <div className="relative overflow-x-auto p-4 sm:p-6 md:p-8">
+        <div className="relative min-w-[640px]">
+          <div
+            className="pointer-events-none absolute inset-0 grid"
+            style={{ gridTemplateColumns: `repeat(${GRID_COLS}, minmax(0, 1fr))` }}
+            aria-hidden
+          >
+            {Array.from({ length: GRID_COLS }, (_, index) => (
+              <div
+                key={index}
+                className={index % 2 === 0 ? 'bg-white/[0.02]' : 'bg-accent/[0.04]'}
+              />
+            ))}
+          </div>
 
-        <motion.div
-          className="relative grid gap-2 sm:gap-2.5"
-          style={{ gridTemplateColumns: `repeat(${GRID_COLS}, minmax(0, 1fr))` }}
+          <motion.div
+            className="relative grid gap-2 sm:gap-2.5"
+            style={{ gridTemplateColumns: `repeat(${GRID_COLS}, minmax(0, 1fr))` }}
           variants={reduceMotion ? undefined : containerVariants}
           initial={reduceMotion ? false : 'hidden'}
           whileInView={reduceMotion ? undefined : 'visible'}
@@ -107,13 +108,14 @@ export function AgileRoadmapReveal({ data, className = '' }: AgileRoadmapRevealP
                   color: row.textColor ?? '#ffffff',
                 }}
               >
-                <p className="text-left text-[11px] font-semibold leading-snug sm:text-xs md:text-[13px]">
+                <p className="text-left text-[10px] font-semibold leading-snug sm:text-xs md:text-[13px]">
                   {row.label}
                 </p>
               </div>
             </motion.div>
           ))}
-        </motion.div>
+          </motion.div>
+        </div>
       </div>
     </figure>
   )

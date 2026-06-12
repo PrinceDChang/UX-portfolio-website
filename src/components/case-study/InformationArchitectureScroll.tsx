@@ -568,14 +568,14 @@ export function InformationArchitectureScroll({
 
       <div
         ref={containerRef}
-        className="relative mt-8"
-        style={{ height: reduceMotion ? 'auto' : 'min(260vh, 1500px)' }}
+        className={`relative mt-8 ${reduceMotion ? '' : 'ia-scroll-track'}`}
+        style={reduceMotion ? { height: 'auto' } : undefined}
       >
         <div
           className={
             reduceMotion
               ? 'relative'
-              : 'sticky top-24 flex min-h-[min(72vh,560px)] items-center md:top-28'
+              : 'sticky top-24 flex min-h-[min(58vh,440px)] items-center sm:min-h-[min(72vh,560px)] md:top-28'
           }
         >
           <div className="w-full px-2 py-4 md:px-4 md:py-6">

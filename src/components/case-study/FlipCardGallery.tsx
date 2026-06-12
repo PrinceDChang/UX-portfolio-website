@@ -87,7 +87,7 @@ export function FlipCardGallery({ cards, className = 'mt-6' }: FlipCardGalleryPr
             <button
               type="button"
               onClick={goPrev}
-              className="absolute left-0 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/12 bg-elevated/95 p-3 text-ink shadow-lg transition hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent md:-translate-x-0 md:left-3"
+              className="absolute left-2 top-1/2 z-10 -translate-y-1/2 rounded-full border border-white/12 bg-elevated/95 p-2.5 text-ink shadow-lg transition hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent sm:p-3 md:left-3"
               aria-label="Previous card"
             >
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden>
@@ -103,7 +103,7 @@ export function FlipCardGallery({ cards, className = 'mt-6' }: FlipCardGalleryPr
             <button
               type="button"
               onClick={goNext}
-              className="absolute right-0 top-1/2 z-10 -translate-y-1/2 translate-x-1/2 rounded-full border border-white/12 bg-elevated/95 p-3 text-ink shadow-lg transition hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent md:right-3 md:translate-x-0"
+              className="absolute right-2 top-1/2 z-10 -translate-y-1/2 rounded-full border border-white/12 bg-elevated/95 p-2.5 text-ink shadow-lg transition hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent sm:p-3 md:right-3"
               aria-label="Next card"
             >
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden>

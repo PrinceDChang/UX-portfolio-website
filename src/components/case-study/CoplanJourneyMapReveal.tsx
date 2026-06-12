@@ -9,6 +9,7 @@ import {
   type CSSProperties,
   type ReactNode,
 } from 'react'
+import { useScaleToFit } from '../../lib/useScaleToFit'
 
 export type JourneyMood = 'happy' | 'neutral' | 'unhappy'
 
@@ -79,6 +80,20 @@ function stickyTopPx() {
   return window.matchMedia('(min-width: 768px)').matches ? 112 : 96
 }
 
+function useMobileViewport() {
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 767px)')
+    const update = () => setIsMobile(mq.matches)
+    update()
+    mq.addEventListener('change', update)
+    return () => mq.removeEventListener('change', update)
+  }, [])
+
+  return isMobile
+}
+
 function phaseRevealAmount(scrollProgress: number, phaseIndex: number, total: number) {
   const segment = 1 / total
   const start = phaseIndex * segment
@@ -138,7 +153,12 @@ export function CoplanJourneyMapReveal({ data, className = '' }: CoplanJourneyMa
   const progressRef = useRef(0)
   const touchStartYRef = useRef(0)
   const reduceMotion = useReducedMotion()
+  const isMobile = useMobileViewport()
   const phaseCount = data.phases.length
+  const { containerRef: scaleContainerRef, contentRef, metrics } = useScaleToFit([
+    data,
+    phaseCount,
+  ])
   const [scrollProgress, setScrollProgress] = useState(reduceMotion ? 1 : 0)
   const [isComplete, setIsComplete] = useState(Boolean(reduceMotion))
   const [exitPin, setExitPin] = useState<ExitPinMetrics | null>(null)
@@ -168,7 +188,7 @@ export function CoplanJourneyMapReveal({ data, className = '' }: CoplanJourneyMa
   }, [])
 
   useEffect(() => {
-    if (reduceMotion) {
+    if (reduceMotion || isMobile) {
       setProgress(1)
       return
     }
@@ -265,7 +285,7 @@ export function CoplanJourneyMapReveal({ data, className = '' }: CoplanJourneyMa
       window.removeEventListener('scroll', onScroll)
       window.removeEventListener('keydown', onKeyDown)
     }
-  }, [isPinned, reduceMotion, setProgress])
+  }, [isMobile, isPinned, reduceMotion, setProgress])
 
   const measureExitPin = useCallback(() => {
     const panel = panelRef.current
@@ -342,7 +362,7 @@ export function CoplanJourneyMapReveal({ data, className = '' }: CoplanJourneyMa
     )
   }, [scrollProgress, phaseCount, reduceMotion])
 
-  const containerHeight = reduceMotion
+  const containerHeight = reduceMotion || isMobile
     ? 'auto'
     : exitPin
       ? exitPin.height + exitPin.exitPx
@@ -361,7 +381,7 @@ export function CoplanJourneyMapReveal({ data, className = '' }: CoplanJourneyMa
         }
       : undefined
 
-  const panelPositionClass = reduceMotion
+  const panelPositionClass = reduceMotion || isMobile
     ? 'relative'
     : exitPin || hasReleasedExitPin
       ? 'relative'
@@ -386,7 +406,7 @@ export function CoplanJourneyMapReveal({ data, className = '' }: CoplanJourneyMa
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
               User journey map
             </p>
-            {!reduceMotion && (
+            {!reduceMotion && !isMobile && (
               <p className="mt-1 text-[11px] text-slate/70">
                 {isComplete
                   ? 'All steps revealed — continue scrolling'
@@ -395,14 +415,26 @@ export function CoplanJourneyMapReveal({ data, className = '' }: CoplanJourneyMa
             )}
           </div>
 
-          <div className="overflow-x-auto p-3 sm:p-5">
-            <div className="relative min-w-[920px]">
+          <div ref={scaleContainerRef} className="w-full overflow-hidden p-3 sm:p-5">
+            <div
+              className="relative mx-auto overflow-hidden"
+              style={{
+                width: metrics.width > 0 ? metrics.width : '100%',
+                height: metrics.height > 0 ? metrics.height : undefined,
+              }}
+            >
               <div
-                className="grid gap-x-2 gap-y-2 md:gap-x-3 md:gap-y-2.5"
-                style={{
-                  gridTemplateColumns: `8.75rem repeat(${phaseCount}, minmax(11.5rem, 1fr))`,
-                }}
+                ref={contentRef}
+                className="absolute left-0 top-0 origin-top-left"
+                style={{ transform: `scale(${metrics.scale})` }}
               >
+                <div className="relative w-[920px]">
+                  <div
+                    className="grid gap-x-2 gap-y-2 md:gap-x-3 md:gap-y-2.5"
+                    style={{
+                      gridTemplateColumns: `8.75rem repeat(${phaseCount}, minmax(11.5rem, 1fr))`,
+                    }}
+                  >
                 <div className="rounded-xl bg-amber-500/[0.07] px-3 py-2 text-[10px] font-semibold text-amber-100/85 ring-1 ring-amber-400/15 md:text-[11px]">
                   User steps
                 </div>
@@ -524,11 +556,13 @@ export function CoplanJourneyMapReveal({ data, className = '' }: CoplanJourneyMa
                     </p>
                   </PhaseCell>
                 ))}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
-          {!reduceMotion && (
+          {!reduceMotion && !isMobile && (
             <div className="border-t border-white/[0.06] px-5 py-3 sm:px-6">
               <div className="h-1 overflow-hidden rounded-full bg-white/[0.06]">
                 <motion.div

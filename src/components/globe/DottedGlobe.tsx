@@ -226,9 +226,12 @@ export function DottedGlobe() {
         )}
       </AnimatePresence>
 
-      <div className="pointer-events-none absolute inset-x-0 bottom-5 z-[3] flex justify-center px-6">
-        <p className="rounded-full bg-elevated/80 px-4 py-2 text-xs text-slate backdrop-blur-md ring-1 ring-accent/20">
-          Hover a pin to preview · Click to keep open · Drag to rotate
+      <div className="pointer-events-none absolute inset-x-0 bottom-3 z-[3] flex justify-center px-4 md:bottom-5 md:px-6">
+        <p className="rounded-full bg-elevated/80 px-3 py-1.5 text-[10px] text-slate backdrop-blur-md ring-1 ring-accent/20 md:px-4 md:py-2 md:text-xs">
+          <span className="md:hidden">Tap a pin · Drag to rotate</span>
+          <span className="hidden md:inline">
+            Hover a pin to preview · Click to keep open · Drag to rotate
+          </span>
         </p>
       </div>
     </div>

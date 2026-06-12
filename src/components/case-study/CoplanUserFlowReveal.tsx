@@ -1,5 +1,6 @@
 import { motion, useInView, useReducedMotion } from 'framer-motion'
 import { useEffect, useMemo, useRef, useState } from 'react'
+import { useScaleToFit } from '../../lib/useScaleToFit'
 
 const flowEase = [0.22, 1, 0.36, 1] as const
 const FLOW_NODE_COLORS = {
@@ -863,8 +864,9 @@ export function CoplanUserFlowReveal({
   ariaLabel = 'User flow diagram',
 }: CoplanUserFlowRevealProps) {
   const reduceMotion = useReducedMotion()
-  const containerRef = useRef<HTMLDivElement>(null)
-  const isInView = useInView(containerRef, { once: true, margin: '-60px' })
+  const inViewRef = useRef<HTMLDivElement>(null)
+  const { containerRef, contentRef, metrics } = useScaleToFit([data, viewW, viewH])
+  const isInView = useInView(inViewRef, { once: true, margin: '-60px' })
   const animateIn = Boolean(reduceMotion || isInView)
   const nodeMap = new Map(data.nodes.map((node) => [node.id, node]))
   const revealIndex = new Map(data.revealOrder.map((id, index) => [id, index]))
@@ -887,16 +889,30 @@ export function CoplanUserFlowReveal({
 
   return (
     <div
-      ref={containerRef}
+      ref={inViewRef}
       className={`mt-6 overflow-hidden rounded-3xl bg-[#141418] ring-1 ring-white/[0.08] ${className}`}
       aria-label={ariaLabel}
     >
-      <div className="overflow-x-auto p-4 sm:p-6">
-        <svg
-          viewBox={`0 0 ${viewW} ${viewH}`}
-          className="mx-auto min-w-[920px] w-full"
-          role="img"
+      <div ref={containerRef} className="w-full overflow-hidden p-3 sm:p-6">
+        <div
+          className="relative mx-auto overflow-hidden"
+          style={{
+            width: metrics.width > 0 ? metrics.width : '100%',
+            height: metrics.height > 0 ? metrics.height : undefined,
+          }}
         >
+          <div
+            ref={contentRef}
+            className="absolute left-0 top-0 origin-top-left"
+            style={{ transform: `scale(${metrics.scale})`, width: viewW }}
+          >
+            <svg
+              viewBox={`0 0 ${viewW} ${viewH}`}
+              width={viewW}
+              height={viewH}
+              className="block"
+              role="img"
+            >
           {data.sections.map((section) => (
             <SectionPill key={section.id} section={section} />
           ))}
@@ -990,7 +1006,9 @@ export function CoplanUserFlowReveal({
           })}
 
           <FlowKeyLegend reduceMotion={reduceMotion} viewW={viewW} />
-        </svg>
+            </svg>
+          </div>
+        </div>
       </div>
     </div>
   )

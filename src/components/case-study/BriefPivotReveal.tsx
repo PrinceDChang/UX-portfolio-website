@@ -205,7 +205,7 @@ export function BriefPivotReveal({ data, className = '' }: BriefPivotRevealProps
           />
 
           <motion.span
-            className="pointer-events-none absolute right-5 top-5 rounded-full bg-red-400/20 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-red-400 ring-1 ring-red-400/35"
+            className="pointer-events-none absolute right-3 top-3 rounded-full bg-red-400/20 px-2 py-0.5 text-[9px] font-bold uppercase tracking-[0.12em] text-red-400 ring-1 ring-red-400/35 sm:right-5 sm:top-5 sm:px-2.5 sm:py-1 sm:text-[10px] sm:tracking-[0.14em]"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={crossedOut ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
             transition={{
@@ -251,7 +251,7 @@ export function BriefPivotReveal({ data, className = '' }: BriefPivotRevealProps
             highlighted={crossedOut}
           />
           <motion.span
-            className="pointer-events-none absolute right-5 top-5 rounded-full bg-accent/20 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-accent ring-1 ring-accent/35"
+            className="pointer-events-none absolute right-3 top-3 rounded-full bg-accent/20 px-2 py-0.5 text-[9px] font-bold uppercase tracking-[0.12em] text-accent ring-1 ring-accent/35 sm:right-5 sm:top-5 sm:px-2.5 sm:py-1 sm:text-[10px] sm:tracking-[0.14em]"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={crossedOut ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
             transition={{

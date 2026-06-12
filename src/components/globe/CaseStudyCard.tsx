@@ -70,7 +70,7 @@ function ComingSoonCaseStudyCard({ project, onClose }: CaseStudyCardProps) {
   return (
     <motion.div
       {...cardMotion}
-      className="globe-case-study-hero pointer-events-auto relative flex min-h-[380px] w-[min(100%,380px)] flex-col overflow-hidden rounded-2xl shadow-[0_24px_60px_rgba(0,0,0,0.55)] ring-1 ring-white/10 md:w-[400px]"
+      className="globe-case-study-hero pointer-events-auto relative flex min-h-[min(72vh,340px)] w-[min(100%,340px)] flex-col overflow-hidden rounded-2xl shadow-[0_24px_60px_rgba(0,0,0,0.55)] ring-1 ring-white/10 sm:min-h-[380px] sm:w-[min(100%,380px)] md:w-[400px]"
       onClick={(event) => event.stopPropagation()}
       onPointerDown={(event) => event.stopPropagation()}
     >
@@ -111,7 +111,7 @@ function HeroBackgroundCaseStudyCard({ project, onClose }: CaseStudyCardProps) {
   return (
     <motion.div
       {...cardMotion}
-      className="globe-case-study-hero pointer-events-auto relative flex min-h-[380px] w-[min(100%,380px)] flex-col overflow-hidden rounded-2xl shadow-[0_24px_60px_rgba(0,0,0,0.55)] ring-1 ring-white/10 md:w-[400px]"
+      className="globe-case-study-hero pointer-events-auto relative flex min-h-[min(72vh,340px)] w-[min(100%,340px)] flex-col overflow-hidden rounded-2xl shadow-[0_24px_60px_rgba(0,0,0,0.55)] ring-1 ring-white/10 sm:min-h-[380px] sm:w-[min(100%,380px)] md:w-[400px]"
       onClick={(event) => event.stopPropagation()}
       onPointerDown={(event) => event.stopPropagation()}
     >

@@ -17,7 +17,7 @@ export function CompetitionKingUserFlowReveal({
   return (
     <div className={`relative ${className}`}>
       <div
-        className="absolute left-5 top-5 z-20 flex flex-wrap gap-1 rounded-xl bg-[#1a1a26]/95 p-1 ring-1 ring-white/[0.1] backdrop-blur-sm sm:left-6 sm:top-6"
+        className="mb-3 flex flex-wrap gap-1 rounded-xl bg-[#1a1a26]/95 p-1 ring-1 ring-white/[0.1] backdrop-blur-sm md:absolute md:left-6 md:top-6 md:z-20 md:mb-0"
         role="tablist"
         aria-label="User journey flows"
       >
@@ -43,7 +43,11 @@ export function CompetitionKingUserFlowReveal({
         })}
       </div>
 
-      <div id={`competition-king-flow-${activeFlow.id}`} role="tabpanel">
+      <div
+        id={`competition-king-flow-${activeFlow.id}`}
+        role="tabpanel"
+        className="relative md:pt-0"
+      >
         <CoplanUserFlowReveal
           key={activeFlow.id}
           data={activeFlow.data}
