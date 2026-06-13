@@ -6,6 +6,7 @@ import { CaseStudyShell } from '../components/case-study/CaseStudyShell'
 import { AgileRoadmapReveal } from '../components/case-study/AgileRoadmapReveal'
 import { AlternatingDesignTimeline } from '../components/case-study/AlternatingDesignTimeline'
 import { DesignProcessSteps } from '../components/case-study/DesignProcessSteps'
+import { SushiTalkProcessArtifactReveal } from '../components/case-study/SushiTalkProcessArtifactReveal'
 import { FeatureShowcase } from '../components/case-study/FeatureShowcase'
 import { FigmaToClaudeFlow } from '../components/case-study/FigmaToClaudeFlow'
 import { HtmlPrototypeEmbed } from '../components/case-study/HtmlPrototypeEmbed'
@@ -191,7 +192,7 @@ export function SushiTalkCaseStudyPage() {
           <AgileRoadmapReveal data={sushitalkSections.process.roadmap} />
           <DesignProcessSteps
             steps={sushitalkSections.process.steps}
-            artifactsBelowTrack
+            renderBelowTrack={(ctx) => <SushiTalkProcessArtifactReveal {...ctx} />}
           />
           <AlternatingDesignTimeline
             className="mt-12 md:mt-16"

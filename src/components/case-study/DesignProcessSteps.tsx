@@ -18,6 +18,15 @@ interface DesignProcessStepsProps {
   stepDurationMs?: number
   /** Show the active step image + caption below the tab track instead of inside the tab */
   artifactsBelowTrack?: boolean
+  /** Custom content below the tab track; replaces default zoomable image when set */
+  renderBelowTrack?: (ctx: DesignProcessBelowTrackContext) => React.ReactNode
+}
+
+export interface DesignProcessBelowTrackContext {
+  activeIndex: number
+  selectStep: (index: number) => void
+  activeStep: DesignProcessStep
+  steps: readonly DesignProcessStep[]
 }
 
 const DEFAULT_STEP_MS = 8000
@@ -166,6 +175,7 @@ export function DesignProcessSteps({
   steps,
   stepDurationMs = DEFAULT_STEP_MS,
   artifactsBelowTrack = false,
+  renderBelowTrack,
 }: DesignProcessStepsProps) {
   const [activeIndex, setActiveIndex] = useState(0)
   const [phase, setPhase] = useState<TimerPhase>('ring')
@@ -270,6 +280,7 @@ export function DesignProcessSteps({
 
   /** Steps 02 & 03 (indices 1–2): show a connector on both sides of the node. */
   const hasDualConnectors = (index: number) => index >= 1 && index <= 2
+  const hideTabImages = artifactsBelowTrack || Boolean(renderBelowTrack)
 
   return (
     <div className="design-process-track overflow-x-auto rounded-2xl bg-[#0c0c10] ring-1 ring-white/[0.08] scroll-smooth [scrollbar-width:thin]">
@@ -375,7 +386,7 @@ export function DesignProcessSteps({
                           ))}
                         </ol>
                       )}
-                      {step.image && !artifactsBelowTrack && (
+                      {step.image && !hideTabImages && (
                         <div className="mt-5 flex h-[min(42vw,180px)] w-full items-center justify-center overflow-hidden rounded-lg border border-white/[0.08] bg-white/[0.04] shadow-lg ring-1 ring-white/[0.06] md:h-[242px]">
                           <img
                             src={step.image}
@@ -395,35 +406,43 @@ export function DesignProcessSteps({
         })}
       </div>
 
-      {artifactsBelowTrack && steps[activeIndex]?.image && (
-        <AnimatePresence mode="wait">
-          <motion.figure
-            key={steps[activeIndex].number}
-            role="tabpanel"
-            id={`process-artifact-${activeIndex}`}
-            aria-labelledby={`process-tab-${activeIndex}`}
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 10 }}
-            transition={{ duration: PANEL_TRANSITION_S, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-8 overflow-hidden rounded-3xl bg-[#f4f4f6] ring-1 ring-white/10 md:mt-10"
-          >
-            <div className="px-4 py-4 md:px-6 md:py-5">
-              <ZoomableImage
-                compact
-                src={steps[activeIndex].image!}
-                alt={steps[activeIndex].imageAlt ?? steps[activeIndex].title}
-                className="mt-0"
-              />
-            </div>
-            {(steps[activeIndex].imageCaption ?? steps[activeIndex].imageAlt) && (
-              <figcaption className="border-t border-black/[0.06] px-6 py-4 text-center text-sm leading-relaxed text-slate md:text-[15px]">
-                {steps[activeIndex].imageCaption ?? steps[activeIndex].imageAlt}
-              </figcaption>
-            )}
-          </motion.figure>
-        </AnimatePresence>
-      )}
+      {renderBelowTrack
+        ? renderBelowTrack({
+            activeIndex,
+            selectStep,
+            activeStep: steps[activeIndex]!,
+            steps,
+          })
+        : artifactsBelowTrack &&
+          steps[activeIndex]?.image && (
+            <AnimatePresence mode="wait">
+              <motion.figure
+                key={steps[activeIndex].number}
+                role="tabpanel"
+                id={`process-artifact-${activeIndex}`}
+                aria-labelledby={`process-tab-${activeIndex}`}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 10 }}
+                transition={{ duration: PANEL_TRANSITION_S, ease: [0.22, 1, 0.36, 1] }}
+                className="mt-8 overflow-hidden rounded-3xl bg-[#f4f4f6] ring-1 ring-white/10 md:mt-10"
+              >
+                <div className="px-4 py-4 md:px-6 md:py-5">
+                  <ZoomableImage
+                    compact
+                    src={steps[activeIndex].image!}
+                    alt={steps[activeIndex].imageAlt ?? steps[activeIndex].title}
+                    className="mt-0"
+                  />
+                </div>
+                {(steps[activeIndex].imageCaption ?? steps[activeIndex].imageAlt) && (
+                  <figcaption className="border-t border-black/[0.06] px-6 py-4 text-center text-sm leading-relaxed text-slate md:text-[15px]">
+                    {steps[activeIndex].imageCaption ?? steps[activeIndex].imageAlt}
+                  </figcaption>
+                )}
+              </motion.figure>
+            </AnimatePresence>
+          )}
     </div>
   )
 }
