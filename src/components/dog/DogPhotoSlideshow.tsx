@@ -50,21 +50,25 @@ export function DogPhotoSlideshow({
         aria-roledescription="carousel"
         aria-label={`Photos of ${subjectName}`}
       >
-        <AnimatePresence mode="wait">
-          <motion.img
-            key={current.src}
-            src={current.src}
-            alt={current.alt}
-            initial={reduceMotion ? false : { opacity: 0, scale: 1.03 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={reduceMotion ? undefined : { opacity: 0, scale: 0.98 }}
-            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-            className="dog-slideshow__image"
-            loading="lazy"
-            decoding="async"
-            draggable={false}
-          />
-        </AnimatePresence>
+        <div className="dog-slideshow__mat">
+          <div className="dog-slideshow__photo">
+            <AnimatePresence mode="wait">
+              <motion.img
+                key={current.src}
+                src={current.src}
+                alt={current.alt}
+                initial={reduceMotion ? false : { opacity: 0, scale: 1.03 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={reduceMotion ? undefined : { opacity: 0, scale: 0.98 }}
+                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                className="dog-slideshow__image"
+                loading="lazy"
+                decoding="async"
+                draggable={false}
+              />
+            </AnimatePresence>
+          </div>
+        </div>
 
         {total > 1 && (
           <>
