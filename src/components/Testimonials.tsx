@@ -27,7 +27,7 @@ export function Testimonials() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }}
               transition={{ duration: 0.6, delay: index * 0.08 }}
-              className="rounded-[1.75rem] bg-elevated p-8 shadow-card ring-1 ring-white/8 transition hover:ring-accent/20"
+              className="rounded-[1.75rem] bg-elevated p-8 shadow-card ring-1 ring-accent/35 transition hover:ring-accent/55"
             >
               <p className="text-base leading-relaxed text-slate">&ldquo;{item.quote}&rdquo;</p>
               <footer className="mt-6 border-t border-white/8 pt-5">

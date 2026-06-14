@@ -31,7 +31,7 @@ export function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.7, delay: 0.1 }}
-          className="rounded-[2rem] bg-surface p-8 ring-1 ring-white/8"
+          className="rounded-[2rem] bg-surface p-8 ring-1 ring-accent/35"
           onSubmit={(event) => event.preventDefault()}
         >
           <div className="grid gap-5">
@@ -40,7 +40,7 @@ export function Contact() {
               <input
                 type="text"
                 placeholder="Your name"
-                className="rounded-2xl border border-transparent bg-elevated px-4 py-3 text-sm text-ink outline-none ring-1 ring-white/8 placeholder:text-slate/60 focus:ring-accent/40"
+                className="rounded-2xl border border-transparent bg-elevated px-4 py-3 text-sm text-ink outline-none ring-1 ring-accent/35 placeholder:text-slate/60 focus:ring-accent/55"
               />
             </label>
 
@@ -49,13 +49,13 @@ export function Contact() {
               <input
                 type="email"
                 placeholder="you@email.com"
-                className="rounded-2xl border border-transparent bg-elevated px-4 py-3 text-sm text-ink outline-none ring-1 ring-white/8 placeholder:text-slate/60 focus:ring-accent/40"
+                className="rounded-2xl border border-transparent bg-elevated px-4 py-3 text-sm text-ink outline-none ring-1 ring-accent/35 placeholder:text-slate/60 focus:ring-accent/55"
               />
             </label>
 
             <label className="grid gap-2 text-sm font-medium text-ink">
               Service Needed ?
-              <select className="rounded-2xl border border-transparent bg-elevated px-4 py-3 text-sm text-ink outline-none ring-1 ring-white/8 focus:ring-accent/40">
+              <select className="rounded-2xl border border-transparent bg-elevated px-4 py-3 text-sm text-ink outline-none ring-1 ring-accent/35 focus:ring-accent/55">
                 <option>Select…</option>
                 <option>Branding</option>
                 <option>Web design</option>
@@ -68,7 +68,7 @@ export function Contact() {
               <textarea
                 rows={4}
                 placeholder="Tell me about your project"
-                className="rounded-2xl border border-transparent bg-elevated px-4 py-3 text-sm text-ink outline-none ring-1 ring-white/8 placeholder:text-slate/60 focus:ring-accent/40"
+                className="rounded-2xl border border-transparent bg-elevated px-4 py-3 text-sm text-ink outline-none ring-1 ring-accent/35 placeholder:text-slate/60 focus:ring-accent/55"
               />
             </label>
 
