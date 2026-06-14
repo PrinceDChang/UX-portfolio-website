@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1000" viewBox="0 0 800 1000" fill="none">
+  <rect width="800" height="1000" fill="#141018"/>
+  <circle cx="400" cy="440" r="200" fill="#9970ff" opacity="0.2"/>
+  <ellipse cx="400" cy="620" rx="180" ry="120" fill="#f5c842" opacity="0.18"/>
+  <text x="400" y="820" text-anchor="middle" fill="#f5c842" font-family="Georgia, serif" font-size="28">Add photo 4</text>
+  <text x="400" y="860" text-anchor="middle" fill="#9494a8" font-family="system-ui, sans-serif" font-size="16">public/images/dog/mochi-4</text>
+</svg>

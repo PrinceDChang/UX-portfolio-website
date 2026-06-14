@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 
 import { portraitSrc } from '../data/content'
+import { NavDogIcon } from './nav/NavDogIcon'
 
 const navLinks = [
   { label: 'Home', href: '/#home' },
@@ -63,6 +64,14 @@ export function Navbar() {
             </Link>
           ))}
         </div>
+
+        <Link
+          to="/dog"
+          className="nav-dog-link flex shrink-0 items-center justify-center rounded-full transition-transform hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+          aria-label="My dog, Wushu"
+        >
+          <NavDogIcon />
+        </Link>
 
         <a
           href="https://docs.google.com/document/d/1PRhWQULdrhxiATykFpkIKLJeIBRO6PLr0GSEFbgDMg4/edit?usp=sharing"

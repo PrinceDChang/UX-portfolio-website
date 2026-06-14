@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { ScrollToTop } from './components/ScrollToTop'
 import { PhotographyTransitionProvider } from './context/PhotographyTransitionContext'
 import { WushuTransitionProvider } from './context/WushuTransitionContext'
+import { DogPage } from './pages/DogPage'
 import { HomePage } from './pages/HomePage'
 import { AboutPage } from './pages/AboutPage'
 import { PhotographyPage } from './pages/PhotographyPage'
@@ -25,6 +26,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/about" element={<AboutPage />} />
+            <Route path="/dog" element={<DogPage />} />
             <Route path="/photography" element={<PhotographyPage />} />
             <Route path="/wushu" element={<WushuPage />} />
           <Route path="/projects" element={<ProjectsPage />} />
