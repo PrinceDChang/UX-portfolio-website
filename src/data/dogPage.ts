@@ -77,7 +77,7 @@ export const dogPage = {
     {
       src: '/images/dog/wushu-championship-medal.png',
       alt: 'Senior Wushu wearing a 2023 all-around championship medal',
-      caption: '2023 all-around champion.',
+      caption: '2023 wushu champion.',
     },
     {
       src: '/images/dog/wushu-under-table.png',
