@@ -9,12 +9,8 @@ export const cueCaseStudyMeta = {
   heroImageAlt:
     'Cue AR social coaching interface with engagement insights and companion app profile',
   figbuild: 'FigBuild 2026',
-  impactMetrics: [
-    { value: '48 hrs', label: 'Research to prototype' },
-    { value: '2', label: 'Shipped prototypes (AR + app)' },
-    { value: '4', label: 'Cross-functional teammates' },
-    { value: 'Ethics-first', label: 'Consent guardrails in UX' },
-  ],
+  impactSummary:
+    'Able to provide useful data feedback on incorporation AI tools into design process',
   details: [
     { label: 'Role', value: 'UX Designer' },
     { label: 'Tools', value: 'Figma, Figma Make' },

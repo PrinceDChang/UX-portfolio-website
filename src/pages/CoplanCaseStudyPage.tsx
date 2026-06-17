@@ -60,7 +60,7 @@ export function CoplanCaseStudyPage() {
               {coplanCaseStudyMeta.tagline}
             </p>
 
-            <CaseStudyImpactSummary metrics={coplanCaseStudyMeta.impactMetrics} />
+            <CaseStudyImpactSummary summary={coplanCaseStudyMeta.impactSummary} />
           </motion.div>
         </div>
 

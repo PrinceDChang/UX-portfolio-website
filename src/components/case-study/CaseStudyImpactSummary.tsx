@@ -7,7 +7,8 @@ export interface CaseStudyImpactMetric {
 }
 
 interface CaseStudyImpactSummaryProps {
-  metrics: readonly CaseStudyImpactMetric[]
+  metrics?: readonly CaseStudyImpactMetric[]
+  summary?: string
   className?: string
 }
 
@@ -19,6 +20,7 @@ function impactGridClass(count: number) {
 
 export function CaseStudyImpactSummary({
   metrics,
+  summary,
   className = '',
 }: CaseStudyImpactSummaryProps) {
   const ref = useRef<HTMLDivElement>(null)
@@ -29,8 +31,21 @@ export function CaseStudyImpactSummary({
   return (
     <div ref={ref} className={`mt-10 w-full max-w-none ${className}`.trim()}>
       <p className="text-xs font-semibold uppercase tracking-[0.28em] text-accent">Impact</p>
-      <div className={`mt-4 grid grid-cols-1 gap-4 ${impactGridClass(metrics.length)}`}>
-        {metrics.map((metric, index) => (
+      {summary ? (
+        <motion.p
+          className="mt-4 text-base leading-relaxed text-slate md:text-lg"
+          initial={{ opacity: 0, y: 16 }}
+          animate={active ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+          transition={{
+            duration: reducedMotion ? 0 : 0.55,
+            ease: [0.22, 1, 0.36, 1],
+          }}
+        >
+          {summary}
+        </motion.p>
+      ) : (
+      <div className={`mt-4 grid grid-cols-1 gap-4 ${impactGridClass(metrics?.length ?? 0)}`}>
+        {metrics?.map((metric, index) => (
           <motion.div
             key={metric.label}
             className="rounded-2xl bg-elevated/80 px-5 py-5 text-center ring-2 ring-accent/60 backdrop-blur-sm md:px-6 md:py-6"
@@ -49,6 +64,7 @@ export function CaseStudyImpactSummary({
           </motion.div>
         ))}
       </div>
+      )}
     </div>
   )
 }

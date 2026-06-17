@@ -52,7 +52,7 @@ export function CueCaseStudyPage() {
               {cueCaseStudyMeta.tagline}
             </p>
 
-            <CaseStudyImpactSummary metrics={cueCaseStudyMeta.impactMetrics} />
+            <CaseStudyImpactSummary summary={cueCaseStudyMeta.impactSummary} />
           </motion.div>
         </div>
 
