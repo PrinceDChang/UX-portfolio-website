@@ -106,12 +106,12 @@ const ARROW_W = '1.75rem'
 const ENTRY_W = '5.75rem'
 
 const toneRing: Record<SmartBudgetingFlowTone, string> = {
-  sky: 'bg-sky-500/90 ring-sky-300/40',
+  sky: 'bg-accent/90 ring-accent/40',
   emerald: 'bg-emerald-500/90 ring-emerald-300/40',
-  teal: 'bg-teal-500/90 ring-teal-300/40',
+  teal: 'bg-accent/85 ring-accent/35',
   violet: 'bg-violet-500/90 ring-violet-300/40',
-  cyan: 'bg-cyan-500/90 ring-cyan-300/40',
-  indigo: 'bg-indigo-500/90 ring-indigo-300/40',
+  cyan: 'bg-accent/88 ring-accent/38',
+  indigo: 'bg-violet-500/90 ring-violet-300/40',
   amber: 'bg-amber-400/95 text-[#1a1208] ring-amber-200/50',
 }
 

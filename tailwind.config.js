@@ -1,19 +1,37 @@
 /** @type {import('tailwindcss').Config} */
+
+/** Purple scale used for legacy sky/cyan/indigo/teal outline utilities */
+const purpleOutlineScale = {
+  100: '#ebe4ff',
+  200: '#d4c4ff',
+  300: '#c4b5fd',
+  400: '#b894ff',
+  500: '#9970ff',
+  600: '#7c52e8',
+}
+
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       colors: {
-        canvas: '#09090f',
-        surface: '#111118',
-        elevated: '#1a1a26',
-        ink: '#f4f4f5',
-        slate: '#9494a8',
-        mist: '#13131b',
-        accent: '#9970FF',
-        ocean: '#9970FF',
-        sky: '#b894ff',
-        glass: 'rgba(26, 26, 36, 0.78)',
+        canvas: 'var(--color-canvas)',
+        surface: 'var(--color-surface)',
+        elevated: 'var(--color-elevated)',
+        ink: 'var(--color-ink)',
+        slate: 'var(--color-slate)',
+        mist: 'var(--color-mist)',
+        accent: 'var(--color-accent)',
+        ocean: 'var(--color-accent)',
+        sky: {
+          DEFAULT: 'var(--color-sky)',
+          ...purpleOutlineScale,
+        },
+        cyan: purpleOutlineScale,
+        indigo: purpleOutlineScale,
+        teal: purpleOutlineScale,
+        glass: 'var(--color-glass)',
+        'theme-border': 'var(--color-border)',
       },
       fontFamily: {
         sans: ['"DM Sans"', 'system-ui', 'sans-serif'],

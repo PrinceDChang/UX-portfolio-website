@@ -1,20 +1,26 @@
 import { useLayoutEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { disableBrowserScrollRestoration, scrollPageToTop } from '../lib/scrollToTop'
+import {
+  disableBrowserScrollRestoration,
+  schedulePageScrollToHash,
+  schedulePageScrollToTop,
+} from '../lib/scrollToTop'
 
-/** Scroll to top on client-side route changes. */
+/** Scroll to top on client-side route changes; honor in-page hash targets when present. */
 export function ScrollToTop() {
-  const { pathname } = useLocation()
+  const { pathname, hash, search, key } = useLocation()
 
   useLayoutEffect(() => {
     disableBrowserScrollRestoration()
   }, [])
 
   useLayoutEffect(() => {
-    scrollPageToTop()
-    const frame = requestAnimationFrame(scrollPageToTop)
-    return () => cancelAnimationFrame(frame)
-  }, [pathname])
+    if (hash) {
+      return schedulePageScrollToHash(hash)
+    }
+
+    return schedulePageScrollToTop()
+  }, [pathname, hash, search, key])
 
   return null
 }

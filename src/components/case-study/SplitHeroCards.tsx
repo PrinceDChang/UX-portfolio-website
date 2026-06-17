@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react'
+
 interface SplitHeroPillar {
   title: string
   icon?: string
@@ -9,6 +11,8 @@ interface SplitHeroCardsProps {
   headline: string
   body: string
   pillars?: readonly SplitHeroPillar[]
+  /** Renders between the hero card and pillar grid (e.g. demo video). */
+  middleSlot?: ReactNode
   className?: string
 }
 
@@ -20,6 +24,7 @@ export function SplitHeroCards({
   headline,
   body,
   pillars = [],
+  middleSlot,
   className = '',
 }: SplitHeroCardsProps) {
   return (
@@ -40,6 +45,8 @@ export function SplitHeroCards({
           ))}
         </div>
       </article>
+
+      {middleSlot}
 
       {pillars.length > 0 && (
       <div

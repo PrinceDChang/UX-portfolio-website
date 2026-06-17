@@ -1,16 +1,17 @@
 import { useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { BeforeAfterProcessReveal } from '../components/case-study/BeforeAfterProcessReveal'
 import { BriefPivotReveal } from '../components/case-study/BriefPivotReveal'
+import { CaseStudyDemoVideo } from '../components/case-study/CaseStudyDemoVideo'
 import { CaseStudyConclusion } from '../components/case-study/CaseStudyConclusion'
 import { VideoPrototypeCard } from '../components/case-study/VideoPrototypeCard'
 import { CaseStudyMoreProjects } from '../components/case-study/CaseStudyMoreProjects'
+import { CaseStudyImpactSummary } from '../components/case-study/CaseStudyImpactSummary'
 import { CaseStudyLogo } from '../components/case-study/CaseStudyLogo'
+import { CaseStudyMetaGrid } from '../components/case-study/CaseStudyMetaGrid'
 import { CaseStudyShell } from '../components/case-study/CaseStudyShell'
 import { DesignProcessSteps } from '../components/case-study/DesignProcessSteps'
 import { FeatureShowcase } from '../components/case-study/FeatureShowcase'
 import { FieldPhotoGallery } from '../components/case-study/FieldPhotoGallery'
-import { FigmaPrototypeEmbed } from '../components/case-study/FigmaPrototypeEmbed'
 import { SectionBlock } from '../components/case-study/SectionBlock'
 import { SageIntegrationHub } from '../components/case-study/SageIntegrationHub'
 import { SmartBudgetingFlowReveal } from '../components/case-study/SmartBudgetingFlowReveal'
@@ -55,19 +56,7 @@ export function UwOrisCaseStudyPage() {
               {uwOrisCaseStudyMeta.tagline}
             </p>
 
-            <dl className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {uwOrisCaseStudyMeta.details.map((item) => (
-                <div
-                  key={item.label}
-                  className="rounded-2xl bg-elevated/80 px-5 py-4 ring-1 ring-accent/30 backdrop-blur-sm"
-                >
-                  <dt className="text-xs font-semibold uppercase tracking-[0.2em] text-slate">
-                    {item.label}
-                  </dt>
-                  <dd className="mt-1 text-sm font-medium text-ink">{item.value}</dd>
-                </div>
-              ))}
-            </dl>
+            <CaseStudyImpactSummary metrics={uwOrisCaseStudyMeta.impactMetrics} />
           </motion.div>
         </div>
 
@@ -84,6 +73,7 @@ export function UwOrisCaseStudyPage() {
               className="block h-auto w-full object-contain object-center"
             />
           </div>
+          <CaseStudyMetaGrid className="mt-10" details={uwOrisCaseStudyMeta.details} />
         </motion.div>
       </section>
 
@@ -144,45 +134,38 @@ export function UwOrisCaseStudyPage() {
             headline={uwOrisSections.solution.subtitle}
             body={uwOrisSections.solution.body}
             pillars={uwOrisSections.solution.pillars}
-          />
-        </SectionBlock>
-
-        <SectionBlock label={uwOrisSections.finalDesign.label} title="Final design">
-          <p className="mb-8 w-full max-w-none text-left text-base leading-relaxed text-slate md:text-lg">
-            {uwOrisSections.finalDesign.body}
-          </p>
-          <figure className="overflow-hidden rounded-3xl bg-elevated ring-1 ring-white/10">
-            <FigmaPrototypeEmbed
-              src={uwOrisSections.finalDesign.prototype.embedUrl}
-              title={uwOrisSections.finalDesign.prototype.title}
-              frameWidth={uwOrisSections.finalDesign.prototype.frame.width}
-              frameHeight={uwOrisSections.finalDesign.prototype.frame.height}
-              layout="fit"
-            />
-            <figcaption className="border-t border-white/8 px-6 py-5">
-              <p className="font-semibold text-ink">
-                {uwOrisSections.finalDesign.prototype.title}
-              </p>
-              <p className="mt-1 text-sm text-slate">
-                Context setup, budget settings, worksheet, and import gates — interactive
-                prototype built in Cursor
-              </p>
-              <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2">
+            middleSlot={
+              <>
+                <figure className="overflow-hidden rounded-3xl bg-elevated ring-1 ring-white/10">
+                  <CaseStudyDemoVideo
+                    src={uwOrisSections.solution.demoVideo.src}
+                    title={uwOrisSections.solution.demoVideo.title}
+                  />
+                </figure>
                 <a
-                  href={uwOrisSections.finalDesign.prototype.openUrl}
+                  href={uwOrisSections.solution.demoVideo.openUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm font-medium text-accent hover:underline"
+                  className="group flex w-full items-center justify-between gap-4 rounded-3xl bg-accent px-6 py-5 text-left shadow-glow ring-2 ring-accent/80 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-accent/90 hover:shadow-[0_0_40px_rgba(153,112,255,0.45)] hover:ring-white/25 active:translate-y-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                 >
-                  Open prototype →
+                  <span className="min-w-0">
+                    <span className="block font-semibold text-white">
+                      {uwOrisSections.solution.demoVideo.title}
+                    </span>
+                    <span className="mt-1 block text-sm text-white/80 transition-colors group-hover:text-white/95">
+                      {uwOrisSections.solution.demoVideo.caption}
+                    </span>
+                  </span>
+                  <span className="shrink-0 text-sm font-semibold text-white transition-transform duration-300 group-hover:translate-x-1">
+                    Open prototype →
+                  </span>
                 </a>
-              </div>
-            </figcaption>
-          </figure>
-
-          <BeforeAfterProcessReveal
-            className="mt-8"
-            data={uwOrisSections.finalDesign.processComparison}
+                <SageIntegrationHub
+                  className="mt-4"
+                  data={uwOrisSections.sageIntegration}
+                />
+              </>
+            }
           />
         </SectionBlock>
 
@@ -223,11 +206,6 @@ export function UwOrisCaseStudyPage() {
           <SmartBudgetingFlowReveal
             className="mb-10"
             data={uwOrisSections.userFlow}
-          />
-          <h2 className="section-title mb-6">{uwOrisSections.solution.label}</h2>
-          <SageIntegrationHub
-            className="mb-10"
-            data={uwOrisSections.sageIntegration}
           />
           <p className="mb-6 w-full max-w-none text-base leading-relaxed text-slate md:text-lg">
             {uwOrisSections.featuresIntro}

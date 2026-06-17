@@ -1,6 +1,8 @@
 import { useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { AlternatingDesignTimeline } from '../components/case-study/AlternatingDesignTimeline'
+import { CaseStudyImpactSummary } from '../components/case-study/CaseStudyImpactSummary'
+import { CaseStudyMetaGrid } from '../components/case-study/CaseStudyMetaGrid'
 import { CaseStudyMoreProjects } from '../components/case-study/CaseStudyMoreProjects'
 import { CaseStudyConclusion } from '../components/case-study/CaseStudyConclusion'
 import { CaseStudyShell } from '../components/case-study/CaseStudyShell'
@@ -48,19 +50,7 @@ export function CompetitionKingCaseStudyPage() {
               {competitionKingCaseStudyMeta.tagline}
             </p>
 
-            <dl className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {competitionKingCaseStudyMeta.details.map((item) => (
-                <div
-                  key={item.label}
-                  className="rounded-2xl bg-elevated/80 px-5 py-4 ring-1 ring-accent/30 backdrop-blur-sm"
-                >
-                  <dt className="text-xs font-semibold uppercase tracking-[0.2em] text-slate">
-                    {item.label}
-                  </dt>
-                  <dd className="mt-1 text-sm font-medium text-ink">{item.value}</dd>
-                </div>
-              ))}
-            </dl>
+            <CaseStudyImpactSummary metrics={competitionKingCaseStudyMeta.impactMetrics} />
           </motion.div>
         </div>
 
@@ -77,6 +67,7 @@ export function CompetitionKingCaseStudyPage() {
               className="block h-auto w-full object-cover object-center"
             />
           </div>
+          <CaseStudyMetaGrid className="mt-10" details={competitionKingCaseStudyMeta.details} />
         </motion.div>
       </section>
 

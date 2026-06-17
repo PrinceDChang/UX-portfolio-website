@@ -8,6 +8,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#09090f" />
     <title>Oey Chang — UX Designer</title>
+    <script>
+      (function () {
+        var t = localStorage.getItem('oey-portfolio-theme')
+        if (t === 'light' || (!t && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+          document.documentElement.dataset.theme = 'light'
+          document.documentElement.style.colorScheme = 'light'
+          var m = document.querySelector('meta[name="theme-color"]')
+          if (m) m.setAttribute('content', '#f8f7fc')
+        } else {
+          document.documentElement.dataset.theme = 'dark'
+        }
+      })()
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

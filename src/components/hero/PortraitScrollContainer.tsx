@@ -8,16 +8,19 @@ import {
   useTransform,
 } from 'framer-motion'
 import { FlippingPortraitCard } from './FlippingPortraitCard'
+import { HeroGlobeBackground } from './HeroGlobeBackground'
 import { HeroIntro } from './HeroIntro'
 import {
   clamp01,
   easeInOutCubic,
   FLIP_SPRING,
+  OCCLUSION_SPRING,
 } from './portraitMotion'
 
 interface PortraitScrollContainerProps {
   children: React.ReactNode
   aboutSlot: React.ReactNode
+  projectsSlot: React.ReactNode
 }
 
 /** Scroll distance for a full 180° hero flip — larger = slower, more even flip speed */
@@ -30,6 +33,7 @@ const SERVICES_LIST_GAP_PX = 56
 const SERVICES_CONTENT_RIGHT_INSET_PX = 40
 const SERVICES_DOCK_OFFSET_RIGHT_PX = 20
 const SERVICES_DOCK_ROTATE_Z = 3.5
+const PROJECTS_REAPPEAR_PX = 180
 
 function getCardDimensions() {
   if (typeof window === 'undefined') {
@@ -87,6 +91,30 @@ function getServicesDockTop(
   return Math.max(navOffset, Math.min(centered, window.innerHeight - cardHeight - 40))
 }
 
+function getProjectsOcclusion(
+  cardTop: number,
+  cardHeight: number,
+  projectsRect: DOMRect | null,
+) {
+  if (!projectsRect || cardHeight <= 0) return 1
+
+  const cardBottom = cardTop + cardHeight
+
+  if (cardBottom <= projectsRect.top) {
+    return 1
+  }
+
+  if (cardTop >= projectsRect.bottom) {
+    const past = cardTop - projectsRect.bottom
+    return easeInOutCubic(clamp01(past / PROJECTS_REAPPEAR_PX))
+  }
+
+  const visibleAbove = Math.max(0, projectsRect.top - cardTop)
+  const visibleBelow = Math.max(0, cardBottom - projectsRect.bottom)
+  const visibleHeight = Math.min(cardHeight, visibleAbove + visibleBelow)
+  return easeInOutCubic(visibleHeight / cardHeight)
+}
+
 function lerp(start: number, end: number, t: number) {
   return start + (end - start) * t
 }
@@ -112,10 +140,15 @@ function travelHorizontalThenVertical(
   return { h: targetH, v: lerp(originV, targetV, vt) }
 }
 
-export function PortraitScrollContainer({ children, aboutSlot }: PortraitScrollContainerProps) {
+export function PortraitScrollContainer({
+  children,
+  aboutSlot,
+  projectsSlot,
+}: PortraitScrollContainerProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const cardSlotRef = useRef<HTMLDivElement>(null)
   const mobileCardSlotRef = useRef<HTMLDivElement>(null)
+  const projectsWrapRef = useRef<HTMLDivElement>(null)
   const servicesWrapRef = useRef<HTMLDivElement>(null)
   const aboutSectionRef = useRef<HTMLElement>(null)
   const aboutCardSlotRef = useRef<HTMLDivElement>(null)
@@ -200,15 +233,33 @@ export function PortraitScrollContainer({ children, aboutSlot }: PortraitScrollC
   const inlineCardOpacity = useTransform(scrollY, [0, INLINE_FADE_END_PX], [1, 0])
 
   const heroLayoutReady = useMotionValue(0)
+  const projectsOcclusionRaw = useMotionValue(1)
+  const projectsOcclusion = useSpring(projectsOcclusionRaw, OCCLUSION_SPRING)
 
   const desktopInlineOpacity = useTransform(scrollYProgress, (p) =>
     ((p as number) < TRAVEL_PROGRESS_START ? 1 : 0) as number,
   )
 
   const floatingOpacity = useTransform(
-    [heroLayoutReady, scrollYProgress],
-    ([ready, p]) =>
-      ((ready as number) >= 1 && (p as number) >= TRAVEL_PROGRESS_START ? 1 : 0) as number,
+    [heroLayoutReady, scrollYProgress, projectsOcclusion],
+    ([ready, p, occlusion]) =>
+      ((ready as number) >= 1 &&
+      (p as number) >= TRAVEL_PROGRESS_START &&
+      (occlusion as number) > 0.001
+        ? (occlusion as number)
+        : 0) as number,
+  )
+
+  const portraitZIndex = useTransform(projectsOcclusion, (occlusion) =>
+    ((occlusion as number) > 0.35 ? 20 : 8),
+  )
+
+  const projectsDepthScale = useTransform(projectsOcclusion, (occlusion) =>
+    lerp(0.9, 1, easeInOutCubic((occlusion as number) ?? 1)),
+  )
+
+  const projectsDepthY = useTransform(projectsOcclusion, (occlusion) =>
+    lerp(32, 0, easeInOutCubic((occlusion as number) ?? 1)),
   )
 
   const dockedOpacity = useTransform(effectiveAboutTravel, (aboutP) =>
@@ -485,9 +536,52 @@ export function PortraitScrollContainer({ children, aboutSlot }: PortraitScrollC
   const cardLeft = cardLeftRaw
   const cardTop = cardTopRaw
 
+  const portraitScale = useTransform(
+    [cardScale, projectsDepthScale],
+    ([scale, depthScale]) => ((scale as number) ?? 1) * ((depthScale as number) ?? 1),
+  )
+
+  const portraitTop = useTransform(
+    [cardTop, projectsDepthY],
+    ([top, depthY]) => ((top as number) ?? 0) + ((depthY as number) ?? 0),
+  )
+
+  const syncProjectsOcclusion = () => {
+    if (typeof window === 'undefined') return
+
+    const projectsEl = projectsWrapRef.current
+    if (!projectsEl) {
+      projectsOcclusionRaw.set(1)
+      return
+    }
+
+    const { height } = getCardDimensions()
+    projectsOcclusionRaw.set(
+      getProjectsOcclusion(cardTop.get(), height, projectsEl.getBoundingClientRect()),
+    )
+  }
+
+  useLayoutEffect(() => {
+    syncProjectsOcclusion()
+    window.addEventListener('resize', syncProjectsOcclusion)
+    return () => window.removeEventListener('resize', syncProjectsOcclusion)
+  }, [cardTop, projectsOcclusionRaw])
+
+  useMotionValueEvent(scrollYProgress, 'change', () => {
+    syncProjectsOcclusion()
+  })
+
+  useMotionValueEvent(cardTop, 'change', () => {
+    syncProjectsOcclusion()
+  })
+
   return (
     <>
-      <div ref={containerRef} className="relative">
+      <div ref={containerRef} className="relative overflow-visible">
+        <div className="hero-globe-bleed pointer-events-none absolute inset-x-0 top-0 z-0" aria-hidden>
+          <HeroGlobeBackground />
+        </div>
+
         <HeroIntro
           cardSlotRef={cardSlotRef}
           mobileCardSlotRef={mobileCardSlotRef}
@@ -496,16 +590,23 @@ export function PortraitScrollContainer({ children, aboutSlot }: PortraitScrollC
           desktopInlineOpacity={desktopInlineOpacity}
         />
 
-        <div ref={servicesWrapRef}>{children}</div>
+        <div ref={projectsWrapRef} className="relative z-30">
+          {projectsSlot}
+        </div>
+
+        <div ref={servicesWrapRef} className="relative z-10">
+          {children}
+        </div>
 
         <motion.div
-          className="pointer-events-none fixed z-20 origin-top will-change-[transform,opacity] max-lg:hidden"
+          className="pointer-events-none fixed origin-top will-change-[transform,opacity] max-lg:hidden"
           style={{
             left: cardLeft,
-            top: cardTop,
-            scale: cardScale,
+            top: portraitTop,
+            scale: portraitScale,
             rotate: cardRotateZ,
             opacity: floatingOpacity,
+            zIndex: portraitZIndex,
           }}
         >
           <div style={{ perspective: 1200 }}>

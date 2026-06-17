@@ -64,9 +64,9 @@ const toneStyles = {
     card: 'bg-violet-500/12 ring-violet-400/15 text-violet-100/90',
   },
   blue: {
-    shell: 'bg-sky-500/[0.08] ring-sky-400/20',
-    header: 'bg-sky-500/15 text-sky-200',
-    card: 'bg-sky-500/12 ring-sky-400/15 text-sky-100/90',
+    shell: 'bg-accent/[0.08] ring-accent/20',
+    header: 'bg-accent/15 text-violet-200',
+    card: 'bg-accent/12 ring-accent/15 text-violet-100/90',
   },
   green: {
     shell: 'bg-emerald-500/[0.08] ring-emerald-400/20',

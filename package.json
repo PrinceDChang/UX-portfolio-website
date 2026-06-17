@@ -8,7 +8,8 @@
     "build": "tsc -b && vite build",
     "preview": "vite preview",
     "generate:uw-oris-hero": "node scripts/generate-uw-oris-hero.mjs",
-    "generate:earth-land-mask": "node scripts/generate-earth-land-mask.mjs"
+    "generate:earth-land-mask": "node scripts/generate-earth-land-mask.mjs",
+    "generate:sushitalk-hero": "node scripts/generate-sushitalk-hero.mjs"
   },
   "dependencies": {
     "@react-three/drei": "^9.117.3",
@@ -25,6 +26,7 @@
     "@types/three": "^0.171.0",
     "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.4.20",
+    "playwright": "^1.49.1",
     "postcss": "^8.4.49",
     "sharp": "^0.34.5",
     "tailwindcss": "^3.4.16",

@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
 import { getPostcardVisibleTags, type Project } from '../../data/content'
-import { scrollPageToTop } from '../../lib/scrollToTop'
+import { useProjectHoverVideo } from '../../lib/useProjectHoverVideo'
+import { PageLink } from '../PageLink'
 
 const postcardTilt: Record<string, number> = {
   cue: -2.8,
@@ -31,11 +31,39 @@ function PostcardPin() {
 function PostcardInner({ project }: { project: Project }) {
   const imageBg = project.heroImageBackground ?? '#f4f0ea'
   const visibleTags = getPostcardVisibleTags(project.tags)
+  const { videoRef, hovered, hasHoverVideo, hoverHandlers } = useProjectHoverVideo(
+    project.hoverVideo,
+  )
 
   return (
     <article className="postcard-card">
-      <div className="postcard-card__image" style={{ backgroundColor: imageBg }}>
-        <img src={project.image} alt={project.imageAlt} className="postcard-card__photo" />
+      <div
+        className={`postcard-card__image${hasHoverVideo ? ' postcard-card__image--hover-video' : ''}`}
+        style={{ backgroundColor: imageBg }}
+        {...hoverHandlers}
+      >
+        <img
+          src={project.image}
+          alt={project.imageAlt}
+          className={`postcard-card__photo${
+            hasHoverVideo ? ` transition-opacity duration-300 ${hovered ? 'opacity-0' : 'opacity-100'}` : ''
+          }`}
+        />
+
+        {hasHoverVideo ? (
+          <video
+            ref={videoRef}
+            src={project.hoverVideo}
+            loop
+            muted
+            playsInline
+            preload="metadata"
+            aria-hidden
+            className={`postcard-card__photo postcard-card__video transition-opacity duration-300 ${
+              hovered ? 'opacity-100' : 'opacity-0'
+            }`}
+          />
+        ) : null}
       </div>
 
       <div className="postcard-card__body">
@@ -98,12 +126,11 @@ export function PostcardProjectCard({ project, index }: PostcardProjectCardProps
   }
 
   return (
-    <Link
+    <PageLink
       to={project.href}
-      onClick={scrollPageToTop}
       className="postcard-link block no-underline outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[#121018]"
     >
       {card}
-    </Link>
+    </PageLink>
   )
 }

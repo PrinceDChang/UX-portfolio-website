@@ -7,6 +7,12 @@ export const competitionKingCaseStudyMeta = {
   heroImageAlt:
     'Group photo at the Seattle International Wushu Festival with participants and organizers in a gymnasium',
   projectLabel: 'Sports · 9-week capstone',
+  impactMetrics: [
+    { value: '28%', label: 'Increase in participation' },
+    { value: '2×', label: 'Time improvement' },
+    { value: '86%', label: 'User satisfaction' },
+    { value: '1', label: 'Live event field test' },
+  ],
   details: [
     { label: 'Role', value: 'UX Research · Project Management' },
     { label: 'Industry', value: 'Sports' },

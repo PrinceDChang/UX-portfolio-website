@@ -20,7 +20,7 @@ export function HeroIntro({
   return (
     <section
       id="home"
-      className="section-ambient relative flex min-h-screen items-center overflow-hidden pt-24 pb-16 md:pt-28"
+      className="section-ambient relative flex min-h-screen items-center overflow-visible pt-24 pb-16 md:pt-28"
     >
       <div className="relative z-10 w-full max-w-7xl px-6 md:px-10 lg:px-16">
         <div className="relative hidden w-full lg:grid lg:grid-cols-[minmax(0,1fr)_340px_minmax(0,1fr)] lg:items-center lg:gap-x-12 lg:gap-y-1 xl:gap-x-20">

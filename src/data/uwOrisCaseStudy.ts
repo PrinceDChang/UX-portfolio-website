@@ -1,3 +1,10 @@
+export const uwOrisImpactMetrics = [
+  { value: '1.5+', label: 'Hours saved per award' },
+  { value: '~3,000', label: 'Hours returned for GM/year' },
+  { value: '25–33%', label: 'Workload reduction per GM' },
+  { value: '8 → 1', label: 'Data sources consolidated' },
+] as const
+
 export const uwOrisCaseStudyMeta = {
   role: 'UX Designer',
   title: 'UW ORIS',
@@ -11,6 +18,7 @@ export const uwOrisCaseStudyMeta = {
   heroImageAlt:
     'University of Washington logo beside a laptop showing the SAGE Smart Budgeting worksheet interface',
   projectLabel: 'Research administration · HCDE capstone 2026',
+  impactMetrics: uwOrisImpactMetrics,
   details: [
     { label: 'Role', value: 'UX Designer · Research' },
     { label: 'Industry', value: 'Higher education / research admin' },
@@ -60,9 +68,7 @@ This was a coordination problem dressed up as a tooling problem — and every pr
   solution: {
     label: 'Solution',
     subtitle: 'Smart Budgeting Plug-in System',
-    body: `SAGE Smart Budgeting embeds an Excel-like worksheet directly inside SAGE so GMs can stop switching between Excel, SAGE, and reference tabs. AI handles parsing, rate retrieval, and mapping — but rates, exceptions, tradeoff calls, and the final submit action stay with the user.
-
-The solution keeps the familiarity of the GMs' existing process while offloading tedious tasks to AI, keeping control with the user.`,
+    body: `SAGE Smart Budgeting embeds an Excel-like worksheet directly inside SAGE so GMs can have a unifying source of information. AI handles all the math/rate searching while still leaving users in charge.`,
     pillars: [
       {
         title: 'Consolidate the surface',
@@ -80,12 +86,21 @@ The solution keeps the familiarity of the GMs' existing process while offloading
         body: `Rates, exceptions, FCOI sign-off, reconciliation tradeoffs, and submit stay with the accountable grant manager. Auto-fix is offered, never silent — with confidence chips, source labels, and preview-then-confirm at every commit point.`,
       },
     ],
+    demoVideo: {
+      src: '/videos/uw-oris-smart-budgeting-demo.mp4',
+      title: 'SAGE Smart Budgeting — live prototype',
+      caption:
+        'Context setup, budget settings, worksheet, and import gates — interactive prototype built in Cursor',
+      openUrl: 'https://hcdeorbit.netlify.app/',
+    },
   },
   finalDesign: {
     label: 'Final design',
     body: `We delivered a working high-fidelity prototype covering four hand-off gates — Context Setup, Budget Settings, Budget Worksheet (the hero screen), and Import to SAGE — validated with moderated think-aloud sessions and a complementary contextual inquiry on the current workflow.`,
     prototype: {
       title: 'SAGE Smart Budgeting — live prototype',
+      caption:
+        'Context setup, budget settings, worksheet, and import gates — interactive prototype built in Cursor',
       embedUrl: 'https://hcdeorbit.netlify.app/',
       openUrl: 'https://hcdeorbit.netlify.app/',
       frame: { width: 1280, height: 800 },
@@ -168,12 +183,7 @@ The solution keeps the familiarity of the GMs' existing process while offloading
           'AI & Rules Engine',
         ],
       },
-      impactMetrics: [
-        { value: '1.5+', label: 'Hours saved per award' },
-        { value: '~3,000', label: 'Hours returned for GM/year' },
-        { value: '25–33%', label: 'Workload reduction per GM' },
-        { value: '8 → 1', label: 'Data sources consolidated' },
-      ],
+      impactMetrics: uwOrisImpactMetrics,
     },
   },
   pivot: {

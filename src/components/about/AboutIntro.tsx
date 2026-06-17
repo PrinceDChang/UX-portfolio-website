@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
+import { PageLink } from '../PageLink'
 import { aboutIntro, aboutIntroPortrait, aboutStats } from '../../data/aboutPage'
 import { CountUpStat } from '../CountUpStat'
 import { SocialLinks } from './SocialLinks'
@@ -44,12 +44,12 @@ export function AboutIntro() {
 
           <div className="mt-10 flex flex-wrap items-center gap-4">
             <SocialLinks />
-            <Link
+            <PageLink
               to="/projects"
               className="rounded-full border border-white/10 px-5 py-2.5 text-sm font-medium text-ink transition hover:border-accent/50 hover:text-accent"
             >
               View projects
-            </Link>
+            </PageLink>
           </div>
         </motion.div>
 

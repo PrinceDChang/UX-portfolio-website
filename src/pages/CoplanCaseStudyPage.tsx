@@ -1,5 +1,7 @@
 import { useEffect } from 'react'
 import { motion } from 'framer-motion'
+import { CaseStudyImpactSummary } from '../components/case-study/CaseStudyImpactSummary'
+import { CaseStudyMetaGrid } from '../components/case-study/CaseStudyMetaGrid'
 import { CaseStudyConclusion } from '../components/case-study/CaseStudyConclusion'
 import { CaseStudyMoreProjects } from '../components/case-study/CaseStudyMoreProjects'
 import { CaseStudyLogo } from '../components/case-study/CaseStudyLogo'
@@ -58,19 +60,7 @@ export function CoplanCaseStudyPage() {
               {coplanCaseStudyMeta.tagline}
             </p>
 
-            <dl className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {coplanCaseStudyMeta.details.map((item) => (
-                <div
-                  key={item.label}
-                  className="rounded-2xl bg-elevated/80 px-5 py-4 ring-1 ring-accent/30 backdrop-blur-sm"
-                >
-                  <dt className="text-xs font-semibold uppercase tracking-[0.2em] text-slate">
-                    {item.label}
-                  </dt>
-                  <dd className="mt-1 text-sm font-medium text-ink">{item.value}</dd>
-                </div>
-              ))}
-            </dl>
+            <CaseStudyImpactSummary metrics={coplanCaseStudyMeta.impactMetrics} />
           </motion.div>
         </div>
 
@@ -87,6 +77,7 @@ export function CoplanCaseStudyPage() {
               className="block h-auto w-full object-contain object-center"
             />
           </div>
+          <CaseStudyMetaGrid className="mt-10" details={coplanCaseStudyMeta.details} />
         </motion.div>
       </section>
 

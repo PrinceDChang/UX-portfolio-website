@@ -8,8 +8,15 @@ export const sushitalkCaseStudyMeta = {
   tagline:
     'A passion project with a Software Engineer at Google Japan for a platform to help non-native Japanese learners connect with native Japanese tutors that match on their journey to not only learn Japanese, but give specialized help with moving into or staying in Japan.',
   heroImage: '/images/sushitalk-case-study.png',
-  heroImageAlt: 'SushiTalk brand and product screens for the tutor matching platform',
+  heroImageAlt:
+    'SushiTalk mascot logo on a floating card beside a laptop showing the final prototype landing page',
   projectLabel: 'Passion project · Google Japan',
+  impactMetrics: [
+    { value: '3/5', label: 'Priority screens delivered' },
+    { value: '4', label: 'Usability study participants' },
+    { value: '8 wks', label: 'Phase 1 design sprint' },
+    { value: 'No paywall', label: 'Tutor discovery strategy' },
+  ],
   details: [
     { label: 'Role', value: 'UX Designer · Usability Researcher' },
     { label: 'Industry', value: 'EdTech · Marketplace' },

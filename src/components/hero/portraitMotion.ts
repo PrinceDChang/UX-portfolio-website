@@ -22,6 +22,14 @@ export const TILT_SCALE_SPRING = {
   restDelta: 0.2,
 }
 
+/** Soft follow for portrait fade behind the featured projects band */
+export const OCCLUSION_SPRING = {
+  stiffness: 85,
+  damping: 24,
+  mass: 0.45,
+  restDelta: 0.008,
+}
+
 /** Maps scroll progress to flip angle with Framer-like ease-in-out (similar to duration: 2, easeInOut) */
 export function easeInOutCubic(t: number) {
   const x = Math.max(0, Math.min(1, t))

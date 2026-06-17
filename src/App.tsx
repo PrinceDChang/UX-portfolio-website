@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { ScrollToTop } from './components/ScrollToTop'
+import { ThemeToggleLayer } from './components/ThemeToggleLayer'
 import { PhotographyTransitionProvider } from './context/PhotographyTransitionContext'
 import { WushuTransitionProvider } from './context/WushuTransitionContext'
 import { DogPage } from './pages/DogPage'
@@ -23,6 +24,7 @@ export default function App() {
       <PhotographyTransitionProvider>
         <WushuTransitionProvider>
           <ScrollToTop />
+          <ThemeToggleLayer />
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/about" element={<AboutPage />} />

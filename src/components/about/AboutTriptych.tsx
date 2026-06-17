@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { useCallback, useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { PageLink } from '../PageLink'
 import {
   aboutFocuses,
   type AboutFocus,
@@ -76,9 +76,9 @@ function FocusCta({ focus }: { focus: AboutFocus }) {
   }
 
   return (
-    <Link to={focus.cta.href} className={className}>
+    <PageLink to={focus.cta.href} className={className}>
       {content}
-    </Link>
+    </PageLink>
   )
 }
 

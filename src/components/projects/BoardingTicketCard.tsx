@@ -1,7 +1,7 @@
-import { Link } from 'react-router-dom'
+import { PageLink } from '../PageLink'
 import { getPostcardVisibleTags, type Project } from '../../data/content'
+import { useProjectHoverVideo } from '../../lib/useProjectHoverVideo'
 import { getProjectAirportCode, getTicketSerial } from '../../lib/projectTicket'
-import { scrollPageToTop } from '../../lib/scrollToTop'
 
 export type BoardingTicketVariant = 'front' | 'back'
 export type TicketPeekTier = 'full' | 'medium' | 'compact'
@@ -27,6 +27,9 @@ export function BoardingTicket({
   const visibleTags = getPostcardVisibleTags(project.tags)
   const gate = `${String.fromCharCode(65 + (index % 6))}${10 + (index % 8)}`
   const canNavigate = !project.comingSoon && project.href.startsWith('/')
+  const { videoRef, hovered, hasHoverVideo, hoverHandlers } = useProjectHoverVideo(
+    project.hoverVideo,
+  )
 
   return (
     <article
@@ -73,14 +76,38 @@ export function BoardingTicket({
         </div>
 
         <div className="boarding-ticket__main-row">
-          <div className="boarding-ticket__thumb-wrap">
+          <div
+            className={`boarding-ticket__thumb-wrap${
+              hasHoverVideo ? ' boarding-ticket__thumb-wrap--hover-video' : ''
+            }`}
+            style={hasHoverVideo ? { backgroundColor: project.heroImageBackground } : undefined}
+            {...hoverHandlers}
+          >
             <img
               src={project.image}
               alt=""
-              className="boarding-ticket__thumb"
+              className={`boarding-ticket__thumb${
+                hasHoverVideo
+                  ? ` transition-opacity duration-300 ${hovered ? 'opacity-0' : 'opacity-100'}`
+                  : ''
+              }`}
               loading="lazy"
               decoding="async"
             />
+            {hasHoverVideo ? (
+              <video
+                ref={videoRef}
+                src={project.hoverVideo}
+                loop
+                muted
+                playsInline
+                preload="metadata"
+                aria-hidden
+                className={`boarding-ticket__thumb boarding-ticket__thumb-video transition-opacity duration-300 ${
+                  hovered ? 'opacity-100' : 'opacity-0'
+                }`}
+              />
+            ) : null}
           </div>
           <div className="boarding-ticket__copy-block">
             <h3 className="boarding-ticket__title">{project.title}</h3>
@@ -111,13 +138,12 @@ export function BoardingTicket({
             |
           </span>
           {isFront && canNavigate ? (
-            <Link
+            <PageLink
               to={project.href}
-              onClick={scrollPageToTop}
               className="boarding-ticket__open-link"
             >
               Open case study →
-            </Link>
+            </PageLink>
           ) : (
             <span>
               {project.comingSoon ? 'Standby — coming soon' : 'Next in stack'}

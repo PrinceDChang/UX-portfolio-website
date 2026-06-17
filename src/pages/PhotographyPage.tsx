@@ -1,6 +1,7 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import { useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
+import { PageLink } from '../components/PageLink'
 import { CaseStudyShell } from '../components/case-study/CaseStudyShell'
 import { PhotographyFilmGallery } from '../components/photography/PhotographyFilmGallery'
 import { usePhotographyTransition } from '../context/PhotographyTransitionContext'
@@ -25,12 +26,12 @@ export function PhotographyPage() {
   return (
     <CaseStudyShell>
       <article className="photography-page mx-auto max-w-6xl px-6 pb-28 md:px-10 md:pb-36">
-        <Link
+        <PageLink
           to="/about#focus-photography"
           className="inline-block text-sm text-slate transition hover:text-accent"
         >
           ← Back to about
-        </Link>
+        </PageLink>
 
         <div className="photography-page__layout mt-10 md:mt-14">
           <motion.aside

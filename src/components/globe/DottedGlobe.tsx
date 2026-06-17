@@ -62,25 +62,31 @@ function GlobeScene({
       <ambientLight intensity={0.7} />
 
       {landGeometry && (
-        <points geometry={landGeometry}>
+        <points geometry={landGeometry} renderOrder={1}>
           <pointsMaterial
             color="#c4b5fd"
             size={0.015}
             sizeAttenuation
-            transparent
-            opacity={0.92}
+            opacity={1}
+            depthWrite
           />
         </points>
       )}
 
+      <mesh renderOrder={0}>
+        <sphereGeometry args={[GLOBE_RADIUS * 0.998, 64, 64]} />
+        <meshBasicMaterial color="#111118" depthWrite />
+      </mesh>
+
       <mesh
+        renderOrder={2}
         onPointerDown={dragHandlers.onPointerDown}
         onPointerUp={dragHandlers.onPointerUp}
         onPointerMove={dragHandlers.onPointerMove}
         onPointerLeave={dragHandlers.onPointerUp}
       >
         <sphereGeometry args={[GLOBE_RADIUS, 64, 64]} />
-        <meshBasicMaterial transparent opacity={0} />
+        <meshBasicMaterial transparent opacity={0} depthWrite={false} />
       </mesh>
 
       {globeFeaturedProjects.map((project) => (

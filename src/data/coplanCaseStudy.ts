@@ -11,6 +11,12 @@ export const coplanCaseStudyMeta = {
   heroImageAlt:
     'Co-plan logo and laptop mockup showing schedule view and degree planning interface',
   projectLabel: 'Education · 11-week capstone',
+  impactMetrics: [
+    { value: '100%', label: 'Frustrated with MyPlan' },
+    { value: '75%', label: 'Confused by navigation' },
+    { value: '50%', label: 'Valued all-in-one planning' },
+    { value: '4', label: 'Usability test participants' },
+  ],
   details: [
     { label: 'Role', value: 'Project Manager · UX Designer' },
     { label: 'Industry', value: 'Education' },

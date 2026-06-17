@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
+import { PageLink } from './PageLink'
 import { CountUpStat } from './CountUpStat'
 import { SocialLinks } from './about/SocialLinks'
 
@@ -30,7 +30,7 @@ export function AboutContent() {
         {stats.map((stat, index) => (
           <div
             key={stat.label}
-            className="rounded-3xl bg-elevated p-6 shadow-card ring-1 ring-white/8"
+            className="rounded-3xl bg-elevated p-6 shadow-card ring-2 ring-accent/60"
           >
             <CountUpStat
               value={stat.value}
@@ -44,12 +44,12 @@ export function AboutContent() {
 
       <div className="mt-8 flex flex-wrap items-center gap-4">
         <SocialLinks />
-        <Link
+        <PageLink
           to="/about"
           className="rounded-full border border-white/10 px-5 py-2.5 text-sm font-medium text-ink transition hover:border-accent/50 hover:text-accent"
         >
           My Story
-        </Link>
+        </PageLink>
       </div>
     </motion.div>
   )

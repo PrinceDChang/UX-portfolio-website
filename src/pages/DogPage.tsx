@@ -1,6 +1,6 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import { useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { PageLink } from '../components/PageLink'
 import { CaseStudyShell } from '../components/case-study/CaseStudyShell'
 import { DogPhotoSlideshow } from '../components/dog/DogPhotoSlideshow'
 import { dogPage } from '../data/dogPage'
@@ -18,12 +18,12 @@ export function DogPage() {
   return (
     <CaseStudyShell>
       <article className="dog-page mx-auto max-w-6xl px-6 pb-28 md:px-10 md:pb-36">
-        <Link
+        <PageLink
           to="/"
           className="inline-block text-sm text-slate transition hover:text-accent"
         >
           ← Back home
-        </Link>
+        </PageLink>
 
         <div className="dog-page__layout mt-10 md:mt-14">
           <motion.aside

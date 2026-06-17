@@ -1,5 +1,7 @@
 import { useEffect } from 'react'
 import { motion } from 'framer-motion'
+import { CaseStudyImpactSummary } from '../components/case-study/CaseStudyImpactSummary'
+import { CaseStudyMetaGrid } from '../components/case-study/CaseStudyMetaGrid'
 import { CaseStudyMoreProjects } from '../components/case-study/CaseStudyMoreProjects'
 import { CaseStudyConclusion } from '../components/case-study/CaseStudyConclusion'
 import { CaseStudyShell } from '../components/case-study/CaseStudyShell'
@@ -56,21 +58,7 @@ export function SushiTalkCaseStudyPage() {
               {sushitalkCaseStudyMeta.tagline}
             </p>
 
-            <dl className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {sushitalkCaseStudyMeta.details.map((item) => (
-                <div
-                  key={item.label}
-                  className="rounded-2xl bg-elevated/80 px-5 py-4 ring-1 ring-accent/30 backdrop-blur-sm"
-                >
-                  <dt className="text-xs font-semibold uppercase tracking-[0.2em] text-slate">
-                    {item.label}
-                  </dt>
-                  <dd className="mt-1 whitespace-pre-line text-sm font-medium leading-snug text-ink">
-                    {item.value}
-                  </dd>
-                </div>
-              ))}
-            </dl>
+            <CaseStudyImpactSummary metrics={sushitalkCaseStudyMeta.impactMetrics} />
           </motion.div>
         </div>
 
@@ -87,6 +75,7 @@ export function SushiTalkCaseStudyPage() {
               className="block h-auto w-full object-contain object-center p-6 md:p-10"
             />
           </div>
+          <CaseStudyMetaGrid className="mt-10" details={sushitalkCaseStudyMeta.details} />
         </motion.div>
       </section>
 

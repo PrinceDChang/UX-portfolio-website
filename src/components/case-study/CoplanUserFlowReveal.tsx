@@ -648,7 +648,7 @@ function FlowNodeShape({
       >
         <div className="flex h-full items-center justify-center">
           <p
-            className={`text-center text-[8px] font-semibold leading-[1.2] text-sky-100/90 ${
+            className={`text-center text-[8px] font-semibold leading-[1.2] text-violet-100/90 ${
               node.label.includes('\n') ? 'whitespace-pre-line' : ''
             }`}
           >

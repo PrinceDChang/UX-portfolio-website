@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { Link } from 'react-router-dom'
+import { PageLink } from '../PageLink'
 import { featuredProjects } from '../../data/content'
 import { roleBadgeClassName } from '../../lib/projectRole'
 import { shuffle } from '../../lib/shuffle'
@@ -27,7 +27,7 @@ export function CaseStudyMoreProjects({ excludeProjectId }: CaseStudyMoreProject
           const imageBg = project.heroImageBackground ?? '#111118'
 
           return (
-            <Link
+            <PageLink
               key={project.id}
               to={project.href}
               className="flex w-[min(85vw,320px)] shrink-0 snap-start flex-col overflow-hidden rounded-3xl bg-surface ring-1 ring-accent/30 transition hover:ring-accent/50 sm:w-[300px] md:w-[320px]"
@@ -58,7 +58,7 @@ export function CaseStudyMoreProjects({ excludeProjectId }: CaseStudyMoreProject
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-slate">{project.description}</p>
               </div>
-            </Link>
+            </PageLink>
           )
         })}
       </div>

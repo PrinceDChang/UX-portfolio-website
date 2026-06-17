@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
+import { PageLink } from '../components/PageLink'
 import { AboutIntro } from '../components/about/AboutIntro'
 import { AboutTriptych } from '../components/about/AboutTriptych'
 import { CaseStudyShell } from '../components/case-study/CaseStudyShell'
@@ -24,12 +24,12 @@ export function AboutPage() {
             Whether it&apos;s a product challenge, a photo walk, or a conversation about design —
             I&apos;d love to hear from you.
           </p>
-          <Link
+          <PageLink
             to="/#contact"
             className="mt-8 inline-flex rounded-full border border-white/10 px-6 py-3 text-sm font-medium text-ink transition hover:border-accent/50 hover:text-accent hover:shadow-glow"
           >
             Get in touch
-          </Link>
+          </PageLink>
         </motion.footer>
       </article>
     </CaseStudyShell>

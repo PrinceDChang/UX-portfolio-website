@@ -44,6 +44,8 @@ export interface Project {
   heroBackgroundCard?: boolean
   /** Letterbox color behind the contained project image. */
   heroImageBackground?: string
+  /** Looped video that plays on card hover (hero background cards). */
+  hoverVideo?: string
   /** Grey globe pin and preview card without a case study link. */
   comingSoon?: boolean
 }
@@ -157,6 +159,7 @@ export const featuredProjects: Project[] = [
     ],
     heroBackgroundCard: true,
     heroImageBackground: '#f4f4f6',
+    hoverVideo: '/videos/uw-oris-hover.mp4',
   },
   {
     id: 'cue',
@@ -219,7 +222,7 @@ export const featuredProjects: Project[] = [
     description:
       'A platform for native Japanese tutors to host their business and learners to connect with tutors on their journey to learn Japanese.',
     href: '/projects/sushitalk',
-    image: '/images/sushitalk-case-study.png',
+    image: '/images/sushitalk-mascot-logo.png',
     imageAlt: 'SushiTalk kawaii salmon nigiri mascot logo',
     tags: ['Design', 'Mobile', 'Start-up'],
     keywords: [
@@ -332,11 +335,11 @@ export const featuredProjects: Project[] = [
 
 /** Projects shown on the home page globe (pins + preview cards). */
 export const globeFeaturedProjectIds = [
-  'cue',
-  'wa211',
-  'sushitalk',
-  'coplan',
   'uw-oris',
+  'cue',
+  'sushitalk',
+  'wa211',
+  'coplan',
 ] as const
 
 export const globeFeaturedProjects: Project[] = globeFeaturedProjectIds

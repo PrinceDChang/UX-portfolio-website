@@ -1,12 +1,63 @@
 import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
+import { type ReactNode, SyntheticEvent } from 'react'
 import type { Project } from '../../data/content'
+import { PageLink } from '../PageLink'
 import { roleBadgeClassName } from '../../lib/projectRole'
-import { scrollPageToTop } from '../../lib/scrollToTop'
+import { useProjectHoverVideo } from '../../lib/useProjectHoverVideo'
+
+export type CaseStudyCardLayout = 'modal' | 'grid'
 
 interface CaseStudyCardProps {
   project: Project
   onClose?: () => void
+  layout?: CaseStudyCardLayout
+}
+
+function heroShellClass(layout: CaseStudyCardLayout) {
+  const base =
+    'globe-case-study-hero pointer-events-auto relative flex flex-col overflow-hidden rounded-2xl shadow-[0_24px_60px_rgba(0,0,0,0.55)] ring-1 ring-white/10'
+  if (layout === 'grid') {
+    return `${base} h-full w-full min-h-[360px]`
+  }
+  return `${base} min-h-[min(72vh,340px)] w-[min(100%,340px)] sm:min-h-[380px] sm:w-[min(100%,380px)] md:w-[400px]`
+}
+
+function blurShellClass(layout: CaseStudyCardLayout) {
+  const base =
+    'globe-case-study pointer-events-auto relative block overflow-hidden rounded-2xl text-center shadow-[0_24px_60px_rgba(0,0,0,0.55)] ring-1 ring-white/10'
+  if (layout === 'grid') {
+    return `${base} h-full w-full min-h-[360px]`
+  }
+  return `${base} w-[min(100%,380px)] md:w-[400px]`
+}
+
+function heroMediaClass(layout: CaseStudyCardLayout) {
+  return layout === 'grid' ? 'h-[184px] shrink-0' : 'min-h-[220px] flex-1'
+}
+
+function heroTitleClassFor(layout: CaseStudyCardLayout) {
+  if (layout === 'grid') {
+    return 'font-condensed text-[clamp(1.65rem,4vw,2.25rem)] uppercase leading-[0.9] tracking-[0.04em] text-white'
+  }
+  return heroTitleClass
+}
+
+function blurTitleClassFor(layout: CaseStudyCardLayout) {
+  if (layout === 'grid') {
+    return 'mt-4 font-condensed text-[clamp(2rem,5vw,2.75rem)] uppercase leading-[0.9] tracking-[0.04em] text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]'
+  }
+  return 'mt-5 font-condensed text-[clamp(2.75rem,10vw,3.5rem)] uppercase leading-[0.9] tracking-[0.04em] text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]'
+}
+
+function footerClass(layout: CaseStudyCardLayout) {
+  if (layout === 'grid') {
+    return 'shrink-0 border-t border-white/10 bg-[#0c0c12] px-5 py-5 text-center md:px-6 md:py-6'
+  }
+  return 'shrink-0 border-t border-white/10 bg-[#0c0c12] px-7 py-6 text-center md:px-10 md:py-7'
+}
+
+function blurBodyClass(layout: CaseStudyCardLayout) {
+  return layout === 'grid' ? 'relative px-5 py-7 md:px-6 md:py-8' : 'relative px-7 py-8 md:px-10 md:py-9'
 }
 
 const caseStudyButtonClass =
@@ -49,35 +100,113 @@ function ViewCaseStudyLink({ href, className = '' }: { href: string; className?:
   if (!href.startsWith('/')) return null
 
   return (
-    <Link
+    <PageLink
       to={href}
       onClick={(event) => {
         event.stopPropagation()
-        scrollPageToTop()
       }}
       className={`${caseStudyButtonClass} ${className}`.trim()}
     >
       View case study
       <span aria-hidden>→</span>
-    </Link>
+    </PageLink>
   )
 }
 
-function ComingSoonCaseStudyCard({ project, onClose }: CaseStudyCardProps) {
-  const imageBg = project.heroImageBackground ?? '#3f3f46'
-  const hasHeroImage = Boolean(project.image)
+function CardShell({
+  layout = 'modal',
+  className,
+  children,
+}: {
+  layout?: CaseStudyCardLayout
+  className: string
+  children: ReactNode
+}) {
+  const stopPropagation = (event: SyntheticEvent) => event.stopPropagation()
+
+  if (layout === 'grid') {
+    return (
+      <div className={className} onClick={stopPropagation} onPointerDown={stopPropagation}>
+        {children}
+      </div>
+    )
+  }
 
   return (
     <motion.div
       {...cardMotion}
-      className="globe-case-study-hero pointer-events-auto relative flex min-h-[min(72vh,340px)] w-[min(100%,340px)] flex-col overflow-hidden rounded-2xl shadow-[0_24px_60px_rgba(0,0,0,0.55)] ring-1 ring-white/10 sm:min-h-[380px] sm:w-[min(100%,380px)] md:w-[400px]"
-      onClick={(event) => event.stopPropagation()}
-      onPointerDown={(event) => event.stopPropagation()}
+      className={className}
+      onClick={stopPropagation}
+      onPointerDown={stopPropagation}
     >
+      {children}
+    </motion.div>
+  )
+}
+
+function HeroCardMedia({
+  project,
+  layout,
+}: {
+  project: Project
+  layout: CaseStudyCardLayout
+}) {
+  const { videoRef, hovered, hasHoverVideo, hoverHandlers } = useProjectHoverVideo(
+    project.hoverVideo,
+  )
+  const imageBg = project.heroImageBackground ?? '#111118'
+
+  return (
+    <div
+      className={`relative overflow-hidden ${heroMediaClass(layout)}`}
+      style={{ backgroundColor: imageBg }}
+      {...hoverHandlers}
+    >
+      <img
+        src={project.image}
+        alt={project.imageAlt}
+        className={`absolute inset-0 h-full w-full object-fill object-center transition-opacity duration-300 ${
+          hovered ? 'opacity-0' : 'opacity-100'
+        }`}
+      />
+
+      {hasHoverVideo ? (
+        <video
+          ref={videoRef}
+          src={project.hoverVideo}
+          loop
+          muted
+          playsInline
+          preload="metadata"
+          aria-hidden
+          className={`absolute inset-0 h-full w-full object-fill object-center transition-opacity duration-300 ${
+            hovered ? 'opacity-100' : 'opacity-0'
+          }`}
+        />
+      ) : null}
+
+      <div
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-[#0c0c12]/80 to-transparent"
+        aria-hidden
+      />
+
+      <span className={roleBadgeClassName(project.role, 'absolute left-3 top-3 z-10')}>
+        {project.role}
+      </span>
+    </div>
+  )
+}
+
+function ComingSoonCaseStudyCard({ project, onClose, layout = 'modal' }: CaseStudyCardProps) {
+  const imageBg = project.heroImageBackground ?? '#3f3f46'
+  const hasHeroImage = Boolean(project.image)
+
+  return (
+    <CardShell layout={layout} className={heroShellClass(layout)}>
       {onClose ? <CaseStudyCloseButton onClose={onClose} /> : null}
 
       <div
-        className="relative flex min-h-[220px] flex-1 items-center justify-center overflow-hidden"
+        className={`relative flex items-center justify-center overflow-hidden ${heroMediaClass(layout)}`}
         style={{ backgroundColor: imageBg }}
       >
         {hasHeroImage ? (
@@ -94,66 +223,36 @@ function ComingSoonCaseStudyCard({ project, onClose }: CaseStudyCardProps) {
         </span>
       </div>
 
-      <div className="shrink-0 border-t border-white/10 bg-[#0c0c12] px-7 py-6 text-center md:px-10 md:py-7">
-        <h3 className={heroTitleClass}>{project.title}</h3>
+      <div className={footerClass(layout)}>
+        <h3 className={heroTitleClassFor(layout)}>{project.title}</h3>
         <p className={heroDescriptionClass}>{project.description}</p>
         <span className={comingSoonButtonClass} aria-disabled="true">
           Coming soon
         </span>
       </div>
-    </motion.div>
+    </CardShell>
   )
 }
 
-function HeroBackgroundCaseStudyCard({ project, onClose }: CaseStudyCardProps) {
-  const imageBg = project.heroImageBackground ?? '#111118'
-
+function HeroBackgroundCaseStudyCard({ project, onClose, layout = 'modal' }: CaseStudyCardProps) {
   return (
-    <motion.div
-      {...cardMotion}
-      className="globe-case-study-hero pointer-events-auto relative flex min-h-[min(72vh,340px)] w-[min(100%,340px)] flex-col overflow-hidden rounded-2xl shadow-[0_24px_60px_rgba(0,0,0,0.55)] ring-1 ring-white/10 sm:min-h-[380px] sm:w-[min(100%,380px)] md:w-[400px]"
-      onClick={(event) => event.stopPropagation()}
-      onPointerDown={(event) => event.stopPropagation()}
-    >
+    <CardShell layout={layout} className={heroShellClass(layout)}>
       {onClose ? <CaseStudyCloseButton onClose={onClose} /> : null}
 
-      <div
-        className="relative min-h-[220px] flex-1 overflow-hidden"
-        style={{ backgroundColor: imageBg }}
-      >
-        <img
-          src={project.image}
-          alt={project.imageAlt}
-          className="absolute inset-0 h-full w-full object-fill object-center"
-        />
+      <HeroCardMedia project={project} layout={layout} />
 
-        <div
-          className="pointer-events-none absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-[#0c0c12]/80 to-transparent"
-          aria-hidden
-        />
-
-        <span className={roleBadgeClassName(project.role, 'absolute left-3 top-3 z-10')}>
-          {project.role}
-        </span>
-      </div>
-
-      <div className="shrink-0 border-t border-white/10 bg-[#0c0c12] px-7 py-6 text-center md:px-10 md:py-7">
-        <h3 className={heroTitleClass}>{project.title}</h3>
+      <div className={footerClass(layout)}>
+        <h3 className={heroTitleClassFor(layout)}>{project.title}</h3>
         <p className={heroDescriptionClass}>{project.description}</p>
         <ViewCaseStudyLink href={project.href} className="mt-5" />
       </div>
-    </motion.div>
+    </CardShell>
   )
 }
 
-function BlurCaseStudyCard({ project, onClose }: CaseStudyCardProps) {
+function BlurCaseStudyCard({ project, onClose, layout = 'modal' }: CaseStudyCardProps) {
   return (
-    <motion.div
-      {...cardMotion}
-      className="globe-case-study pointer-events-auto relative block w-[min(100%,380px)] overflow-hidden rounded-2xl text-center shadow-[0_24px_60px_rgba(0,0,0,0.55)] ring-1 ring-white/10 md:w-[400px]"
-      onClick={(event) => event.stopPropagation()}
-      onPointerDown={(event) => event.stopPropagation()}
-    >
+    <CardShell layout={layout} className={blurShellClass(layout)}>
       {onClose ? <CaseStudyCloseButton onClose={onClose} /> : null}
 
       <div className="absolute inset-0">
@@ -166,14 +265,12 @@ function BlurCaseStudyCard({ project, onClose }: CaseStudyCardProps) {
         <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/65 to-black/85 backdrop-blur-md" />
       </div>
 
-      <div className="relative px-7 py-8 md:px-10 md:py-9">
+      <div className={blurBodyClass(layout)}>
         <span className={roleBadgeClassName(project.role, 'shadow-glow')}>
           {project.role}
         </span>
 
-        <h3 className="mt-5 font-condensed text-[clamp(2.75rem,10vw,3.5rem)] uppercase leading-[0.9] tracking-[0.04em] text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
-          {project.title}
-        </h3>
+        <h3 className={blurTitleClassFor(layout)}>{project.title}</h3>
 
         <p className="mx-auto mt-4 max-w-[340px] text-sm font-medium leading-relaxed text-white/95 drop-shadow-[0_1px_8px_rgba(0,0,0,0.75)] md:text-[15px]">
           {project.description}
@@ -181,18 +278,18 @@ function BlurCaseStudyCard({ project, onClose }: CaseStudyCardProps) {
 
         <ViewCaseStudyLink href={project.href} className="mt-6" />
       </div>
-    </motion.div>
+    </CardShell>
   )
 }
 
-export function CaseStudyCard({ project, onClose }: CaseStudyCardProps) {
+export function CaseStudyCard({ project, onClose, layout = 'modal' }: CaseStudyCardProps) {
   if (project.comingSoon) {
-    return <ComingSoonCaseStudyCard project={project} onClose={onClose} />
+    return <ComingSoonCaseStudyCard project={project} onClose={onClose} layout={layout} />
   }
 
   if (project.heroBackgroundCard) {
-    return <HeroBackgroundCaseStudyCard project={project} onClose={onClose} />
+    return <HeroBackgroundCaseStudyCard project={project} onClose={onClose} layout={layout} />
   }
 
-  return <BlurCaseStudyCard project={project} onClose={onClose} />
+  return <BlurCaseStudyCard project={project} onClose={onClose} layout={layout} />
 }

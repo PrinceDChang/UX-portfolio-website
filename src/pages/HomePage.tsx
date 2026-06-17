@@ -14,10 +14,12 @@ export function HomePage() {
       <SiteAmbient />
       <Navbar />
       <main>
-        <PortraitScrollContainer aboutSlot={<AboutContent />}>
+        <PortraitScrollContainer
+          aboutSlot={<AboutContent />}
+          projectsSlot={<FeaturedProjects embedded />}
+        >
           <Services />
         </PortraitScrollContainer>
-        <FeaturedProjects />
         <Testimonials />
         <Contact />
       </main>

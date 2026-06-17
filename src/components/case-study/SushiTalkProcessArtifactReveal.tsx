@@ -19,7 +19,7 @@ const toneRing: Record<string, string> = {
   amber: 'ring-amber-400/35 bg-amber-400/10',
   green: 'ring-emerald-400/35 bg-emerald-400/10',
   violet: 'ring-violet-400/35 bg-violet-400/10',
-  sky: 'ring-sky-400/35 bg-sky-400/10',
+  sky: 'ring-accent/35 bg-accent/10',
   slate: 'ring-white/20 bg-white/[0.04]',
 }
 
