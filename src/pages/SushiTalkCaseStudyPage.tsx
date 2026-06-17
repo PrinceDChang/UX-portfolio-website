@@ -58,7 +58,7 @@ export function SushiTalkCaseStudyPage() {
               {sushitalkCaseStudyMeta.tagline}
             </p>
 
-            <CaseStudyImpactSummary metrics={sushitalkCaseStudyMeta.impactMetrics} />
+            <CaseStudyImpactSummary summary={sushitalkCaseStudyMeta.impactSummary} />
           </motion.div>
         </div>
 

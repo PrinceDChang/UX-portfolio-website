@@ -7,12 +7,8 @@ export const arboretumCaseStudyMeta = {
   heroImageAlt:
     'Washington Park Arboretum navigation app — map mockups, user flow diagram, and accessibility research collage',
   projectLabel: 'DesignJam 2024 · Accessibility',
-  impactMetrics: [
-    { value: '8 hrs', label: 'Sprint to stakeholder demo' },
-    { value: '4', label: 'HCDE teammates' },
-    { value: '1', label: 'Live stakeholder presentation' },
-    { value: 'Mobile', label: 'Accessibility-first companion' },
-  ],
+  impactSummary:
+    '"Provided Washington Park Arboretum stakeholder concepts of ways to improve Accessibility-first for park-goers on a digital scale."',
   details: [
     { label: 'Role', value: 'UX Designer' },
     { label: 'Industry', value: 'Non-profit' },

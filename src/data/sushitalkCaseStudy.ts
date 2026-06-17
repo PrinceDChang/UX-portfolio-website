@@ -11,12 +11,8 @@ export const sushitalkCaseStudyMeta = {
   heroImageAlt:
     'SushiTalk mascot logo on a floating card beside a laptop showing the final prototype landing page',
   projectLabel: 'Passion project · Google Japan',
-  impactMetrics: [
-    { value: '3/5', label: 'Priority screens delivered' },
-    { value: '4', label: 'Usability study participants' },
-    { value: '8 wks', label: 'Phase 1 design sprint' },
-    { value: 'No paywall', label: 'Tutor discovery strategy' },
-  ],
+  impactSummary:
+    "Kickstarted the startup company's business model to focus beyond just language tutoring but efforts to build a community to help immigration procedures into Japan.",
   details: [
     { label: 'Role', value: 'UX Designer · Usability Researcher' },
     { label: 'Industry', value: 'EdTech · Marketplace' },

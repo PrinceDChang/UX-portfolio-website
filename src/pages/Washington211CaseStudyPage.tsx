@@ -45,7 +45,7 @@ export function Washington211CaseStudyPage() {
               {wa211CaseStudyMeta.tagline}
             </p>
 
-            <CaseStudyImpactSummary metrics={wa211CaseStudyMeta.impactMetrics} />
+            <CaseStudyImpactSummary summary={wa211CaseStudyMeta.impactSummary} />
           </motion.div>
         </div>
 

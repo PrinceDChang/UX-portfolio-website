@@ -7,12 +7,8 @@ export const citibridgeCaseStudyMeta = {
   heroImageAlt:
     'Citibridge branding with civic action tagline and mobile app mockup showing Seattle community reports',
   projectLabel: 'Protothon 2025',
-  impactMetrics: [
-    { value: '24 hrs', label: 'Protothon sprint' },
-    { value: '4', label: 'HCDE teammates' },
-    { value: 'Seattle', label: 'Pilot city focus' },
-    { value: '1 hub', label: 'Unified civic reporting flow' },
-  ],
+  impactSummary:
+    '"Brought a new way to improve transparency for reporting civic issues taking good points and address pain points from the competition"',
   details: [
     { label: 'Role', value: 'UX Designer' },
     { label: 'Team', value: '4 HCDE students' },

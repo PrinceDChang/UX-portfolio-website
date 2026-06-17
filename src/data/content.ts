@@ -241,8 +241,8 @@ export const featuredProjects: Project[] = [
     id: 'wa211',
     title: 'Washington 211',
     role: 'Research',
-    location: 'France',
-    city: 'Paris',
+    location: 'USA',
+    city: 'Washington',
     lat: globePinCoordinates.wa211.lat,
     lng: globePinCoordinates.wa211.lng,
     description:

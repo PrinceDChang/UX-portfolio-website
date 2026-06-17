@@ -45,7 +45,7 @@ export function CitibridgeCaseStudyPage() {
               {citibridgeCaseStudyMeta.tagline}
             </p>
 
-            <CaseStudyImpactSummary metrics={citibridgeCaseStudyMeta.impactMetrics} />
+            <CaseStudyImpactSummary summary={citibridgeCaseStudyMeta.impactSummary} />
           </motion.div>
         </div>
 

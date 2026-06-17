@@ -51,7 +51,7 @@ export function ArboretumCaseStudyPage() {
               {arboretumCaseStudyMeta.tagline}
             </p>
 
-            <CaseStudyImpactSummary metrics={arboretumCaseStudyMeta.impactMetrics} />
+            <CaseStudyImpactSummary summary={arboretumCaseStudyMeta.impactSummary} />
           </motion.div>
         </div>
 

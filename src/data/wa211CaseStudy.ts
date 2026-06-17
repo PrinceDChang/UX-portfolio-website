@@ -9,12 +9,8 @@ export const wa211CaseStudyMeta = {
   heroImageAlt:
     'Washington 211 community hands with blue 2-1-1 speech bubble logo',
   projectLabel: 'Corporate research · Washington State',
-  impactMetrics: [
-    { value: '6', label: 'Stakeholder-ready recommendations' },
-    { value: '7', label: 'Research findings synthesized' },
-    { value: '48 hrs', label: 'Corporate sponsorship sprint' },
-    { value: '75%+', label: 'Preferred MI 211 UX benchmark' },
-  ],
+  impactSummary:
+    '"Provided 7 pain points and solutions to stakeholders backed by research findings giving direct redesign decisions to make in order to improve accessibility in WA211 website."',
   details: [
     { label: 'Role', value: 'UX Designer' },
     { label: 'Industry', value: 'Public services · Crisis support' },
