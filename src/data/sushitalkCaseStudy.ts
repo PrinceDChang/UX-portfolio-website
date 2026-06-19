@@ -9,7 +9,7 @@ export const sushitalkCaseStudyMeta = {
     'A passion project with a Software Engineer at Google Japan for a platform to help non-native Japanese learners connect with native Japanese tutors that match on their journey to not only learn Japanese, but give specialized help with moving into or staying in Japan.',
   heroImage: '/images/sushitalk-case-study.png',
   heroImageAlt:
-    'SushiTalk mascot logo on a floating card beside a laptop showing the final prototype landing page',
+    'SushiTalk mentor marketplace on a desktop monitor in a Tokyo office, with mascot branding on the desk',
   projectLabel: 'Passion project · Google Japan',
   impactSummary:
     "Kickstarted the startup company's business model to focus beyond just language tutoring but efforts to build a community to help immigration procedures into Japan.",
@@ -73,10 +73,13 @@ Stage two expands that foundation with resources and flows for documentation, he
     label: 'Final design',
     body: `After eight weeks, the team completed a working prototype of the web platform for stage one — covering tutor discovery, search, and profile flows that let learners evaluate fit on language goals and teaching approach, setting up the life-in-Japan support vision for phase two.`,
     ongoingNote: 'Design is still ongoing — launching soon.',
-    prototype: {
+    demoVideo: {
       title: 'SushiTalk interactive prototype',
-      embedUrl: '/sushitalk-prototype.html',
+      src: '/videos/sushitalk-hover.mp4',
+      caption:
+        'Homepage, mentor search, profiles, resources, and booking — scroll and click to explore the full flow.',
       openUrl: '/sushitalk-prototype.html',
+      ctaLabel: 'Open prototype in new tab',
     },
   },
   testimonial: {

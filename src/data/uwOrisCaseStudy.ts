@@ -92,6 +92,7 @@ This was a coordination problem dressed up as a tooling problem — and every pr
       caption:
         'Context setup, budget settings, worksheet, and import gates — interactive prototype built in Cursor',
       openUrl: 'https://hcdeorbit.netlify.app/',
+      ctaLabel: 'Open prototype in new tab',
     },
   },
   finalDesign: {

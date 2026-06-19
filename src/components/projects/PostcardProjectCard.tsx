@@ -36,11 +36,10 @@ function PostcardInner({ project }: { project: Project }) {
   )
 
   return (
-    <article className="postcard-card">
+    <article className="postcard-card" {...hoverHandlers}>
       <div
         className={`postcard-card__image${hasHoverVideo ? ' postcard-card__image--hover-video' : ''}`}
         style={{ backgroundColor: imageBg }}
-        {...hoverHandlers}
       >
         <img
           src={project.image}

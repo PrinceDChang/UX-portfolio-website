@@ -41,6 +41,7 @@ export function BoardingTicket({
       ]
         .filter(Boolean)
         .join(' ')}
+      {...hoverHandlers}
     >
       <div className="boarding-ticket__stub">
         <span className="boarding-ticket__brand" aria-hidden>
@@ -81,7 +82,6 @@ export function BoardingTicket({
               hasHoverVideo ? ' boarding-ticket__thumb-wrap--hover-video' : ''
             }`}
             style={hasHoverVideo ? { backgroundColor: project.heroImageBackground } : undefined}
-            {...hoverHandlers}
           >
             <img
               src={project.image}

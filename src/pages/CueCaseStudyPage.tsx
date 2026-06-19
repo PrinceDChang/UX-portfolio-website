@@ -9,9 +9,10 @@ import { DesignProcessSteps } from '../components/case-study/DesignProcessSteps'
 import { FeatureShowcase } from '../components/case-study/FeatureShowcase'
 import { VideoPrototypeCard } from '../components/case-study/VideoPrototypeCard'
 import { FlipCardGallery } from '../components/case-study/FlipCardGallery'
+import { CaseStudyDemoVideo } from '../components/case-study/CaseStudyDemoVideo'
+import { CaseStudyPrototypeCaptionGroup } from '../components/case-study/CaseStudyPrototypeCaption'
 import { SplitHeroCards } from '../components/case-study/SplitHeroCards'
 import { ZoomableImage } from '../components/case-study/ZoomableImage'
-import { FigmaPrototypeEmbed } from '../components/case-study/FigmaPrototypeEmbed'
 import {
   cueCaseStudyMeta,
   cueSections,
@@ -104,48 +105,17 @@ export function CueCaseStudyPage() {
 
         <SectionBlock label={cueSections.finalDesign.label} title="Final design">
           <p className="section-copy mb-10">{cueSections.finalDesign.body}</p>
-          <div className="grid gap-6 md:grid-cols-2 md:items-center">
-            {cueSections.finalDesign.deliverables.map((item) => (
-              <figure
-                key={item.title}
-                className="flex flex-col overflow-hidden rounded-3xl bg-elevated ring-1 ring-white/10"
-              >
-                {'embedUrl' in item && item.embedUrl && 'embedFrame' in item && (
-                  <FigmaPrototypeEmbed
-                    src={item.embedUrl}
-                    title={item.title}
-                    frameWidth={item.embedFrame.width}
-                    frameHeight={item.embedFrame.height}
-                    layout={
-                      'embedLayout' in item && item.embedLayout === 'phone'
-                        ? 'phone'
-                        : 'fit'
-                    }
-                    scale={
-                      'embedScale' in item &&
-                      typeof item.embedScale === 'number'
-                        ? item.embedScale
-                        : 1
-                    }
-                  />
-                )}
-                <figcaption className="shrink-0 border-t border-white/8 px-6 py-5">
-                  <p className="font-semibold text-ink">{item.title}</p>
-                  <p className="mt-1 text-sm text-slate">{item.caption}</p>
-                  {'embedUrl' in item && item.embedUrl && (
-                    <a
-                      href={item.embedUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-2 inline-block text-sm font-medium text-accent hover:underline"
-                    >
-                      Open prototype in new tab →
-                    </a>
-                  )}
-                </figcaption>
-              </figure>
-            ))}
-          </div>
+          <figure className="overflow-hidden rounded-3xl bg-elevated ring-1 ring-white/10">
+            <CaseStudyDemoVideo
+              src={cueSections.finalDesign.demoVideo.src}
+              title={cueSections.finalDesign.demoVideo.title}
+            />
+            <CaseStudyPrototypeCaptionGroup
+              title={cueSections.finalDesign.demoVideo.title}
+              caption={cueSections.finalDesign.demoVideo.caption}
+              links={cueSections.finalDesign.prototypeLinks}
+            />
+          </figure>
         </SectionBlock>
 
         <SectionBlock

@@ -66,19 +66,20 @@ After every interaction, Cue helps users reflect on what happened, what worked, 
   finalDesign: {
     label: 'Final design',
     body: `Within 48 hours, we built a working prototype of the companion app for Cue as well as the AR layout of the vision display inside Figma Make.`,
-    deliverables: [
+    demoVideo: {
+      src: '/videos/cue-hover.mp4',
+      title: 'Cue companion app & AR overlay',
+      caption:
+        'Post-session reflection, energy tracking, and coaching — alongside real-time social cues and calm guidance in view.',
+    },
+    prototypeLinks: [
       {
-        title: 'Cue companion app',
-        caption: 'Post-session reflection, energy tracking, and coaching',
-        embedUrl: 'https://final-cue-app.figma.site',
-        embedFrame: { width: 390, height: 844 },
-        embedLayout: 'phone' as const,
+        label: 'Companion app',
+        openUrl: 'https://final-cue-app.figma.site',
       },
       {
-        title: 'Cue AR overlay',
-        caption: 'Real-time social cues and calm guidance in view',
-        embedUrl: 'https://aspect-elbow-23441285.figma.site',
-        embedFrame: { width: 1280, height: 800 },
+        label: 'AR overlay',
+        openUrl: 'https://aspect-elbow-23441285.figma.site',
       },
     ],
   },
@@ -138,7 +139,7 @@ After every interaction, Cue helps users reflect on what happened, what worked, 
     ],
   },
   featuresSidebarTitle:
-    'Six capabilities for calmer, clearer social moments.',
+    'Five capabilities for calmer, clearer social moments.',
   featuresIntro:
     'Explore how Cue supports energy tracking, preparation, in-the-moment guidance, and reflection — without turning connection into a scoreboard.',
   features: [
@@ -148,13 +149,11 @@ After every interaction, Cue helps users reflect on what happened, what worked, 
       icon: '🔋',
       description:
         'Track your social battery in real time with percentage-based energy levels and smart alerts before burnout.',
-    },
-    {
-      title: 'Calendar integration',
-      headline: 'Plan with context',
-      icon: '📅',
-      description:
-        'Sync with your calendar to prepare for upcoming social events with pre-session coaching and energy planning.',
+      image: '/images/cue-social-energy-profile.png',
+      imageAlt:
+        'Cue AR overlay showing Marcus Chen profile card with interests, bio, and 85% social energy meter',
+      imageWidth: 568,
+      imageHeight: 676,
     },
     {
       title: 'Social cue detector',
@@ -162,6 +161,14 @@ After every interaction, Cue helps users reflect on what happened, what worked, 
       icon: '👁️',
       description:
         'Real-time detection of body language, eye contact patterns, and conversational engagement through AR overlay.',
+      image: '/images/cue-social-cue-detector.png',
+      imageAlt:
+        'Cue AR overlay in a bar showing Marcus Chen profile, social energy, conversation starter suggestions, and real-time cue indicators',
+      imageWidth: 1024,
+      imageHeight: 722,
+      imageScrollable: true,
+      imageFrameClass:
+        'flex min-h-[200px] flex-1 flex-col overflow-hidden bg-[#0a0a0c] md:min-h-[240px] md:max-h-[280px]',
     },
     {
       title: 'Mood heat map',
@@ -169,6 +176,14 @@ After every interaction, Cue helps users reflect on what happened, what worked, 
       icon: '🌡️',
       description:
         'Color-coded emotional auras that make the invisible emotional temperature of a space visible at a glance.',
+      image: '/images/cue-mood-heat-map.png',
+      imageAlt:
+        'Crowded bar scene with Cue mood heat map highlighting a person in a green emotional aura outline',
+      imageWidth: 1024,
+      imageHeight: 704,
+      imageScrollable: true,
+      imageFrameClass:
+        'flex min-h-[200px] flex-1 flex-col overflow-hidden bg-[#0a0a0c] md:min-h-[240px] md:max-h-[280px]',
     },
     {
       title: 'Weekly reports',
@@ -176,6 +191,14 @@ After every interaction, Cue helps users reflect on what happened, what worked, 
       icon: '📊',
       description:
         'In-app summaries of social interactions, patterns, and personalized coaching insights delivered weekly.',
+      image: '/images/cue-weekly-insights.png',
+      imageAlt:
+        'Cue companion app Insights screen with strongest signal, growth area, trend insights, and signal over time chart',
+      imageWidth: 480,
+      imageHeight: 1024,
+      imageScrollable: true,
+      imageFrameClass:
+        'flex min-h-[200px] flex-1 flex-col overflow-hidden bg-[#0a0a0c] md:min-h-[240px] md:max-h-[280px]',
     },
     {
       title: 'People blur',

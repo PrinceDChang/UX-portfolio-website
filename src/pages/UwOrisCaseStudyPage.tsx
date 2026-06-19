@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { BriefPivotReveal } from '../components/case-study/BriefPivotReveal'
 import { CaseStudyDemoVideo } from '../components/case-study/CaseStudyDemoVideo'
+import { CaseStudyPrototypeCaption } from '../components/case-study/CaseStudyPrototypeCaption'
 import { CaseStudyConclusion } from '../components/case-study/CaseStudyConclusion'
 import { VideoPrototypeCard } from '../components/case-study/VideoPrototypeCard'
 import { CaseStudyMoreProjects } from '../components/case-study/CaseStudyMoreProjects'
@@ -141,25 +142,13 @@ export function UwOrisCaseStudyPage() {
                     src={uwOrisSections.solution.demoVideo.src}
                     title={uwOrisSections.solution.demoVideo.title}
                   />
+                  <CaseStudyPrototypeCaption
+                    title={uwOrisSections.solution.demoVideo.title}
+                    caption={uwOrisSections.solution.demoVideo.caption}
+                    openUrl={uwOrisSections.solution.demoVideo.openUrl}
+                    ctaLabel={uwOrisSections.solution.demoVideo.ctaLabel}
+                  />
                 </figure>
-                <a
-                  href={uwOrisSections.solution.demoVideo.openUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex w-full items-center justify-between gap-4 rounded-3xl bg-accent px-6 py-5 text-left shadow-glow ring-2 ring-accent/80 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-accent/90 hover:shadow-[0_0_40px_rgba(153,112,255,0.45)] hover:ring-white/25 active:translate-y-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-                >
-                  <span className="min-w-0">
-                    <span className="block font-semibold text-white">
-                      {uwOrisSections.solution.demoVideo.title}
-                    </span>
-                    <span className="mt-1 block text-sm text-white/80 transition-colors group-hover:text-white/95">
-                      {uwOrisSections.solution.demoVideo.caption}
-                    </span>
-                  </span>
-                  <span className="shrink-0 text-sm font-semibold text-white transition-transform duration-300 group-hover:translate-x-1">
-                    Open prototype →
-                  </span>
-                </a>
                 <SageIntegrationHub
                   className="mt-4"
                   data={uwOrisSections.sageIntegration}

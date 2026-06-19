@@ -9,9 +9,10 @@ import { AgileRoadmapReveal } from '../components/case-study/AgileRoadmapReveal'
 import { AlternatingDesignTimeline } from '../components/case-study/AlternatingDesignTimeline'
 import { DesignProcessSteps } from '../components/case-study/DesignProcessSteps'
 import { SushiTalkProcessArtifactReveal } from '../components/case-study/SushiTalkProcessArtifactReveal'
+import { CaseStudyDemoVideo } from '../components/case-study/CaseStudyDemoVideo'
+import { CaseStudyPrototypeCaption } from '../components/case-study/CaseStudyPrototypeCaption'
 import { FeatureShowcase } from '../components/case-study/FeatureShowcase'
 import { FigmaToClaudeFlow } from '../components/case-study/FigmaToClaudeFlow'
-import { HtmlPrototypeEmbed } from '../components/case-study/HtmlPrototypeEmbed'
 import { SectionBlock } from '../components/case-study/SectionBlock'
 import { SplitHeroCards } from '../components/case-study/SplitHeroCards'
 import {
@@ -144,27 +145,16 @@ export function SushiTalkCaseStudyPage() {
             {sushitalkSections.finalDesign.body}
           </p>
           <figure className="overflow-hidden rounded-3xl bg-[#0d0d0d] ring-1 ring-white/10">
-            <HtmlPrototypeEmbed
-              src={sushitalkSections.finalDesign.prototype.embedUrl}
-              title={sushitalkSections.finalDesign.prototype.title}
+            <CaseStudyDemoVideo
+              src={sushitalkSections.finalDesign.demoVideo.src}
+              title={sushitalkSections.finalDesign.demoVideo.title}
             />
-            <figcaption className="border-t border-white/8 px-6 py-5">
-              <p className="font-semibold text-ink">
-                {sushitalkSections.finalDesign.prototype.title}
-              </p>
-              <p className="mt-1 text-sm text-slate">
-                Homepage, mentor search, profiles, resources, and booking — scroll and click
-                to explore the full flow.
-              </p>
-              <a
-                href={sushitalkSections.finalDesign.prototype.openUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-2 inline-block text-sm font-medium text-accent hover:underline"
-              >
-                Open prototype in new tab →
-              </a>
-            </figcaption>
+            <CaseStudyPrototypeCaption
+              title={sushitalkSections.finalDesign.demoVideo.title}
+              caption={sushitalkSections.finalDesign.demoVideo.caption}
+              openUrl={sushitalkSections.finalDesign.demoVideo.openUrl}
+              ctaLabel={sushitalkSections.finalDesign.demoVideo.ctaLabel}
+            />
           </figure>
         </SectionBlock>
 

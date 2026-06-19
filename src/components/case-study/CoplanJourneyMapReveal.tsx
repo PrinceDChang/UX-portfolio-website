@@ -37,6 +37,17 @@ const ease = [0.22, 1, 0.36, 1] as const
 const PROGRESS_PER_PX = 0.00135
 const COMPLETE_THRESHOLD = 0.998
 const UNLOCK_EXIT_VH = 45
+const JOURNEY_LABEL_COL_REM = 8.75
+const JOURNEY_PHASE_COL_REM = 11.5
+const JOURNEY_COL_GAP_REM = 0.75
+
+function journeyMapWidthRem(phaseCount: number) {
+  return (
+    JOURNEY_LABEL_COL_REM +
+    phaseCount * JOURNEY_PHASE_COL_REM +
+    phaseCount * JOURNEY_COL_GAP_REM
+  )
+}
 
 interface ExitPinMetrics {
   top: number
@@ -155,9 +166,11 @@ export function CoplanJourneyMapReveal({ data, className = '' }: CoplanJourneyMa
   const reduceMotion = useReducedMotion()
   const isMobile = useMobileViewport()
   const phaseCount = data.phases.length
+  const journeyWidthRem = journeyMapWidthRem(phaseCount)
   const { containerRef: scaleContainerRef, contentRef, metrics } = useScaleToFit([
     data,
     phaseCount,
+    journeyWidthRem,
   ])
   const [scrollProgress, setScrollProgress] = useState(reduceMotion ? 1 : 0)
   const [isComplete, setIsComplete] = useState(Boolean(reduceMotion))
@@ -428,11 +441,11 @@ export function CoplanJourneyMapReveal({ data, className = '' }: CoplanJourneyMa
                 className="absolute left-0 top-0 origin-top-left"
                 style={{ transform: `scale(${metrics.scale})` }}
               >
-                <div className="relative w-[920px]">
+                <div className="relative" style={{ width: `${journeyWidthRem}rem` }}>
                   <div
                     className="grid gap-x-2 gap-y-2 md:gap-x-3 md:gap-y-2.5"
                     style={{
-                      gridTemplateColumns: `8.75rem repeat(${phaseCount}, minmax(11.5rem, 1fr))`,
+                      gridTemplateColumns: `${JOURNEY_LABEL_COL_REM}rem repeat(${phaseCount}, minmax(${JOURNEY_PHASE_COL_REM}rem, 1fr))`,
                     }}
                   >
                 <div className="rounded-xl bg-amber-500/[0.07] px-3 py-2 text-[10px] font-semibold text-amber-100/85 ring-1 ring-amber-400/15 md:text-[11px]">

@@ -184,6 +184,7 @@ export const featuredProjects: Project[] = [
     ],
     heroBackgroundCard: true,
     heroImageBackground: '#0a0a12',
+    hoverVideo: '/videos/cue-hover.mp4',
   },
   {
     id: 'coplan',
@@ -222,8 +223,9 @@ export const featuredProjects: Project[] = [
     description:
       'A platform for native Japanese tutors to host their business and learners to connect with tutors on their journey to learn Japanese.',
     href: '/projects/sushitalk',
-    image: '/images/sushitalk-mascot-logo.png',
-    imageAlt: 'SushiTalk kawaii salmon nigiri mascot logo',
+    image: '/images/sushitalk-postcard-hero.png',
+    imageAlt:
+      'SushiTalk mentor marketplace on a desktop monitor in a Tokyo office, with mascot branding on the desk',
     tags: ['Design', 'Mobile', 'Start-up'],
     keywords: [
       'Competitive audit',
@@ -236,6 +238,7 @@ export const featuredProjects: Project[] = [
     ],
     heroBackgroundCard: true,
     heroImageBackground: '#f5f0e8',
+    hoverVideo: '/videos/sushitalk-hover.mp4',
   },
   {
     id: 'wa211',
