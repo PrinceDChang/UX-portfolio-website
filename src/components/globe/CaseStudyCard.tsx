@@ -153,6 +153,7 @@ function HeroCardMedia({
 }) {
   const { videoRef, hovered, hasHoverVideo, hoverHandlers } = useProjectHoverVideo(
     project.hoverVideo,
+    project.hoverVideoPlaybackRate ?? 1,
   )
   const imageBg = project.heroImageBackground ?? '#111118'
 

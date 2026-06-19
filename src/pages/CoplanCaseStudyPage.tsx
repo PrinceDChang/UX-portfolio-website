@@ -16,7 +16,8 @@ import { ZoomableImage } from '../components/case-study/ZoomableImage'
 import { FeatureShowcase } from '../components/case-study/FeatureShowcase'
 import { SectionBlock } from '../components/case-study/SectionBlock'
 import { SplitHeroCards } from '../components/case-study/SplitHeroCards'
-import { FigmaPrototypeEmbed } from '../components/case-study/FigmaPrototypeEmbed'
+import { CaseStudyDemoVideo } from '../components/case-study/CaseStudyDemoVideo'
+import { CaseStudyPrototypeCaption } from '../components/case-study/CaseStudyPrototypeCaption'
 import {
   coplanCaseStudyMeta,
   coplanSections,
@@ -129,29 +130,16 @@ export function CoplanCaseStudyPage() {
             {coplanSections.finalDesign.body}
           </p>
           <figure className="overflow-hidden rounded-3xl bg-elevated ring-1 ring-white/10">
-            <FigmaPrototypeEmbed
-              src={coplanSections.finalDesign.prototype.embedUrl}
-              title={coplanSections.finalDesign.prototype.title}
-              frameWidth={coplanSections.finalDesign.prototype.frame.width}
-              frameHeight={coplanSections.finalDesign.prototype.frame.height}
-              layout="fit"
+            <CaseStudyDemoVideo
+              src={coplanSections.finalDesign.demoVideo.src}
+              title={coplanSections.finalDesign.demoVideo.title}
             />
-            <figcaption className="border-t border-white/8 px-6 py-5">
-              <p className="font-semibold text-ink">
-                {coplanSections.finalDesign.prototype.title}
-              </p>
-              <p className="mt-1 text-sm text-slate">
-                Homepage, schedule, map view, and degree audit — interactive Figma prototype
-              </p>
-              <a
-                href={coplanSections.finalDesign.prototype.openUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-2 inline-block text-sm font-medium text-accent hover:underline"
-              >
-                Open prototype in new tab →
-              </a>
-            </figcaption>
+            <CaseStudyPrototypeCaption
+              title={coplanSections.finalDesign.demoVideo.title}
+              caption={coplanSections.finalDesign.demoVideo.caption}
+              openUrl={coplanSections.finalDesign.demoVideo.openUrl}
+              ctaLabel={coplanSections.finalDesign.demoVideo.ctaLabel}
+            />
           </figure>
         </SectionBlock>
 

@@ -60,13 +60,14 @@ The goal was an all-in-one product students could trust before, during, and afte
   finalDesign: {
     label: 'Final design',
     body: `We delivered four core surfaces stakeholders requested — homepage, schedule view, map view, and degree audit — iterating from cleaned wireframes through high-fidelity prototypes tested with students.`,
-    prototype: {
+    demoVideo: {
+      src: '/videos/coplan-hover.mp4',
       title: 'Co-plan interactive prototype',
-      embedUrl:
-        'https://embed.figma.com/proto/W5C7ggIelURrAPAz69NmL6/Coplan-Original?content-scaling=fixed&kind=proto&node-id=619-20674&scaling=scale-down&starting-point-node-id=619%3A20674&page-id=76%3A24618&embed-host=share',
+      caption:
+        'Homepage, schedule, map view, and degree audit — walkthrough of the high-fidelity flows.',
       openUrl:
         'https://www.figma.com/proto/W5C7ggIelURrAPAz69NmL6/Coplan-Original?node-id=619-20674&starting-point-node-id=619%3A20674',
-      frame: { width: 800, height: 450 },
+      ctaLabel: 'Open prototype in new tab',
     },
   },
   findingsIntro:

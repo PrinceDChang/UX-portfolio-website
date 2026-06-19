@@ -46,6 +46,8 @@ export interface Project {
   heroImageBackground?: string
   /** Looped video that plays on card hover (hero background cards). */
   hoverVideo?: string
+  /** Playback rate for hover video (default 1). */
+  hoverVideoPlaybackRate?: number
   /** Grey globe pin and preview card without a case study link. */
   comingSoon?: boolean
 }
@@ -185,6 +187,7 @@ export const featuredProjects: Project[] = [
     heroBackgroundCard: true,
     heroImageBackground: '#0a0a12',
     hoverVideo: '/videos/cue-hover.mp4',
+    hoverVideoPlaybackRate: 2,
   },
   {
     id: 'coplan',
@@ -211,6 +214,7 @@ export const featuredProjects: Project[] = [
     ],
     heroBackgroundCard: true,
     heroImageBackground: '#ffffff',
+    hoverVideo: '/videos/coplan-hover.mp4',
   },
   {
     id: 'sushitalk',

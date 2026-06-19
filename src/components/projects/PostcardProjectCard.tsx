@@ -33,6 +33,7 @@ function PostcardInner({ project }: { project: Project }) {
   const visibleTags = getPostcardVisibleTags(project.tags)
   const { videoRef, hovered, hasHoverVideo, hoverHandlers } = useProjectHoverVideo(
     project.hoverVideo,
+    project.hoverVideoPlaybackRate ?? 1,
   )
 
   return (

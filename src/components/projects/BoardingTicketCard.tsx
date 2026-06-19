@@ -29,6 +29,7 @@ export function BoardingTicket({
   const canNavigate = !project.comingSoon && project.href.startsWith('/')
   const { videoRef, hovered, hasHoverVideo, hoverHandlers } = useProjectHoverVideo(
     project.hoverVideo,
+    project.hoverVideoPlaybackRate ?? 1,
   )
 
   return (
