@@ -148,7 +148,7 @@ export const featuredProjects: Project[] = [
     href: '/projects/uw-oris',
     image: '/images/uw-oris-case-study.png',
     imageAlt:
-      'University of Washington logo beside a laptop showing the SAGE Smart Budgeting worksheet interface',
+      'SAGE Smart Budgeting worksheet on a curved monitor in a UW office, with campus and Mount Rainier visible through the window',
     tags: ['Design', 'Web', 'AI'],
     keywords: [
       'Interviews & surveys',
