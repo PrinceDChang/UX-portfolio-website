@@ -19,8 +19,10 @@ import { CompetitionKingCaseStudyPage } from './pages/CompetitionKingCaseStudyPa
 import { UwOrisCaseStudyPage } from './pages/UwOrisCaseStudyPage'
 
 export default function App() {
+  const basename = import.meta.env.BASE_URL.replace(/\/$/, '')
+
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={basename || undefined}>
       <PhotographyTransitionProvider>
         <WushuTransitionProvider>
           <ScrollToTop />
