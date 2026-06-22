@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { type ReactNode, SyntheticEvent } from 'react'
+import { type HTMLAttributes, type ReactNode, SyntheticEvent, type RefObject } from 'react'
 import type { Project } from '../../data/content'
 import { PageLink } from '../PageLink'
 import { roleBadgeClassName } from '../../lib/projectRole'
@@ -117,16 +117,26 @@ function CardShell({
   layout = 'modal',
   className,
   children,
+  interactionHandlers,
 }: {
   layout?: CaseStudyCardLayout
   className: string
   children: ReactNode
+  interactionHandlers?: Pick<
+    HTMLAttributes<HTMLElement>,
+    'onMouseEnter' | 'onMouseLeave' | 'onFocus' | 'onBlur'
+  >
 }) {
   const stopPropagation = (event: SyntheticEvent) => event.stopPropagation()
 
   if (layout === 'grid') {
     return (
-      <div className={className} onClick={stopPropagation} onPointerDown={stopPropagation}>
+      <div
+        className={className}
+        onClick={stopPropagation}
+        onPointerDown={stopPropagation}
+        {...interactionHandlers}
+      >
         {children}
       </div>
     )
@@ -138,6 +148,7 @@ function CardShell({
       className={className}
       onClick={stopPropagation}
       onPointerDown={stopPropagation}
+      {...interactionHandlers}
     >
       {children}
     </motion.div>
@@ -147,21 +158,22 @@ function CardShell({
 function HeroCardMedia({
   project,
   layout,
+  hovered,
+  videoRef,
+  hasHoverVideo,
 }: {
   project: Project
   layout: CaseStudyCardLayout
+  hovered: boolean
+  videoRef: RefObject<HTMLVideoElement>
+  hasHoverVideo: boolean
 }) {
-  const { videoRef, hovered, hasHoverVideo, hoverHandlers } = useProjectHoverVideo(
-    project.hoverVideo,
-    project.hoverVideoPlaybackRate ?? 1,
-  )
   const imageBg = project.heroImageBackground ?? '#111118'
 
   return (
     <div
       className={`relative overflow-hidden ${heroMediaClass(layout)}`}
       style={{ backgroundColor: imageBg }}
-      {...hoverHandlers}
     >
       <img
         src={project.image}
@@ -236,11 +248,26 @@ function ComingSoonCaseStudyCard({ project, onClose, layout = 'modal' }: CaseStu
 }
 
 function HeroBackgroundCaseStudyCard({ project, onClose, layout = 'modal' }: CaseStudyCardProps) {
+  const { videoRef, hovered, hasHoverVideo, hoverHandlers } = useProjectHoverVideo(
+    project.hoverVideo,
+    project.hoverVideoPlaybackRate ?? 1,
+  )
+
   return (
-    <CardShell layout={layout} className={heroShellClass(layout)}>
+    <CardShell
+      layout={layout}
+      className={heroShellClass(layout)}
+      interactionHandlers={hoverHandlers}
+    >
       {onClose ? <CaseStudyCloseButton onClose={onClose} /> : null}
 
-      <HeroCardMedia project={project} layout={layout} />
+      <HeroCardMedia
+        project={project}
+        layout={layout}
+        hovered={hovered}
+        videoRef={videoRef}
+        hasHoverVideo={hasHoverVideo}
+      />
 
       <div className={footerClass(layout)}>
         <h3 className={heroTitleClassFor(layout)}>{project.title}</h3>

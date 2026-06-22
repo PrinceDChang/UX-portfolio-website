@@ -311,7 +311,7 @@ Stage two expands that foundation with resources and flows for documentation, he
       'After creating a list of topics and extra features, fed everything to Claude to generate a prototype to present to stakeholder',
     flowCta: {
       label: 'View final design',
-      href: 'https://sushitalk.netlify.app',
+      href: '/sushitalk-prototype.html',
     },
   },
   featuresSidebarTitle: 'Stage-one priorities for matching learners and tutors.',
