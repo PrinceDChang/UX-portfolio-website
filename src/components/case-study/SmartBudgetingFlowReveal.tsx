@@ -2,7 +2,7 @@ import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react'
 import { createPortal } from 'react-dom'
 
-const HOVER_ZOOM_DELAY_MS = 1000
+const HOVER_ZOOM_DELAY_MS = 300
 const flowEase = [0.22, 1, 0.36, 1] as const
 const FLOW_ANIM_SPEED = 1.25
 const FLOW_SEGMENT_STAGGER = 0.22 / FLOW_ANIM_SPEED
@@ -15,6 +15,12 @@ const FLOW_ARROW_LINE_DELAY = 0.05 / FLOW_ANIM_SPEED
 const FLOW_ARROW_HEAD_DURATION = 0.22 / FLOW_ANIM_SPEED
 const FLOW_ARROW_HEAD_DELAY = 0.28 / FLOW_ANIM_SPEED
 const LAYER_CONNECTOR_LEAD = 0.2 / FLOW_ANIM_SPEED
+
+const STEP_CARD_CLASS =
+  'flex shrink-0 flex-col rounded-2xl border border-white/[0.12] bg-[#16161e] ring-1 ring-white/[0.08]'
+
+const HOVER_PANEL_SHADOW =
+  'shadow-[0_24px_60px_rgba(0,0,0,0.72)] ring-2 ring-accent/45'
 
 const flowRowVariants = {
   hidden: {},
@@ -274,10 +280,10 @@ function HoverZoomCell({
                 ref={zoomRef}
                 className={`fixed z-[220] -translate-x-1/2 -translate-y-full ${zoomClassName}`}
                 style={{ top: zoomTop, left: zoomLeft }}
-                initial={{ opacity: 0, scale: 0.94, y: 8 }}
+                initial={{ opacity: 0, scale: 0.96, y: 6 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.96, y: 6 }}
-                transition={{ duration: 0.22, ease: flowEase }}
+                exit={{ opacity: 0, scale: 0.98, y: 4 }}
+                transition={{ duration: 0.14, ease: flowEase }}
                 onMouseEnter={() => window.clearTimeout(closeTimerRef.current)}
                 onMouseLeave={handleLeave}
               >
@@ -355,23 +361,20 @@ function StepCard({
   index: number
   reduceMotion: boolean | null
 }) {
-  const cardClass =
-    'flex shrink-0 flex-col rounded-2xl border border-white/[0.1] bg-elevated/90 ring-1 ring-white/[0.06]'
+  const cardClass = STEP_CARD_CLASS
 
   return (
     <HoverZoomCell
       reduceMotion={reduceMotion}
       zoomClassName="w-[min(18rem,calc(100vw-2rem))]"
       zoomContent={
-        <article
-          className={`${cardClass} px-5 pb-5 pt-4 shadow-[0_24px_60px_rgba(0,0,0,0.55)] ring-2 ring-accent/35`}
-        >
+        <article className={`${cardClass} px-5 pb-5 pt-4 ${HOVER_PANEL_SHADOW}`}>
           <StepCardContent step={step} index={index} zoom />
         </article>
       }
     >
       <article
-        className={`${cardClass} px-3 pb-4 pt-3 transition-[box-shadow,ring-color] duration-300 hover:ring-accent/25`}
+        className={`${cardClass} px-3 pb-4 pt-3 transition-[background-color,box-shadow,ring-color] duration-200 hover:bg-[#1c1c2a] hover:ring-accent/30`}
         style={{ width: STEP_W }}
       >
         <StepCardContent step={step} index={index} />
@@ -475,8 +478,13 @@ function FlowLayerChip({
 }) {
   const chipClass =
     tone === 'amber'
-      ? 'border-amber-400/15 bg-[#141418]/50 text-amber-50/80'
-      : 'border-accent/20 bg-[#141418]/60 text-slate'
+      ? 'border-amber-400/25 bg-[#1c1810] text-amber-50'
+      : 'border-accent/30 bg-[#16161e] text-slate'
+
+  const chipHoverClass =
+    tone === 'amber'
+      ? 'hover:bg-[#221c12] hover:ring-amber-400/35'
+      : 'hover:bg-[#1c1c2a] hover:ring-accent/35'
 
   const chipBody = (zoom: boolean) => (
     <>
@@ -503,14 +511,14 @@ function FlowLayerChip({
         className="inline-flex"
         zoomContent={
           <div
-            className={`inline-flex max-w-[min(20rem,calc(100vw-2rem))] items-start gap-2 rounded-xl border px-4 py-3 shadow-[0_20px_50px_rgba(0,0,0,0.55)] ring-2 ring-accent/35 ${chipClass}`}
+            className={`inline-flex max-w-[min(20rem,calc(100vw-2rem))] items-start gap-2 rounded-xl border px-4 py-3 ${HOVER_PANEL_SHADOW} ${chipClass}`}
           >
             {chipBody(true)}
           </div>
         }
       >
         <span
-          className={`inline-flex w-fit shrink-0 cursor-default items-center gap-1 rounded-md border px-2 py-1 transition-[box-shadow,ring-color] duration-300 hover:ring-1 hover:ring-accent/30 ${chipClass}`}
+          className={`inline-flex w-fit shrink-0 cursor-default items-center gap-1 rounded-md border px-2 py-1 transition-[background-color,box-shadow,ring-color] duration-200 hover:ring-1 ${chipClass} ${chipHoverClass}`}
         >
           {chipBody(false)}
         </span>
@@ -585,7 +593,7 @@ export function SmartBudgetingFlowReveal({
               className="shrink-0 self-start"
               style={{ width: ENTRY_W }}
               zoomContent={
-                <div className="flex w-[min(14rem,calc(100vw-2rem))] flex-col items-center rounded-2xl border border-white/[0.12] bg-elevated px-6 py-5 text-center shadow-[0_24px_60px_rgba(0,0,0,0.55)] ring-2 ring-accent/35">
+                <div className={`flex w-[min(14rem,calc(100vw-2rem))] flex-col items-center rounded-2xl border border-white/[0.12] bg-[#16161e] px-6 py-5 text-center ${HOVER_PANEL_SHADOW}`}>
                   <span
                     className="flex h-14 w-14 items-center justify-center rounded-full border border-white/[0.12] bg-white/[0.05] text-3xl"
                     aria-hidden
@@ -599,7 +607,7 @@ export function SmartBudgetingFlowReveal({
               }
             >
             <div
-              className="flex shrink-0 flex-col items-center self-start pt-6 text-center transition-[box-shadow] duration-300 hover:drop-shadow-[0_0_12px_rgba(153,112,255,0.25)]"
+              className="flex shrink-0 flex-col items-center self-start rounded-2xl border border-transparent bg-[#16161e]/0 pt-6 text-center transition-[background-color,box-shadow] duration-200 hover:border-white/[0.1] hover:bg-[#16161e] hover:shadow-[0_0_20px_rgba(153,112,255,0.2)]"
               style={{ width: ENTRY_W }}
             >
               <span
