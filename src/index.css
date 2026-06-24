@@ -10,22 +10,29 @@
   --color-elevated: #1a1a26;
   --color-ink: #f4f4f5;
   --color-slate: #9494a8;
+  --color-slate-muted: #a8a8b8;
+  --color-slate-subtle: #8e8ea2;
   --color-mist: #13131b;
   --color-accent: #9970ff;
+  --color-accent-text: #b894ff;
+  --color-accent-solid: #6840d4;
+  --color-accent-solid-hover: #5f3dc4;
+  --color-accent-fg: #ffffff;
   --color-sky: #b894ff;
   --color-glass: rgba(26, 26, 36, 0.78);
-  --color-border: rgba(255, 255, 255, 0.08);
-  --color-border-strong: rgba(255, 255, 255, 0.12);
+  --color-border: rgba(255, 255, 255, 0.14);
+  --color-border-strong: rgba(255, 255, 255, 0.22);
   --color-nav-bg: rgba(0, 0, 0, 0.5);
   --color-nav-bg-scrolled: rgba(0, 0, 0, 0.7);
-  --color-nav-border: rgba(255, 255, 255, 0.08);
-  --color-nav-inset: rgba(255, 255, 255, 0.06);
+  --color-nav-border: rgba(255, 255, 255, 0.14);
+  --color-nav-inset: rgba(255, 255, 255, 0.08);
   --color-nav-shadow: rgba(0, 0, 0, 0.45);
   --body-gradient-a: rgba(153, 112, 255, 0.14);
   --body-gradient-b: rgba(74, 222, 128, 0.07);
   --body-gradient-c: rgba(153, 112, 255, 0.08);
   --ambient-purple: rgba(153, 112, 255, 0.32);
   --ambient-violet: rgba(184, 148, 255, 0.18);
+  --color-focus: #9970ff;
   --ambient-green: rgba(74, 222, 128, 0.14);
   --selection-bg: rgba(153, 112, 255, 0.35);
   --selection-fg: #ffffff;
@@ -37,16 +44,22 @@
   --color-surface: #ffffff;
   --color-elevated: #f0edf8;
   --color-ink: #18181f;
-  --color-slate: #5c5c6e;
+  --color-slate: #4f4f5c;
+  --color-slate-muted: #3f3f4a;
+  --color-slate-subtle: #52525e;
   --color-mist: #eae8f2;
   --color-accent: #7c52e8;
+  --color-accent-text: #6840d4;
+  --color-accent-solid: #6840d4;
+  --color-accent-solid-hover: #5f3dc4;
+  --color-accent-fg: #ffffff;
   --color-sky: #9970ff;
   --color-glass: rgba(255, 255, 255, 0.88);
-  --color-border: rgba(24, 24, 31, 0.1);
-  --color-border-strong: rgba(24, 24, 31, 0.16);
+  --color-border: rgba(24, 24, 31, 0.16);
+  --color-border-strong: rgba(24, 24, 31, 0.24);
   --color-nav-bg: rgba(255, 255, 255, 0.82);
   --color-nav-bg-scrolled: rgba(255, 255, 255, 0.96);
-  --color-nav-border: rgba(24, 24, 31, 0.1);
+  --color-nav-border: rgba(24, 24, 31, 0.14);
   --color-nav-inset: rgba(255, 255, 255, 0.9);
   --color-nav-shadow: rgba(24, 24, 31, 0.08);
   --body-gradient-a: rgba(153, 112, 255, 0.1);
@@ -54,6 +67,7 @@
   --body-gradient-c: rgba(153, 112, 255, 0.06);
   --ambient-purple: rgba(153, 112, 255, 0.2);
   --ambient-violet: rgba(184, 148, 255, 0.14);
+  --color-focus: #6840d4;
   --ambient-green: rgba(74, 222, 128, 0.1);
   --selection-bg: rgba(124, 82, 232, 0.22);
   --selection-fg: #18181f;
@@ -86,6 +100,86 @@ body {
   color: var(--selection-fg);
 }
 
+/* —— WCAG: base focus, motion, and interactive defaults —— */
+@layer base {
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  :focus {
+    outline: none;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+
+  a:not([class]) {
+    color: var(--color-accent-text);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+
+  a:not([class]):hover {
+    color: var(--color-accent);
+  }
+
+  :where(a.text-accent, button.text-accent) {
+    color: var(--color-accent-text);
+  }
+
+  :where(a.text-accent:hover, button.text-accent:hover) {
+    color: var(--color-accent);
+  }
+}
+
+/* —— WCAG: filled accent controls (white label on deeper purple) —— */
+@layer components {
+  :where(.bg-accent):where(.text-white, .text-accent-fg) {
+    background-color: var(--color-accent-solid);
+    color: var(--color-accent-fg);
+  }
+
+  :where(.bg-accent):where(.text-white, .text-accent-fg):hover,
+  :where(.hover\:bg-accent\/90:hover):where(.text-white, .text-accent-fg) {
+    background-color: var(--color-accent-solid-hover);
+  }
+
+  .placeholder\:text-slate\/60::placeholder,
+  .placeholder\:text-slate\/50::placeholder {
+    color: var(--color-slate-subtle);
+    opacity: 1;
+  }
+}
+
+/* —— WCAG: lift low-contrast opacity text utilities site-wide —— */
+[data-theme='dark'] :is(.text-slate\/40, .text-slate\/50, .text-slate\/55, .text-slate\/60) {
+  color: var(--color-slate-subtle);
+}
+
+[data-theme='dark'] :is(.text-slate\/65, .text-slate\/70, .text-slate\/75, .text-slate\/80, .text-slate\/90) {
+  color: var(--color-slate-muted);
+}
+
+[data-theme='dark'] :is(.text-accent\/70, .text-accent\/80, .text-accent\/90) {
+  color: var(--color-accent-text);
+}
+
+[data-theme='light'] :is(.text-slate\/40, .text-slate\/50, .text-slate\/55, .text-slate\/60) {
+  color: var(--color-slate-subtle);
+}
+
+[data-theme='light'] :is(.text-slate\/65, .text-slate\/70, .text-slate\/75) {
+  color: var(--color-slate);
+}
+
+[data-theme='light'] :is(.text-accent\/70, .text-accent\/80, .text-accent\/90) {
+  color: var(--color-accent-text);
+}
+
 .glass-card {
   background: var(--color-glass);
   backdrop-filter: blur(18px);
@@ -110,7 +204,8 @@ body {
 }
 
 .section-label {
-  @apply text-xs font-semibold uppercase tracking-[0.24em] text-accent;
+  @apply text-xs font-semibold uppercase tracking-[0.24em];
+  color: var(--color-accent-text);
 }
 
 .section-copy {
@@ -267,7 +362,7 @@ body {
 }
 
 .nav-resume-cta:focus-visible {
-  outline: 2px solid #9970ff;
+  outline: 2px solid var(--color-focus);
   outline-offset: 2px;
 }
 
@@ -3687,7 +3782,7 @@ body {
   cursor: pointer;
   border-radius: 9999px;
   line-height: 0;
-  opacity: 0.48;
+  opacity: 0.78;
   transition: opacity 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -3697,7 +3792,7 @@ body {
 }
 
 .theme-toggle:focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid var(--color-focus);
   outline-offset: 2px;
 }
 
@@ -4040,5 +4135,23 @@ body {
 
 [data-theme='light'] .hero-globe__canvas {
   filter: saturate(0.85);
+}
+
+/* Before/after image compare — divider + reveal track the same CSS variable */
+.image-compare-after-clip {
+  left: var(--compare-pos, 50%);
+}
+
+.image-compare-divider,
+.image-compare-handle {
+  left: var(--compare-pos, 50%);
+}
+
+.image-compare-handle {
+  will-change: left;
+}
+
+.image-compare-after-clip {
+  will-change: left;
 }
 

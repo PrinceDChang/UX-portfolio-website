@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 
 export interface FeatureShowcaseItem {
@@ -7,6 +7,8 @@ export interface FeatureShowcaseItem {
   description: string
   icon: string
   image?: string
+  /** Looping screen recording or demo — takes precedence over `image` on the finding side */
+  video?: string
   imageSrc2x?: string
   /** Intrinsic width of `image` — used for srcSet / layout */
   imageWidth?: number
@@ -20,6 +22,8 @@ export interface FeatureShowcaseItem {
   imageScrollBoth?: boolean
   /** Wide/short screenshots fill the frame width; height follows aspect ratio */
   imageFill?: boolean
+  /** With imageFill — scale to cover the full frame height and width */
+  imageFillCover?: boolean
   /** Override default fixed-frame sizing (min/max height) */
   imageFrameClass?: string
   /** Optional external link when the visual is clicked */
@@ -35,6 +39,8 @@ export interface FeatureShowcaseItem {
 
 interface FeatureShowcaseProps {
   sidebarTitle: string
+  /** Optional heading above the showcase card */
+  title?: string
   features: readonly FeatureShowcaseItem[]
   className?: string
 }
@@ -83,6 +89,7 @@ function FeatureVisual({
     side === 'recommendation'
       ? feature.recommendationImage ?? feature.image
       : feature.image
+  const video = side === 'finding' ? feature.video : undefined
   const imageAlt =
     side === 'recommendation'
       ? feature.recommendationImageAlt ?? feature.imageAlt ?? feature.title
@@ -112,10 +119,33 @@ function FeatureVisual({
         (stats && stats.length > 0)),
   )
 
-  const useFixedFrame = feature.imageScrollable || feature.imageFill
+  const useVideo = Boolean(video)
+  const useFixedFrame = useVideo || feature.imageScrollable || feature.imageFill
+  const videoRef = useRef<HTMLVideoElement>(null)
 
-  const defaultFixedFrameClass =
-    'flex min-h-[200px] flex-1 flex-col overflow-hidden bg-[#f4f4f6] md:min-h-[240px] md:max-h-[280px]'
+  useEffect(() => {
+    const el = videoRef.current
+    if (!el || !video) return
+
+    el.loop = true
+    el.muted = true
+
+    const restart = () => {
+      el.currentTime = 0
+      void el.play().catch(() => {})
+    }
+
+    el.addEventListener('ended', restart)
+    void el.play().catch(() => {})
+
+    return () => {
+      el.removeEventListener('ended', restart)
+    }
+  }, [video])
+
+  const defaultFixedFrameClass = useVideo
+    ? 'relative aspect-video w-full min-w-0 overflow-hidden bg-[#f4f4f6]'
+    : 'flex min-h-[200px] flex-1 flex-col overflow-hidden bg-[#f4f4f6] md:min-h-[240px] md:max-h-[280px]'
 
   const visualClass = useFixedFrame
     ? feature.imageFrameClass ?? defaultFixedFrameClass
@@ -128,7 +158,19 @@ function FeatureVisual({
       className={`group/visual relative mb-6 shrink-0 overflow-hidden rounded-2xl ring-1 ring-white/[0.06] ${visualClass} ${useFixedFrame ? 'min-w-0' : ''} ${showQuoteOverlay ? 'cursor-default' : ''}`}
       tabIndex={showQuoteOverlay ? 0 : undefined}
     >
-      {image ? (
+      {video ? (
+        <video
+          ref={videoRef}
+          src={video}
+          className="absolute inset-0 h-full w-full object-contain object-top"
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          aria-label={imageAlt}
+        />
+      ) : image ? (
         feature.imageFill ? (
           <div className="relative min-h-0 flex-1 overflow-hidden">
             <LinkedFeatureImage href={feature.imageLink} imageAlt={imageAlt}>
@@ -139,7 +181,11 @@ function FeatureVisual({
                 width={feature.imageWidth}
                 height={feature.imageHeight}
                 alt={imageAlt}
-                className="block h-auto w-full"
+                className={
+                  feature.imageFillCover
+                    ? 'absolute inset-0 h-full w-full object-cover object-center'
+                    : 'block h-auto w-full'
+                }
                 loading={imageLoading}
                 decoding="async"
               />
@@ -310,6 +356,7 @@ function FeatureFace({
 
 export function FeatureShowcase({
   sidebarTitle,
+  title,
   features,
   className = '',
 }: FeatureShowcaseProps) {
@@ -326,9 +373,15 @@ export function FeatureShowcase({
   const hasRecommendation = Boolean(active.recommendation)
 
   return (
-    <div
-      className={`overflow-x-hidden rounded-3xl bg-[#141418] ring-1 ring-white/[0.08] lg:flex lg:min-h-[min(640px,82vh)] lg:items-stretch ${className}`}
-    >
+    <div>
+      {title && (
+        <h3 className="mb-6 font-display text-2xl uppercase leading-tight tracking-wide text-ink md:text-3xl">
+          {title}
+        </h3>
+      )}
+      <div
+        className={`overflow-x-hidden rounded-3xl bg-[#141418] ring-1 ring-white/[0.08] lg:flex lg:min-h-[min(640px,82vh)] lg:items-stretch ${className}`}
+      >
       <aside className="border-b border-white/[0.08] p-6 md:p-8 lg:flex lg:w-[min(100%,22rem)] lg:shrink-0 lg:flex-col lg:border-b-0 lg:border-r">
         <p className="font-display text-sm uppercase leading-snug tracking-wide text-ink md:text-base">
           {sidebarTitle}
@@ -461,6 +514,7 @@ export function FeatureShowcase({
           </button>
         )}
       </div>
+    </div>
     </div>
   )
 }

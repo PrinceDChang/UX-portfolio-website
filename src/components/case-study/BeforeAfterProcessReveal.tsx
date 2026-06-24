@@ -421,48 +421,6 @@ function BackendPanel({
   )
 }
 
-function ImpactMetricsGrid({
-  metrics,
-  reducedMotion,
-}: {
-  metrics: readonly ProcessImpactMetric[]
-  reducedMotion: boolean
-}) {
-  const ref = useRef<HTMLDivElement>(null)
-  const inView = useInView(ref, {
-    once: true,
-    amount: 0.35,
-    margin: '0px 0px -10% 0px',
-  })
-  const active = inView || reducedMotion
-
-  return (
-    <div
-      ref={ref}
-      className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6"
-    >
-      {metrics.map((metric, index) => (
-        <motion.div
-          key={metric.label}
-          className="rounded-2xl bg-elevated px-5 py-6 text-center ring-1 ring-accent/30 md:px-6 md:py-8"
-          initial={{ opacity: 0, y: 18 }}
-          animate={active ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
-          transition={{
-            duration: reducedMotion ? 0 : 0.77,
-            delay: reducedMotion ? 0 : index * 0.14,
-            ease: [0.22, 1, 0.36, 1],
-          }}
-        >
-          <p className="font-condensed text-4xl uppercase tracking-wide text-accent md:text-5xl">
-            {metric.value}
-          </p>
-          <p className="mt-2 text-sm leading-snug text-slate">{metric.label}</p>
-        </motion.div>
-      ))}
-    </div>
-  )
-}
-
 export function BeforeAfterProcessReveal({
   data,
   className = '',
@@ -523,13 +481,6 @@ export function BeforeAfterProcessReveal({
         <p className="text-sm leading-relaxed text-slate md:text-[15px]">{data.caption}</p>
       </figcaption>
     </figure>
-
-    {data.impactMetrics && data.impactMetrics.length > 0 && (
-      <ImpactMetricsGrid
-        metrics={data.impactMetrics}
-        reducedMotion={Boolean(reducedMotion)}
-      />
-    )}
     </div>
   )
 }

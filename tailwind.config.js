@@ -19,9 +19,18 @@ export default {
         surface: 'var(--color-surface)',
         elevated: 'var(--color-elevated)',
         ink: 'var(--color-ink)',
-        slate: 'var(--color-slate)',
+        slate: {
+          DEFAULT: 'var(--color-slate)',
+          muted: 'var(--color-slate-muted)',
+          subtle: 'var(--color-slate-subtle)',
+        },
         mist: 'var(--color-mist)',
-        accent: 'var(--color-accent)',
+        accent: {
+          DEFAULT: 'var(--color-accent)',
+          text: 'var(--color-accent-text)',
+          solid: 'var(--color-accent-solid)',
+          fg: 'var(--color-accent-fg)',
+        },
         ocean: 'var(--color-accent)',
         sky: {
           DEFAULT: 'var(--color-sky)',
@@ -32,6 +41,7 @@ export default {
         teal: purpleOutlineScale,
         glass: 'var(--color-glass)',
         'theme-border': 'var(--color-border)',
+        focus: 'var(--color-focus)',
       },
       fontFamily: {
         sans: ['"DM Sans"', 'system-ui', 'sans-serif'],

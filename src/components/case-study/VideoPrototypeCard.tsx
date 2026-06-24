@@ -10,7 +10,7 @@ export function VideoPrototypeCard({
   youtubeId,
   embedSrc,
   title,
-  footerLabel = 'Video prototype',
+  footerLabel,
   className = '',
 }: VideoPrototypeCardProps) {
   const resolvedSrc =
@@ -35,9 +35,11 @@ export function VideoPrototypeCard({
           referrerPolicy="strict-origin-when-cross-origin"
         />
       </div>
-      <p className="border-t border-white/[0.06] px-5 py-4 text-sm text-slate md:px-8">
-        {footerLabel}
-      </p>
+      {footerLabel && (
+        <p className="border-t border-white/[0.06] px-5 py-4 text-sm text-slate md:px-8">
+          {footerLabel}
+        </p>
+      )}
     </article>
   )
 }

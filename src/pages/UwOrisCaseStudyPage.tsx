@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { BriefPivotReveal } from '../components/case-study/BriefPivotReveal'
+import { BeforeAfterProcessReveal } from '../components/case-study/BeforeAfterProcessReveal'
 import { CaseStudyDemoVideo } from '../components/case-study/CaseStudyDemoVideo'
 import { CaseStudyPrototypeCaption } from '../components/case-study/CaseStudyPrototypeCaption'
 import { CaseStudyConclusion } from '../components/case-study/CaseStudyConclusion'
@@ -13,8 +14,14 @@ import { CaseStudyShell } from '../components/case-study/CaseStudyShell'
 import { DesignProcessSteps } from '../components/case-study/DesignProcessSteps'
 import { FeatureShowcase } from '../components/case-study/FeatureShowcase'
 import { FieldPhotoGallery } from '../components/case-study/FieldPhotoGallery'
+import { FindingsStatsGrid } from '../components/case-study/FindingsStatsGrid'
+import { ImageCompareSlider } from '../components/case-study/ImageCompareSlider'
 import { SectionBlock } from '../components/case-study/SectionBlock'
+import { ProblemStatementQuote } from '../components/case-study/ProblemStatementQuote'
+import { ResearchQuestionsPanel } from '../components/case-study/ResearchQuestionsPanel'
 import { SageIntegrationHub } from '../components/case-study/SageIntegrationHub'
+import { UwOrisHookSection } from '../components/case-study/UwOrisHookSection'
+import { WhosThisForPanel } from '../components/case-study/WhosThisForPanel'
 import { SmartBudgetingFlowReveal } from '../components/case-study/SmartBudgetingFlowReveal'
 import { SplitHeroCards } from '../components/case-study/SplitHeroCards'
 import {
@@ -57,7 +64,10 @@ export function UwOrisCaseStudyPage() {
               {uwOrisCaseStudyMeta.tagline}
             </p>
 
-            <CaseStudyImpactSummary metrics={uwOrisCaseStudyMeta.impactMetrics} />
+            <CaseStudyImpactSummary
+              metrics={uwOrisCaseStudyMeta.impactMetrics}
+              appearDelay={1}
+            />
           </motion.div>
         </div>
 
@@ -80,53 +90,26 @@ export function UwOrisCaseStudyPage() {
 
       <div className="space-y-20 pb-20 pt-10 md:space-y-28 md:pb-28 md:pt-14">
         <SectionBlock label={uwOrisSections.hook.label}>
-          <p className="w-full max-w-none text-left text-base leading-relaxed text-slate whitespace-pre-line md:text-lg">
-            {uwOrisSections.hook.body}
-          </p>
+          <UwOrisHookSection data={uwOrisSections.hook} />
         </SectionBlock>
 
         <SectionBlock label={uwOrisSections.challenge.label}>
           <p className="mb-8 w-full max-w-none text-left text-base leading-relaxed text-slate md:text-lg">
             {uwOrisSections.challenge.body}
           </p>
-          <blockquote className="case-study-quote mb-8 rounded-3xl border border-accent/25 bg-elevated/60 px-8 py-8 md:px-10 md:py-10">
+          <ProblemStatementQuote>
             <h2 className="mb-5 font-display text-2xl leading-tight text-ink md:text-3xl">
               Problem statement
             </h2>
             <p className="font-display text-xl leading-relaxed text-ink md:text-2xl">
               &ldquo;{uwOrisSections.challenge.problemStatement}&rdquo;
             </p>
-          </blockquote>
-          <div className="rounded-3xl bg-[#141418] px-7 py-8 ring-1 ring-white/[0.06] md:px-10 md:py-10">
-            <h3 className="font-display text-lg uppercase tracking-wide text-ink md:text-xl">
-              Research questions
-            </h3>
-            <ul className="mt-5 space-y-4 text-base leading-relaxed text-slate md:text-[17px]">
-              {uwOrisSections.researchQuestions.map((question) => (
-                <li key={question} className="flex gap-3">
-                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" aria-hidden />
-                  <span>{question}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="mt-8 rounded-3xl bg-[#141418] px-7 py-8 ring-1 ring-white/[0.06] md:px-10 md:py-10">
-            <h3 className="font-display text-lg uppercase tracking-wide text-ink md:text-xl">
-              {uwOrisSections.whosThisFor.title}
-            </h3>
-            <div className="mt-6 grid gap-6 md:grid-cols-3 md:gap-8">
-              {uwOrisSections.whosThisFor.audiences.map((audience) => (
-                <div key={audience.label}>
-                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
-                    {audience.label}
-                  </p>
-                  <p className="mt-3 text-sm leading-relaxed text-slate md:text-[15px]">
-                    {audience.body}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
+          </ProblemStatementQuote>
+          <ResearchQuestionsPanel questions={uwOrisSections.researchQuestions} />
+          <WhosThisForPanel
+            title={uwOrisSections.whosThisFor.title}
+            audiences={uwOrisSections.whosThisFor.audiences}
+          />
         </SectionBlock>
 
         <SectionBlock>
@@ -159,6 +142,10 @@ export function UwOrisCaseStudyPage() {
         </SectionBlock>
 
         <SectionBlock>
+          <BeforeAfterProcessReveal data={uwOrisSections.finalDesign.processComparison} />
+        </SectionBlock>
+
+        <SectionBlock>
           <div className="mb-8 md:mb-10">
             <h2 className="section-title mb-0">{uwOrisSections.process.title}</h2>
             <p className="mt-4 font-display text-xl uppercase tracking-wide text-ink md:text-2xl">
@@ -179,27 +166,26 @@ export function UwOrisCaseStudyPage() {
           <p className="mb-8 w-full max-w-none text-left text-base leading-relaxed text-slate md:text-lg">
             {uwOrisSections.findingsIntro}
           </p>
-          <div className="mb-10 flex flex-wrap justify-center gap-4 md:gap-6">
-            {uwOrisSections.findings.map((stat) => (
-              <div
-                key={stat.label}
-                className="w-full max-w-[300px] flex-[1_1_240px] rounded-2xl bg-elevated px-5 py-6 text-center ring-1 ring-accent/30 md:px-6 md:py-8"
-              >
-                <p className="font-condensed text-4xl uppercase tracking-wide text-accent md:text-5xl">
-                  {stat.value}
-                </p>
-                <p className="mt-2 text-sm leading-snug text-slate">{stat.label}</p>
-              </div>
-            ))}
-          </div>
+          <FindingsStatsGrid stats={uwOrisSections.findings} />
           <SmartBudgetingFlowReveal
             className="mb-10"
             data={uwOrisSections.userFlow}
           />
-          <p className="mb-6 w-full max-w-none text-base leading-relaxed text-slate md:text-lg">
-            {uwOrisSections.featuresIntro}
-          </p>
+          <p className="section-label mb-4">{uwOrisSections.solutionFeaturesLabel}</p>
+          <h2 className="mb-6 font-display text-3xl leading-tight text-ink md:text-4xl">
+            {uwOrisSections.solutionFeaturesTitle}
+          </h2>
+          <ImageCompareSlider
+            className="mb-8"
+            beforeSrc={uwOrisSections.worksheetCompare.beforeSrc}
+            afterSrc={uwOrisSections.worksheetCompare.afterSrc}
+            beforeAlt={uwOrisSections.worksheetCompare.beforeAlt}
+            afterAlt={uwOrisSections.worksheetCompare.afterAlt}
+            beforeLabel={uwOrisSections.worksheetCompare.beforeLabel}
+            afterLabel={uwOrisSections.worksheetCompare.afterLabel}
+          />
           <FeatureShowcase
+            title={uwOrisSections.featuresTitle}
             sidebarTitle={uwOrisSections.featuresSidebarTitle}
             features={uwOrisSections.features}
           />
@@ -215,13 +201,15 @@ export function UwOrisCaseStudyPage() {
           />
         </SectionBlock>
 
-        <SectionBlock label="Deliverables" title="Full capstone report">
+        <SectionBlock label="Deliverables" title="Video Prototype">
           <VideoPrototypeCard
             className="mb-8"
             embedSrc={uwOrisSections.videoPrototype.embedSrc}
             title={uwOrisSections.videoPrototype.title}
-            footerLabel={uwOrisSections.videoPrototype.footerLabel}
           />
+          <h3 className="mb-4 font-display text-lg uppercase tracking-wide text-ink md:text-xl">
+            {uwOrisSections.reportLinks.label}
+          </h3>
           <ul className="space-y-3">
             {uwOrisSections.reportLinks.items.map((link) => (
               <li key={link.href}>

@@ -30,11 +30,35 @@ export const uwOrisCaseStudyMeta = {
 export const uwOrisSections = {
   hook: {
     label: 'Most of the work is between the tools',
-    body: `A UW grant manager can run up to 75 active awards at once. For each one, the information needed to build a budget is scattered across 8+ surfaces — the Notice of Award PDF, shared folders, Excel templates, federal and UW rate sites, Workday, sponsor portals, email, and SAGE itself.
-
-Grant managers spend roughly 2–3 hours per award copying the same numbers by hand before they can do the judgment work only they can do. As one grant manager with more than 20 years of experience told us: "Every grant manager on campus is filling in all of this information piece by piece, all of the time."
-
-This was a coordination problem dressed up as a tooling problem — and every prior modernization made it worse by adding a surface to learn without removing any scatter.`,
+    lead:
+      'Grant managers juggle dozens of awards at once — but the hardest work happens in the gaps between tools, not inside any one of them.',
+    stats: [
+      { value: '75+', label: 'Active awards per grant manager' },
+      { value: '8+', label: 'Surfaces to assemble each budget' },
+      { value: '2–3h', label: 'Manual copying before judgment work' },
+    ],
+    surfacesLabel: 'Where budget data lives today',
+    surfaces: [
+      'Notice of Award (PDF)',
+      'Shared folders',
+      'Excel templates',
+      'Federal rate sites',
+      'UW rate sites',
+      'Workday',
+      'Sponsor portals',
+      'Email',
+      'SAGE',
+    ],
+    quote: {
+      text:
+        'Every grant manager on campus is filling in all of this information piece by piece, all of the time.',
+      attribution: 'Grant manager, 20+ years at UW',
+    },
+    insight: {
+      label: 'The real problem',
+      text:
+        'A coordination problem dressed up as a tooling problem — every modernization added a surface without removing the scatter.',
+    },
   },
   challenge: {
     label: 'The challenge',
@@ -461,7 +485,8 @@ This was a coordination problem dressed up as a tooling problem — and every pr
       ],
     },
   },
-  featuresSidebarTitle: 'Four hand-off gates in the proposed workflow',
+  featuresSidebarTitle: 'Five features and updates in the proposed workflow',
+  featuresTitle: 'New Features Integrated',
   sageIntegration: {
     title: 'All aspects into SAGE',
     subtitle:
@@ -475,87 +500,74 @@ This was a coordination problem dressed up as a tooling problem — and every pr
       { label: 'Excel', angle: -150 },
     ],
   },
-  featuresIntro:
-    'One screen per gate — G3 is the hero. If a reviewer sees only one screen, it should be the Budget Worksheet.',
+  solutionFeaturesLabel: 'Solution and Features',
+  solutionFeaturesTitle: 'Before & After our solution',
+  worksheetCompare: {
+    beforeSrc: '/images/uw-oris-worksheet-compare-before.jpg',
+    afterSrc: '/images/uw-oris-worksheet-compare-after.jpg',
+    beforeLabel: 'Before',
+    afterLabel: 'After',
+    beforeAlt:
+      'Legacy SAGE budget worksheet — multi-panel layout with separate salary, other costs, and totals tables',
+    afterAlt:
+      'SAGE Smart Budgeting worksheet — streamlined spreadsheet-style budget draft with personnel, travel, and direct costs in one view',
+  },
   features: [
     {
-      title: 'G1 · Context Setup',
-      headline: 'Parse the NOA',
-      icon: '📄',
-      image: '/images/uw-oris-feature-g1-noa-upload.png',
-      imageWidth: 1024,
-      imageHeight: 585,
-      imageAlt:
-        'SAGE Notice of Award upload screen — AI extracts fields from the NoA PDF and surfaces a diff against the worksheet',
-      imageScrollable: true,
-      imageFrameClass:
-        'flex min-h-[200px] flex-1 flex-col overflow-hidden bg-[#f4f4f6] md:min-h-[240px] md:max-h-[280px]',
-      description:
-        'The NOA arrives; AI extracts award number, dates, total, PI, sponsor, F&A, and salary cap — surfacing the delta against the existing eGC1 record. Medium/low-confidence fields queue for GM verification; system-owned fields stay read-only.',
-    },
-    {
-      title: 'G2 · Budget Settings',
-      headline: 'Pre-fill with provenance',
-      icon: '⚙️',
-      image: '/images/uw-oris-feature-g2-budget-settings.png',
-      imageWidth: 1024,
-      imageHeight: 838,
-      imageAlt:
-        'SAGE Budget Settings screen — green-highlighted fields pre-filled from eGC1 and Notice of Award',
-      imageScrollable: true,
-      imageFrameClass:
-        'flex min-h-[200px] flex-1 flex-col overflow-hidden bg-[#f4f4f6] md:min-h-[240px] md:max-h-[280px]',
-      description:
-        'Green source-labels mark every value the system pre-filled from authoritative UW and federal sources; white fields are the GM’s to own. Each rate shows its effective date — stale rates flag amber.',
-    },
-    {
-      title: 'G3 · Budget Worksheet',
+      title: 'Budget Worksheet',
       headline: 'The spreadsheet inside SAGE',
       icon: '📊',
-      image: '/images/uw-oris-feature-g3-budget-worksheet.png',
-      imageWidth: 1024,
-      imageHeight: 585,
+      video: '/videos/uw-oris-feature-g3-budget-worksheet.mp4',
       imageAlt:
         'SAGE Budget Worksheet — spreadsheet-style budget draft with mismatch resolution banner and personnel line items',
-      imageScrollable: true,
-      imageFrameClass:
-        'flex min-h-[200px] flex-1 flex-col overflow-hidden bg-[#f4f4f6] md:min-h-[240px] md:max-h-[280px]',
       description:
         'The hero screen — an Excel-like worksheet with live totals, dollar ↔ percent effort calculation, typed mismatch detection (Rounding / Substantive / Missing), and a suggested fix the GM can accept, edit, or reject.',
     },
     {
-      title: 'G4 · Import to SAGE',
-      headline: 'Review before commit',
+      title: 'Prefill Budget',
+      headline: 'Starting a New Budget without Starting from Scratch',
       icon: '🔒',
-      image: '/images/uw-oris-feature-g4-import-to-sage.png',
-      imageWidth: 1024,
-      imageHeight: 710,
+      video: '/videos/uw-oris-feature-g4-import-to-sage.mp4',
       imageAlt:
         'SAGE Smart Budgeting Excel add-in — spreadsheet with PDF source viewer, SAGE Add-in sidebar, and running total vs. target',
-      imageScrollable: true,
-      imageFrameClass:
-        'flex min-h-[200px] flex-1 flex-col overflow-hidden bg-[#f4f4f6] md:min-h-[240px] md:max-h-[280px]',
       description:
-        'A structured diff maps each worksheet row to a SAGE object code. Pre-submit checklist surfaces FCOI/SFI gates and “cannot auto-map” rows — submit stays disabled until critical items clear.',
+        'Users can easily pull and copy data from previous budgets they have worked on with a quick search and start a new budget without having to redo the same work again.',
     },
     {
-      title: 'Trust & AI behavior',
-      headline: 'Calibrated, not maximized',
-      icon: '🛡️',
-      image: '/images/uw-oris-feature-g5-trust-ai.png',
-      imageSrc2x: '/images/uw-oris-feature-g5-trust-ai@2x.png',
-      imageWidth: 1024,
-      imageHeight: 1008,
-      imageRetinaWidth: 2048,
+      title: 'Context Setup',
+      headline: 'Parse the NOA',
+      icon: '📄',
+      video: '/videos/uw-oris-feature-g1-noa.mp4',
       imageAlt:
-        'Trust and AI behavior design diagram — annotated UI screenshots with guideline callouts for confidence, provenance, and human review gates',
-      imageLink:
-        'https://www.figma.com/board/xM0Nngd7FT43mPrEc4AthR/HCDE-Capstone--UW-Research-?node-id=1634-1555&t=ASHcpd3Rjpuogi8q-1',
-      imageScrollable: true,
+        'SAGE Notice of Award upload screen — AI extracts fields from the NoA PDF and surfaces a diff against the worksheet',
+      description:
+        'The NOA arrives; AI extracts award number, dates, total, PI, sponsor, F&A, and salary cap — surfacing the delta against the existing eGC1 record. Medium/low-confidence fields queue for GM verification; system-owned fields stay read-only.',
+    },
+    {
+      title: 'Mismatch Resolve',
+      headline: 'Resolve Budget Mismatch with one click',
+      icon: '⚙️',
+      video: '/videos/uw-oris-feature-g2-mismatch-resolve.mp4',
+      imageAlt:
+        'SAGE Budget Worksheet — mismatch resolution banner with suggested one-click fix for rounding discrepancy',
+      description:
+        'The AI tool goes through budget history and suggests potential mismatch resolutions that reflect what the user has done in past budget setups — with a one-click fix.',
+    },
+    {
+      title: 'Knowledge & Data Layer',
+      headline: 'Backend',
+      icon: '🛡️',
+      image: '/images/uw-oris-feature-g5-knowledge-data-layer.png',
+      imageWidth: 1024,
+      imageHeight: 284,
+      imageAlt:
+        'Knowledge and data layer backend diagram — salary tables, fringe rates, past grants, tuition rates, sponsor guidelines, and AI rules engine',
+      imageFill: true,
+      imageFillCover: true,
       imageFrameClass:
         'flex min-h-[200px] flex-1 flex-col overflow-hidden bg-[#f4f4f6] md:min-h-[240px] md:max-h-[280px]',
       description:
-        'Every AI suggestion carries confidence + source + reasoning. Auto-fix is preview-then-confirm. In regulated financial work, a tool people trust too much is more dangerous than one they trust too little — so we designed to verify.',
+        'Authoritative UW and federal sources — salary tables, fringe and tuition rates, sponsor guidelines, past grants, and an AI rules engine — feed every suggestion and validation in Smart Budgeting.',
     },
   ],
   testimonial: {

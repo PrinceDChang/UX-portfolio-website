@@ -4,7 +4,7 @@ import { createPortal } from 'react-dom'
 
 const HOVER_ZOOM_DELAY_MS = 300
 const flowEase = [0.22, 1, 0.36, 1] as const
-const FLOW_ANIM_SPEED = 1.25
+const FLOW_ANIM_SPEED = 1.625
 const FLOW_SEGMENT_STAGGER = 0.22 / FLOW_ANIM_SPEED
 const FLOW_SEGMENT_DURATION = 0.45 / FLOW_ANIM_SPEED
 const FLOW_ROW_DELAY = 0.15 / FLOW_ANIM_SPEED

@@ -1,5 +1,6 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
+import { usePauseWhenOffscreen } from '../../lib/usePauseWhenOffscreen'
 import { ZoomableImage } from './ZoomableImage'
 
 export interface DesignProcessStep {
@@ -181,7 +182,7 @@ export function DesignProcessSteps({
   const [phase, setPhase] = useState<TimerPhase>('ring')
   const [ringProgress, setRingProgress] = useState(0)
   const [bridgeProgress, setBridgeProgress] = useState(0)
-  const pausedRef = useRef(false)
+  const { rootRef, pausedRef } = usePauseWhenOffscreen()
 
   const ringDurationMs = stepDurationMs * RING_PHASE_RATIO
   const bridgeDurationMs =
@@ -203,7 +204,7 @@ export function DesignProcessSteps({
     let totalPaused = 0
 
     const tick = (now: number) => {
-      if (pausedRef.current || document.hidden) {
+      if (pausedRef.current) {
         if (pausedAt === 0) pausedAt = now
         raf = requestAnimationFrame(tick)
         return
@@ -242,14 +243,6 @@ export function DesignProcessSteps({
     cycleDurationMs,
   ])
 
-  useEffect(() => {
-    const onVisibility = () => {
-      pausedRef.current = document.hidden
-    }
-    document.addEventListener('visibilitychange', onVisibility)
-    return () => document.removeEventListener('visibilitychange', onVisibility)
-  }, [])
-
   const selectStep = (index: number) => {
     setActiveIndex(index)
     setPhase('ring')
@@ -283,6 +276,7 @@ export function DesignProcessSteps({
   const hideTabImages = artifactsBelowTrack || Boolean(renderBelowTrack)
 
   return (
+    <div ref={rootRef}>
     <div className="design-process-track overflow-x-auto rounded-2xl bg-elevated ring-1 ring-theme-border scroll-smooth [scrollbar-width:thin]">
       <p className="px-4 pt-3 text-[10px] text-slate/60 md:hidden">
         Swipe to explore each step
@@ -443,6 +437,7 @@ export function DesignProcessSteps({
               </motion.figure>
             </AnimatePresence>
           )}
+    </div>
     </div>
   )
 }

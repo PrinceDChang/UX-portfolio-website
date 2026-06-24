@@ -10,6 +10,8 @@ interface CaseStudyImpactSummaryProps {
   metrics?: readonly CaseStudyImpactMetric[]
   summary?: string
   className?: string
+  /** Seconds before the appear animation starts */
+  appearDelay?: number
 }
 
 function impactGridClass(count: number) {
@@ -22,6 +24,7 @@ export function CaseStudyImpactSummary({
   metrics,
   summary,
   className = '',
+  appearDelay = 0,
 }: CaseStudyImpactSummaryProps) {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
@@ -38,6 +41,7 @@ export function CaseStudyImpactSummary({
           animate={active ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
           transition={{
             duration: reducedMotion ? 0 : 0.55,
+            delay: reducedMotion ? 0 : appearDelay,
             ease: [0.22, 1, 0.36, 1],
           }}
         >
@@ -53,7 +57,7 @@ export function CaseStudyImpactSummary({
             animate={active ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
             transition={{
               duration: reducedMotion ? 0 : 0.55,
-              delay: reducedMotion ? 0 : index * 0.1,
+              delay: reducedMotion ? 0 : appearDelay + index * 0.1,
               ease: [0.22, 1, 0.36, 1],
             }}
           >
