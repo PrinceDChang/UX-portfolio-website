@@ -13,8 +13,11 @@ import { CaseStudyDemoVideo } from '../components/case-study/CaseStudyDemoVideo'
 import { CaseStudyPrototypeCaption } from '../components/case-study/CaseStudyPrototypeCaption'
 import { FeatureShowcase } from '../components/case-study/FeatureShowcase'
 import { FigmaToClaudeFlow } from '../components/case-study/FigmaToClaudeFlow'
+import { ProblemStatementQuote } from '../components/case-study/ProblemStatementQuote'
 import { SectionBlock } from '../components/case-study/SectionBlock'
-import { SplitHeroCards } from '../components/case-study/SplitHeroCards'
+import { SushiTalkSolutionSection } from '../components/case-study/SushiTalkSolutionSection'
+import { SushiTalkChallengeIntro } from '../components/case-study/SushiTalkChallengeIntro'
+import { SushiTalkHookSection } from '../components/case-study/SushiTalkHookSection'
 import {
   sushitalkCaseStudyMeta,
   sushitalkSections,
@@ -82,23 +85,19 @@ export function SushiTalkCaseStudyPage() {
 
       <div className="space-y-20 pb-20 pt-10 md:space-y-28 md:pb-28 md:pt-14">
         <SectionBlock label={sushitalkSections.hook.label}>
-          <p className="w-full max-w-none text-left text-base leading-relaxed text-slate whitespace-pre-line md:text-lg">
-            {sushitalkSections.hook.body}
-          </p>
+          <SushiTalkHookSection data={sushitalkSections.hook} />
         </SectionBlock>
 
         <SectionBlock label={sushitalkSections.challenge.label}>
-          <p className="mb-8 w-full max-w-none text-left text-base leading-relaxed text-slate md:text-lg">
-            {sushitalkSections.challenge.body}
-          </p>
-          <blockquote className="case-study-quote mb-8 rounded-3xl border border-accent/25 bg-elevated/60 px-8 py-8 md:px-10 md:py-10">
+          <SushiTalkChallengeIntro data={sushitalkSections.challenge} />
+          <ProblemStatementQuote className="mt-8">
             <h2 className="mb-5 font-display text-2xl leading-tight text-ink md:text-3xl">
               Problem statement
             </h2>
             <p className="font-display text-xl leading-relaxed text-ink md:text-2xl">
               &ldquo;{sushitalkSections.challenge.problemStatement}&rdquo;
             </p>
-          </blockquote>
+          </ProblemStatementQuote>
           <div className="rounded-3xl bg-[#141418] px-7 py-8 ring-1 ring-white/[0.06] md:px-10 md:py-10">
             <h3 className="font-display text-lg uppercase tracking-wide text-ink md:text-xl">
               Research questions
@@ -128,12 +127,7 @@ export function SushiTalkCaseStudyPage() {
         </SectionBlock>
 
         <SectionBlock>
-          <SplitHeroCards
-            label={sushitalkSections.solution.label}
-            headline={sushitalkSections.solution.subtitle}
-            body={sushitalkSections.solution.body}
-            pillars={sushitalkSections.solution.pillars}
-          />
+          <SushiTalkSolutionSection data={sushitalkSections.solution} />
         </SectionBlock>
 
         <SectionBlock

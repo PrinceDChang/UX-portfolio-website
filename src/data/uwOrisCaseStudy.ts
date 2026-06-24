@@ -402,7 +402,7 @@ export const uwOrisSections = {
       },
       {
         number: '04',
-        title: 'Prototype & usability testing',
+        title: 'Prototype & Usability Testing (x4)',
         body: `Merged four teammate ideations into one consolidated direction — SAGE as host with an embedded worksheet — then validated with moderated think-aloud sessions.`,
         listItems: [
           'Three GMs walked through the live prototype; a fourth gave complementary inquiry on current SAGE.',

@@ -27,13 +27,59 @@ export const sushitalkCaseStudyMeta = {
 export const sushitalkSections = {
   hook: {
     label: 'Language is only part of living in Japan',
-    body: `For non-native Japanese learners, finding the right tutor is rarely just about grammar drills. Some are preparing for JLPT exams. Others are planning a move, navigating visas and housing, or figuring out how daily life works once they arrive. Most platforms treat every learner the same — and bury the tutors who could actually help behind paywalls and weak search.
-
-SushiTalk began as a passion project with a software engineer at Google Japan: a platform where native tutors can host their practice and learners can find someone who matches their language goals and their life-in-Japan journey — not just their lesson budget.`,
+    lead: 'Finding the right tutor is rarely just about grammar drills — learners bring very different journeys.',
+    learnerPaths: [
+      {
+        label: 'JLPT prep',
+        body: 'Exam-focused study, structured progression, and confidence before test day.',
+      },
+      {
+        label: 'Planning a move',
+        body: 'Visas, housing, and what to expect before arriving in Japan.',
+      },
+      {
+        label: 'Life in Japan',
+        body: 'Daily routines, culture, and long-term support once you are there.',
+      },
+    ],
+    marketGapsLabel: "What's broken today",
+    marketGaps: [
+      {
+        label: 'One-size-fits-all',
+        body: 'Most platforms treat every learner like a grammar student.',
+      },
+      {
+        label: 'Paywalled discovery',
+        body: 'The best tutors stay hidden until you commit or pay.',
+      },
+      {
+        label: 'Thin profiles',
+        body: 'Little signal on relocation help or local-life expertise.',
+      },
+    ],
+    origin: {
+      label: 'Why SushiTalk',
+      body: 'A passion project with a Google Japan engineer — match on language goals and life-in-Japan journey, not just lesson budget.',
+    },
   },
   challenge: {
     label: 'The challenge',
-    body: `We had eight weeks and a distributed student team to define stage one of a two-sided marketplace — with a longer-term vision of supporting learners beyond language alone. Competing products showed what not to do: discovery locked behind paywalls, profiles that hide whether a tutor understands relocation or local life, and search that makes it hard to compare who can truly help on your journey.`,
+    lead: 'Eight weeks to define stage one of a two-sided marketplace — with a vision beyond language alone.',
+    competitorGapsLabel: 'What competitors get wrong',
+    competitorGaps: [
+      {
+        title: 'Paywalled discovery',
+        body: 'Core browsing locked before learners can compare who fits their journey.',
+      },
+      {
+        title: 'Profiles miss context',
+        body: 'Hard to tell whether a tutor understands relocation or daily life in Japan.',
+      },
+      {
+        title: 'Search gates value',
+        body: 'Filters and side-by-side comparison hidden behind premium tiers.',
+      },
+    ],
     problemStatement: `How might we help non-native Japanese learners discover and connect with native tutors who match their language goals and their broader journey — whether learning Japanese, moving to Japan, or building a life there — through free browsing, transparent profiles, and search that does not gate core value behind a paywall?`,
   },
   goals: [
@@ -50,22 +96,39 @@ SushiTalk began as a passion project with a software engineer at Google Japan: a
   ],
   solution: {
     label: 'Solution',
-    subtitle: 'Match on language. Support the full journey.',
-    body: `SushiTalk centers on meaningful matching: learners explore tutors, compare teaching focus, availability, and specialties — including support for relocation, daily life, and staying in Japan — before committing to premium flows. Tutors get a clear place to present what they offer beyond textbook lessons.
-
-We scoped stage one around the discovery and profile flows the founder needed to validate with users and investors — the foundation for a platform that grows from language into specialized life-in-Japan guidance.
-
-Stage two expands that foundation with resources and flows for documentation, healthcare, housing, and other topics learners need once language tutoring alone is not enough.`,
+    headline: 'Match on language. Support the full journey.',
+    lead: 'Meaningful matching before commitment — with room to grow from tutoring into life-in-Japan support.',
     pillars: [
       {
-        title: 'Journey-based matching',
         icon: '🎯',
-        body: `Profiles and filters surface language level, teaching style, and life-in-Japan specialties so learners connect with tutors who fit where they are — and where they are headed.`,
+        title: 'Journey-based matching',
+        points: [
+          'Language level and teaching style on every profile',
+          'Life-in-Japan specialties surfaced in search',
+          'Compare fit before booking',
+        ],
       },
       {
-        title: 'Open discovery',
         icon: '🔍',
-        body: `Free browsing of tutor listings and profiles so learners can evaluate the marketplace — and find the right match — before creating an account or hitting a paywall.`,
+        title: 'Open discovery',
+        points: [
+          'Browse tutors and profiles for free',
+          'Evaluate the marketplace before sign-up',
+          'No paywall on core comparison',
+        ],
+      },
+    ],
+    phasesLabel: 'How we scoped it',
+    phases: [
+      {
+        label: 'Stage 1',
+        title: 'Discovery & profiles',
+        body: 'Tutor search, filters, and profile flows to validate with users and investors.',
+      },
+      {
+        label: 'Stage 2',
+        title: 'Beyond language',
+        body: 'Documentation, healthcare, housing, and guidance once tutoring alone is not enough.',
       },
     ],
   },

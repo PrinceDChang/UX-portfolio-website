@@ -164,6 +164,34 @@ export const featuredProjects: Project[] = [
     hoverVideo: '/videos/uw-oris-hover.mp4',
   },
   {
+    id: 'sushitalk',
+    title: 'SushiTalk',
+    role: 'UX Designer',
+    location: 'Japan',
+    city: 'Tokyo',
+    lat: globePinCoordinates.sushitalk.lat,
+    lng: globePinCoordinates.sushitalk.lng,
+    description:
+      'A platform for native Japanese tutors to host their business and learners to connect with tutors on their journey to learn Japanese.',
+    href: '/projects/sushitalk',
+    image: '/images/sushitalk-postcard-hero.png',
+    imageAlt:
+      'SushiTalk mentor marketplace on a desktop monitor in a Tokyo office, with mascot branding on the desk',
+    tags: ['Design', 'Mobile', 'Start-up'],
+    keywords: [
+      'Competitive audit',
+      'Personas',
+      'User flows',
+      'Wireframes',
+      'Prototyping',
+      'A/B testing',
+      'Usability testing',
+    ],
+    heroBackgroundCard: true,
+    heroImageBackground: '#f5f0e8',
+    hoverVideo: '/videos/sushitalk-hover.mp4',
+  },
+  {
     id: 'cue',
     title: 'Cue',
     role: 'UX Designer',
@@ -215,34 +243,6 @@ export const featuredProjects: Project[] = [
     heroBackgroundCard: true,
     heroImageBackground: '#ffffff',
     hoverVideo: '/videos/coplan-hover.mp4',
-  },
-  {
-    id: 'sushitalk',
-    title: 'SushiTalk',
-    role: 'UX Designer',
-    location: 'Japan',
-    city: 'Tokyo',
-    lat: globePinCoordinates.sushitalk.lat,
-    lng: globePinCoordinates.sushitalk.lng,
-    description:
-      'A platform for native Japanese tutors to host their business and learners to connect with tutors on their journey to learn Japanese.',
-    href: '/projects/sushitalk',
-    image: '/images/sushitalk-postcard-hero.png',
-    imageAlt:
-      'SushiTalk mentor marketplace on a desktop monitor in a Tokyo office, with mascot branding on the desk',
-    tags: ['Design', 'Mobile', 'Start-up'],
-    keywords: [
-      'Competitive audit',
-      'Personas',
-      'User flows',
-      'Wireframes',
-      'Prototyping',
-      'A/B testing',
-      'Usability testing',
-    ],
-    heroBackgroundCard: true,
-    heroImageBackground: '#f5f0e8',
-    hoverVideo: '/videos/sushitalk-hover.mp4',
   },
   {
     id: 'wa211',
@@ -343,8 +343,8 @@ export const featuredProjects: Project[] = [
 /** Projects shown on the home page globe (pins + preview cards). */
 export const globeFeaturedProjectIds = [
   'uw-oris',
-  'cue',
   'sushitalk',
+  'cue',
   'wa211',
   'coplan',
 ] as const

@@ -159,9 +159,8 @@ export function FigmaToClaudeFlow({
             <div className="mt-5 flex justify-center md:mt-6">
               <a
                 href={cta.href}
-                {...(cta.href.startsWith('http')
-                  ? { target: '_blank', rel: 'noopener noreferrer' }
-                  : {})}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center justify-center rounded-full border border-accent/35 bg-accent/15 px-6 py-2.5 text-sm font-semibold text-ink ring-1 ring-accent/25 transition hover:bg-accent/25"
               >
                 {cta.label}

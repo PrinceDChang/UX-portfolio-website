@@ -46,8 +46,29 @@ interface BeforeAfterProcessRevealProps {
   className?: string
 }
 
-const ROW_GAP_S = 2.4
-const STEP_STAGGER_S = 0.1
+const PROCESS_ANIM_SPEED = 1.2
+const processEase = [0.22, 1, 0.36, 1] as const
+
+const ROW_GAP_S = 2.4 / PROCESS_ANIM_SPEED
+const STEP_STAGGER_S = 0.1 / PROCESS_ANIM_SPEED
+const BRIDGE_GAP_S = 0.35 / PROCESS_ANIM_SPEED
+const AFTER_GAP_S = 0.55 / PROCESS_ANIM_SPEED
+const IMPACT_GAP_S = 0.45 / PROCESS_ANIM_SPEED
+
+const D_BRIDGE = 0.45 / PROCESS_ANIM_SPEED
+const D_ARROW = 0.55 / PROCESS_ANIM_SPEED
+const D_BADGE = 0.35 / PROCESS_ANIM_SPEED
+const D_IMPACT = 0.5 / PROCESS_ANIM_SPEED
+const D_STEP = 0.45 / PROCESS_ANIM_SPEED
+const D_STEP_LIST = 0.4 / PROCESS_ANIM_SPEED
+const D_AFTER = 0.5 / PROCESS_ANIM_SPEED
+const D_BACKEND = 0.55 / PROCESS_ANIM_SPEED
+const D_DIAGRAM = 0.4 / PROCESS_ANIM_SPEED
+const D_PULSE = 1.8 / PROCESS_ANIM_SPEED
+const PULSE_LEAD_S = 0.6 / PROCESS_ANIM_SPEED
+const ARROW_DELAY_S = 0.05 / PROCESS_ANIM_SPEED
+const BADGE_DELAY_S = 0.15 / PROCESS_ANIM_SPEED
+const BACKEND_DELAY_S = 0.2 / PROCESS_ANIM_SPEED
 
 function stepDelay(rowIndex: number, stepIndex: number, reducedMotion: boolean) {
   if (reducedMotion) return 0
@@ -56,17 +77,17 @@ function stepDelay(rowIndex: number, stepIndex: number, reducedMotion: boolean) 
 
 function bridgeDelay(rowIndex: number, stepCount: number, reducedMotion: boolean) {
   if (reducedMotion) return 0
-  return rowIndex * ROW_GAP_S + stepCount * STEP_STAGGER_S + 0.35
+  return rowIndex * ROW_GAP_S + stepCount * STEP_STAGGER_S + BRIDGE_GAP_S
 }
 
 function afterDelay(rowIndex: number, stepCount: number, reducedMotion: boolean) {
   if (reducedMotion) return 0
-  return bridgeDelay(rowIndex, stepCount, reducedMotion) + 0.55
+  return bridgeDelay(rowIndex, stepCount, reducedMotion) + AFTER_GAP_S
 }
 
 function impactDelay(rowIndex: number, stepCount: number, reducedMotion: boolean) {
   if (reducedMotion) return 0
-  return afterDelay(rowIndex, stepCount, reducedMotion) + 0.45
+  return afterDelay(rowIndex, stepCount, reducedMotion) + IMPACT_GAP_S
 }
 
 function StepCard({
@@ -142,14 +163,14 @@ function ProcessBridge({
   delay: number
 }) {
   const reducedMotion = useReducedMotion()
-  const pulseDelay = delay + 0.6
+  const pulseDelay = delay + PULSE_LEAD_S
 
   return (
     <motion.div
       className="flex w-full flex-col items-center justify-center gap-2 py-4 lg:py-0"
       initial={{ opacity: 0, scale: 0.92 }}
       animate={show ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.92 }}
-      transition={{ duration: 0.45, delay, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: D_BRIDGE, delay, ease: processEase }}
       aria-hidden
     >
       <motion.svg
@@ -159,7 +180,7 @@ function ProcessBridge({
         aria-hidden
         initial={{ opacity: 0, scaleX: 0 }}
         animate={show ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
-        transition={{ duration: 0.55, delay: delay + 0.05, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: D_ARROW, delay: delay + ARROW_DELAY_S, ease: processEase }}
         style={{ transformOrigin: 'left center' }}
       >
         <motion.g
@@ -169,7 +190,7 @@ function ProcessBridge({
               : { x: 0, opacity: 1 }
           }
           transition={{
-            duration: 1.8,
+            duration: D_PULSE,
             repeat: show && !reducedMotion ? Infinity : 0,
             ease: 'easeInOut',
             delay: show && !reducedMotion ? pulseDelay : 0,
@@ -192,7 +213,7 @@ function ProcessBridge({
         aria-hidden
         initial={{ opacity: 0, scaleY: 0 }}
         animate={show ? { opacity: 1, scaleY: 1 } : { opacity: 0, scaleY: 0 }}
-        transition={{ duration: 0.55, delay: delay + 0.05, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: D_ARROW, delay: delay + ARROW_DELAY_S, ease: processEase }}
         style={{ transformOrigin: 'top center' }}
       >
         <motion.g
@@ -202,7 +223,7 @@ function ProcessBridge({
               : { y: 0, opacity: 1 }
           }
           transition={{
-            duration: 1.8,
+            duration: D_PULSE,
             repeat: show && !reducedMotion ? Infinity : 0,
             ease: 'easeInOut',
             delay: show && !reducedMotion ? pulseDelay : 0,
@@ -222,7 +243,7 @@ function ProcessBridge({
         className="rounded-full bg-accent/25 px-3 py-1 text-center text-[10px] font-bold uppercase tracking-[0.14em] text-ink ring-1 ring-accent/40 md:text-[11px]"
         initial={{ y: 6, opacity: 0 }}
         animate={show ? { y: 0, opacity: 1 } : { y: 6, opacity: 0 }}
-        transition={{ duration: 0.35, delay: delay + 0.15 }}
+        transition={{ duration: D_BADGE, delay: delay + BADGE_DELAY_S }}
       >
         {badge}
       </motion.span>
@@ -247,7 +268,7 @@ function ImpactBanner({
       className="mt-3 rounded-xl bg-accent/20 px-4 py-3 text-xs leading-relaxed text-ink ring-1 ring-accent/35 md:text-sm"
       initial={{ opacity: 0, y: 10 }}
       animate={show ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-      transition={{ duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: D_IMPACT, delay, ease: processEase }}
     >
       {text}
     </motion.div>
@@ -304,7 +325,7 @@ function ProcessRow({
             initial={{ opacity: 0, x: -14 }}
             animate={active ? { opacity: 1, x: 0 } : { opacity: 0, x: -14 }}
             transition={{
-              duration: 0.45,
+              duration: D_STEP,
               delay: stepDelay(0, 0, reducedMotion),
             }}
           >
@@ -318,9 +339,9 @@ function ProcessRow({
                 initial={{ opacity: 0, x: -14 }}
                 animate={active ? { opacity: 1, x: 0 } : { opacity: 0, x: -14 }}
                 transition={{
-                  duration: 0.4,
+                  duration: D_STEP_LIST,
                   delay: stepDelay(0, stepIndex, reducedMotion),
-                  ease: [0.22, 1, 0.36, 1],
+                  ease: processEase,
                 }}
               >
                 <StepCard>{step}</StepCard>
@@ -344,7 +365,7 @@ function ProcessRow({
         <motion.div
           initial={{ opacity: 0, x: 18 }}
           animate={active ? { opacity: 1, x: 0 } : { opacity: 0, x: 18 }}
-          transition={{ duration: 0.5, delay: afterAt, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: D_AFTER, delay: afterAt, ease: processEase }}
         >
           {row.afterFlow ? (
             <FlowDiagram flow={row.afterFlow} tone="after" />
@@ -399,7 +420,7 @@ function BackendPanel({
       className="mt-8 rounded-2xl border border-accent/25 bg-accent/5 p-4 md:p-5"
       initial={{ opacity: 0, y: 16 }}
       animate={active ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
-      transition={{ duration: 0.55, delay: reducedMotion ? 0 : 0.2, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: D_BACKEND, delay: reducedMotion ? 0 : BACKEND_DELAY_S, ease: processEase }}
     >
       <p className="text-center text-[10px] font-semibold uppercase tracking-[0.18em] text-accent">
         ↑ {data.note} ↑
@@ -454,7 +475,7 @@ export function BeforeAfterProcessReveal({
           className={PROCESS_GRID}
           initial={{ opacity: 0 }}
           animate={showDiagram ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: D_DIAGRAM, ease: processEase }}
         >
           <p className="mb-2 hidden self-end text-xs font-bold uppercase tracking-[0.2em] text-slate/50 lg:block">
             {data.beforeColumnLabel}

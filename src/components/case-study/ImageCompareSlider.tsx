@@ -290,7 +290,7 @@ export function ImageCompareSlider({
           style={{ opacity: beforeLabelOpacity }}
           aria-hidden={beforeLabelOpacity < 0.04}
         >
-          <span className="rounded-lg bg-[#141418]/88 px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] text-white shadow-[0_4px_20px_rgba(0,0,0,0.35)] ring-1 ring-white/20 backdrop-blur-md md:text-sm">
+          <span className="rounded-lg bg-white px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] text-[#141418] shadow-[0_4px_24px_rgba(0,0,0,0.28)] ring-2 ring-[#141418]/15 backdrop-blur-md md:text-sm">
             {beforeLabel}
           </span>
         </span>

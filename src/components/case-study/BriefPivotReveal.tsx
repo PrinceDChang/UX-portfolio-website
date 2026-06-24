@@ -18,7 +18,25 @@ interface BriefPivotRevealProps {
   className?: string
 }
 
-const ease = [0.22, 1, 0.36, 1] as const
+const PIVOT_ANIM_SPEED = 1.2
+const pivotEase = [0.22, 1, 0.36, 1] as const
+
+const D_ENTER = 0.55 / PIVOT_ANIM_SPEED
+const PAUSE_BEFORE_STRIKE = 0.4 / PIVOT_ANIM_SPEED
+const D_STRIKE = 0.65 / PIVOT_ANIM_SPEED
+const PAUSE_BEFORE_ARROW = 0.25 / PIVOT_ANIM_SPEED
+const PAUSE_BEFORE_REVISED = 0.35 / PIVOT_ANIM_SPEED
+const D_BADGE = 0.35 / PIVOT_ANIM_SPEED
+const BADGE_DELAY = 0.2 / PIVOT_ANIM_SPEED
+const D_ARROW_WRAP = 0.4 / PIVOT_ANIM_SPEED
+const D_REVISED = 0.6 / PIVOT_ANIM_SPEED
+const NEW_FOCUS_EXTRA_DELAY = 0.25 / PIVOT_ANIM_SPEED
+const D_PIVOT_LABEL = 0.35 / PIVOT_ANIM_SPEED
+const PIVOT_LABEL_DELAY = 0.25 / PIVOT_ANIM_SPEED
+const D_ARROW = 0.65 / PIVOT_ANIM_SPEED
+const ARROW_DELAY = 0.15 / PIVOT_ANIM_SPEED
+const D_PULSE = 1.8 / PIVOT_ANIM_SPEED
+const PULSE_DELAY = 0.75 / PIVOT_ANIM_SPEED
 
 function BriefCard({
   label,
@@ -73,7 +91,7 @@ function PivotArrow({ show, reducedMotion }: { show: boolean; reducedMotion: boo
         className="text-center text-[10px] font-bold uppercase tracking-[0.18em] text-accent/80"
         initial={{ opacity: 0, y: -4 }}
         animate={show ? { opacity: 1, y: 0 } : { opacity: 0, y: -4 }}
-        transition={{ duration: reducedMotion ? 0 : 0.35, ease, delay: reducedMotion ? 0 : 0.25 }}
+        transition={{ duration: reducedMotion ? 0 : D_PIVOT_LABEL, ease: pivotEase, delay: reducedMotion ? 0 : PIVOT_LABEL_DELAY }}
       >
         Pivot
       </motion.p>
@@ -85,9 +103,9 @@ function PivotArrow({ show, reducedMotion }: { show: boolean; reducedMotion: boo
         initial={{ opacity: 0, x: -56 }}
         animate={show ? { opacity: 1, x: 0 } : { opacity: 0, x: -56 }}
         transition={{
-          duration: reducedMotion ? 0 : 0.65,
-          ease,
-          delay: reducedMotion ? 0 : 0.15,
+          duration: reducedMotion ? 0 : D_ARROW,
+          ease: pivotEase,
+          delay: reducedMotion ? 0 : ARROW_DELAY,
         }}
       >
         <motion.g
@@ -97,10 +115,10 @@ function PivotArrow({ show, reducedMotion }: { show: boolean; reducedMotion: boo
               : { x: 0, opacity: 1 }
           }
           transition={{
-            duration: 1.8,
+            duration: D_PULSE,
             repeat: show && !reducedMotion ? Infinity : 0,
             ease: 'easeInOut',
-            delay: show && !reducedMotion ? 0.75 : 0,
+            delay: show && !reducedMotion ? PULSE_DELAY : 0,
           }}
         >
           <path
@@ -120,9 +138,9 @@ function PivotArrow({ show, reducedMotion }: { show: boolean; reducedMotion: boo
         initial={{ opacity: 0, y: -48 }}
         animate={show ? { opacity: 1, y: 0 } : { opacity: 0, y: -48 }}
         transition={{
-          duration: reducedMotion ? 0 : 0.65,
-          ease,
-          delay: reducedMotion ? 0 : 0.15,
+          duration: reducedMotion ? 0 : D_ARROW,
+          ease: pivotEase,
+          delay: reducedMotion ? 0 : ARROW_DELAY,
         }}
       >
         <motion.g
@@ -132,10 +150,10 @@ function PivotArrow({ show, reducedMotion }: { show: boolean; reducedMotion: boo
               : { y: 0, opacity: 1 }
           }
           transition={{
-            duration: 1.8,
+            duration: D_PULSE,
             repeat: show && !reducedMotion ? Infinity : 0,
             ease: 'easeInOut',
-            delay: show && !reducedMotion ? 0.75 : 0,
+            delay: show && !reducedMotion ? PULSE_DELAY : 0,
           }}
         >
           <path
@@ -162,11 +180,11 @@ export function BriefPivotReveal({ data, className = '' }: BriefPivotRevealProps
   const active = inView || Boolean(reducedMotion)
   const [crossedOut, setCrossedOut] = useState(false)
 
-  const enterDuration = reducedMotion ? 0 : 0.55
-  const pauseBeforeStrike = reducedMotion ? 0 : 0.4
-  const strikeDuration = reducedMotion ? 0 : 0.65
-  const pauseBeforeArrow = reducedMotion ? 0 : 0.25
-  const pauseBeforeRevised = reducedMotion ? 0 : 0.35
+  const enterDuration = reducedMotion ? 0 : D_ENTER
+  const pauseBeforeStrike = reducedMotion ? 0 : PAUSE_BEFORE_STRIKE
+  const strikeDuration = reducedMotion ? 0 : D_STRIKE
+  const pauseBeforeArrow = reducedMotion ? 0 : PAUSE_BEFORE_ARROW
+  const pauseBeforeRevised = reducedMotion ? 0 : PAUSE_BEFORE_REVISED
 
   const strikeDelay = enterDuration + pauseBeforeStrike
 
@@ -195,7 +213,7 @@ export function BriefPivotReveal({ data, className = '' }: BriefPivotRevealProps
           className="relative"
           initial={{ opacity: 0, y: 20 }}
           animate={active ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: enterDuration, ease }}
+          transition={{ duration: enterDuration, ease: pivotEase }}
         >
           <BriefCard
             label={data.original.label}
@@ -209,9 +227,9 @@ export function BriefPivotReveal({ data, className = '' }: BriefPivotRevealProps
             initial={{ opacity: 0, scale: 0.9 }}
             animate={crossedOut ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
             transition={{
-              duration: reducedMotion ? 0 : 0.35,
-              ease,
-              delay: reducedMotion ? 0 : 0.2,
+              duration: reducedMotion ? 0 : D_BADGE,
+              ease: pivotEase,
+              delay: reducedMotion ? 0 : BADGE_DELAY,
             }}
           >
             Old Focus
@@ -223,7 +241,7 @@ export function BriefPivotReveal({ data, className = '' }: BriefPivotRevealProps
           initial={{ opacity: 0 }}
           animate={crossedOut ? { opacity: 1 } : { opacity: 0 }}
           transition={{
-            duration: reducedMotion ? 0 : 0.4,
+            duration: reducedMotion ? 0 : D_ARROW_WRAP,
             delay: reducedMotion ? 0 : pauseBeforeArrow,
           }}
         >
@@ -239,8 +257,8 @@ export function BriefPivotReveal({ data, className = '' }: BriefPivotRevealProps
               : { opacity: 0, y: 20, scale: 0.97 }
           }
           transition={{
-            duration: reducedMotion ? 0 : 0.6,
-            ease,
+            duration: reducedMotion ? 0 : D_REVISED,
+            ease: pivotEase,
             delay: reducedMotion ? 0 : strikeDuration + pauseBeforeArrow + pauseBeforeRevised,
           }}
         >
@@ -255,10 +273,10 @@ export function BriefPivotReveal({ data, className = '' }: BriefPivotRevealProps
             initial={{ opacity: 0, scale: 0.9 }}
             animate={crossedOut ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
             transition={{
-              duration: reducedMotion ? 0 : 0.35,
-              ease,
+              duration: reducedMotion ? 0 : D_BADGE,
+              ease: pivotEase,
               delay:
-                reducedMotion ? 0 : strikeDuration + pauseBeforeArrow + pauseBeforeRevised + 0.25,
+                reducedMotion ? 0 : strikeDuration + pauseBeforeArrow + pauseBeforeRevised + NEW_FOCUS_EXTRA_DELAY,
             }}
           >
             New focus
