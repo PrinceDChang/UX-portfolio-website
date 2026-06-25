@@ -463,6 +463,7 @@ export const sushitalkSections = {
       label: 'What’s next:',
       items: [
         'Continue hi-fi iteration toward launch with the SushiTalk founder team.',
+        'Conduct usability tests with users to see and validate our design choices.',
         'Expand from three priority screens to the full five-screen stage-one roadmap.',
         'Grow phase-two flows for life-in-Japan support — documentation, healthcare, and relocation guidance.',
       ],
