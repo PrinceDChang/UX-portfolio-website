@@ -9,12 +9,18 @@ interface ResearchQuestionsPanelProps {
   questions: readonly string[]
   title?: string
   className?: string
+  /** Tighter vertical spacing between items (space-y-3). */
+  compact?: boolean
+  /** Lighter elevated surface instead of dark card. */
+  elevated?: boolean
 }
 
 export function ResearchQuestionsPanel({
   questions,
   title = 'Research questions',
   className = '',
+  compact = false,
+  elevated = false,
 }: ResearchQuestionsPanelProps) {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, {
@@ -25,15 +31,20 @@ export function ResearchQuestionsPanel({
   const reducedMotion = useReducedMotion()
   const active = inView || Boolean(reducedMotion)
 
+  const surfaceClass = elevated
+    ? 'rounded-3xl bg-elevated/60 px-7 py-8 ring-1 ring-white/8 md:px-10 md:py-10'
+    : 'rounded-3xl bg-[#141418] px-7 py-8 ring-1 ring-white/[0.06] md:px-10 md:py-10'
+
   return (
-    <div
-      ref={ref}
-      className={`rounded-3xl bg-[#141418] px-7 py-8 ring-1 ring-white/[0.06] md:px-10 md:py-10 ${className}`.trim()}
-    >
+    <div ref={ref} className={`${surfaceClass} ${className}`.trim()}>
       <h3 className="font-display text-lg uppercase tracking-wide text-ink md:text-xl">
         {title}
       </h3>
-      <ul className="mt-5 space-y-4 text-base leading-relaxed text-slate md:text-[17px]">
+      <ul
+        className={`mt-5 text-base leading-relaxed text-slate md:text-[17px] ${
+          compact ? 'space-y-3' : 'space-y-4'
+        }`}
+      >
         {questions.map((question, index) => (
           <motion.li
             key={question}

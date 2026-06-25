@@ -14,6 +14,7 @@ import { CaseStudyPrototypeCaption } from '../components/case-study/CaseStudyPro
 import { FeatureShowcase } from '../components/case-study/FeatureShowcase'
 import { FigmaToClaudeFlow } from '../components/case-study/FigmaToClaudeFlow'
 import { ProblemStatementQuote } from '../components/case-study/ProblemStatementQuote'
+import { ResearchQuestionsPanel } from '../components/case-study/ResearchQuestionsPanel'
 import { SectionBlock } from '../components/case-study/SectionBlock'
 import { SushiTalkSolutionSection } from '../components/case-study/SushiTalkSolutionSection'
 import { SushiTalkChallengeIntro } from '../components/case-study/SushiTalkChallengeIntro'
@@ -98,32 +99,14 @@ export function SushiTalkCaseStudyPage() {
               &ldquo;{sushitalkSections.challenge.problemStatement}&rdquo;
             </p>
           </ProblemStatementQuote>
-          <div className="rounded-3xl bg-[#141418] px-7 py-8 ring-1 ring-white/[0.06] md:px-10 md:py-10">
-            <h3 className="font-display text-lg uppercase tracking-wide text-ink md:text-xl">
-              Research questions
-            </h3>
-            <ul className="mt-5 space-y-4 text-base leading-relaxed text-slate md:text-[17px]">
-              {sushitalkSections.researchQuestions.map((question) => (
-                <li key={question} className="flex gap-3">
-                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" aria-hidden />
-                  <span>{question}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="mt-8 rounded-3xl bg-elevated/60 px-7 py-8 ring-1 ring-white/8 md:px-10 md:py-10">
-            <h3 className="font-display text-lg uppercase tracking-wide text-ink md:text-xl">
-              Goals
-            </h3>
-            <ul className="mt-5 space-y-3 text-base leading-relaxed text-slate md:text-[17px]">
-              {sushitalkSections.goals.map((goal) => (
-                <li key={goal} className="flex gap-3">
-                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" aria-hidden />
-                  <span>{goal}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <ResearchQuestionsPanel questions={sushitalkSections.researchQuestions} />
+          <ResearchQuestionsPanel
+            questions={sushitalkSections.goals}
+            title="Goals"
+            compact
+            elevated
+            className="mt-8"
+          />
         </SectionBlock>
 
         <SectionBlock>
